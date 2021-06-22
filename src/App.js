@@ -72,10 +72,10 @@ function App(props) {
           <ListItemText primary="Marcas" />
         </ListItem>
         <ListItem button>
-          <ListItemText primary="Veiculos" />
+          <ListItemText primary="Veículos" />
         </ListItem>
         <ListItem button>
-          <ListItemText primary="Usuarios" />
+          <ListItemText primary="Usuários" />
         </ListItem>
         <ListItem button>
           <ListItemText primary="Dashboard" />
