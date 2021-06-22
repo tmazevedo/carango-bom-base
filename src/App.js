@@ -1,130 +1,149 @@
-import { Container } from '@material-ui/core';
-import blue from '@material-ui/core/colors/blue';
-// import { ptBR } from '@material-ui/core/locale';
-// import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
-// import React from 'react';
-import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
-import './App.scss';
+import React from "react";
+import AppBar from "@material-ui/core/AppBar";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import Divider from "@material-ui/core/Divider";
+import Drawer from "@material-ui/core/Drawer";
+import Hidden from "@material-ui/core/Hidden";
+import IconButton from "@material-ui/core/IconButton";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
+import MenuIcon from "@material-ui/icons/Menu";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { Container } from "@material-ui/core";
+import { Route, Switch } from "react-router-dom";
+import "./App.scss";
 
 import CadastroMarca from './pages/CadastroMarca';
 import ListagemMarcas from './pages/ListagemMarcas';
-
-
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: 'flex',
-  },
-  appBar: {
-    width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: drawerWidth,
+    display: "flex",
   },
   drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
+    [theme.breakpoints.up("sm")]: {
+      width: drawerWidth,
+      flexShrink: 0,
+    },
   },
+  appBar: {
+    [theme.breakpoints.up("sm")]: {
+      width: `calc(100% - ${drawerWidth}px)`,
+      marginLeft: drawerWidth,
+    },
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+    [theme.breakpoints.up("sm")]: {
+      display: "none",
+    },
+  },
+  toolbar: theme.mixins.toolbar,
   drawerPaper: {
     width: drawerWidth,
   },
-  // necessary for content to be below app bar
-  toolbar: theme.mixins.toolbar,
   content: {
     flexGrow: 1,
-    backgroundColor: theme.palette.background.default,
     padding: theme.spacing(3),
   },
 }));
 
-
-// const muiTheme = createMuiTheme({
-//   palette: {
-//     primary: {
-//       main: blue[900],
-//     }
-//   },
-// }, ptBR);
-
-// const useStyles = makeStyles((theme) => ({
-//   // root: {
-//   //   display: 'flex',
-//   // },
-//   // necessary for content to be below app bar
-//   toolbar: theme.mixins.toolbar,
-//   backdrop: {
-//     zIndex: theme.zIndex.drawer + 1,
-//     color: '#fff',
-//   },
-//   content: {
-//     flexGrow: 1,
-//     backgroundColor: theme.palette.background.default,
-//     padding: theme.spacing(3),
-//   },
-// }));
-
-function App() {
-
+function App(props) {
+  const { window } = props;
   const classes = useStyles();
+  const theme = useTheme();
+  const [mobileOpen, setMobileOpen] = React.useState(false);
+
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
+  };
+
+  const drawer = (
+    <div>
+      <div className={classes.toolbar} />
+      <Divider />
+      <List>
+        <ListItem button>
+          <ListItemText primary="Marcas" />
+        </ListItem>
+        <ListItem button>
+          <ListItemText primary="Veiculos" />
+        </ListItem>
+        <ListItem button>
+          <ListItemText primary="Usuarios" />
+        </ListItem>
+        <ListItem button>
+          <ListItemText primary="Dashboard" />
+        </ListItem>
+      </List>
+    </div>
+  );
+
+  const container =
+    window !== undefined ? () => window().document.body : undefined;
 
   return (
     <div className={classes.root}>
       <CssBaseline />
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            edge="start"
+            onClick={handleDrawerToggle}
+            className={classes.menuButton}
+          >
+            <MenuIcon />
+          </IconButton>
           <Typography variant="h6" noWrap>
-            Permanent drawer
+            Responsive drawer
           </Typography>
         </Toolbar>
       </AppBar>
-      <Drawer
-        className={classes.drawer}
-        variant="permanent"
-        classes={{
-          paper: classes.drawerPaper,
-        }}
-        anchor="left"
-      >
+      <nav className={classes.drawer} aria-label="mailbox folders">
+        <Hidden smUp implementation="css">
+          <Drawer
+            container={container}
+            variant="temporary"
+            anchor={theme.direction === "rtl" ? "right" : "left"}
+            open={mobileOpen}
+            onClose={handleDrawerToggle}
+            classes={{
+              paper: classes.drawerPaper,
+            }}
+            ModalProps={{
+              keepMounted: true,
+            }}
+          >
+            {drawer}
+          </Drawer>
+        </Hidden>
+        <Hidden xsDown implementation="css">
+          <Drawer
+            classes={{
+              paper: classes.drawerPaper,
+            }}
+            variant="permanent"
+            open
+          >
+            {drawer}
+          </Drawer>
+        </Hidden>
+      </nav>
+      <main className={classes.content}>
         <div className={classes.toolbar} />
-        <Divider />
-        <List >
-          <ListItem button >
-            <ListItemText primary="Marcas" />
-          </ListItem>
-          <ListItem button >
-            <ListItemText primary="Veiculos" />
-          </ListItem>
-          <ListItem button >
-            <ListItemText primary="Usuarios" />
-          </ListItem>
-          <ListItem button >
-            <ListItemText primary="Dashboard" />
-          </ListItem>
-        </List>
-
-
-      </Drawer>
-
         <Container component="article" maxWidth="md">
           <Switch>
             <Route path="/cadastro-marca">
               <CadastroMarca></CadastroMarca>
             </Route>
-            <Route path='/alteracao-marca/:id'>
+            <Route path="/alteracao-marca/:id">
               <CadastroMarca></CadastroMarca>
             </Route>
             <Route path="/">
@@ -132,29 +151,8 @@ function App() {
             </Route>
           </Switch>
         </Container>
+      </main>
     </div>
-
-
-
-    // <div className={classes.root}>
-    //   <CssBaseline />
-    //   <main className={classes.content}>
-    //     <div className={classes.toolbar} />
-    //     <Container component="article" maxWidth="md">
-    //       <Switch>
-    //         <Route path="/cadastro-marca">
-    //           <CadastroMarca></CadastroMarca>
-    //         </Route>
-    //         <Route path='/alteracao-marca/:id'>
-    //           <CadastroMarca></CadastroMarca>
-    //         </Route>
-    //         <Route path="/">
-    //           <ListagemMarcas></ListagemMarcas>
-    //         </Route>
-    //       </Switch>
-    //     </Container>
-    //   </main>
-    // </div>
   );
 }
 
