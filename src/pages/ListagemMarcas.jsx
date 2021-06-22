@@ -76,9 +76,6 @@ function ListagemMarcas() {
                 </Button>
             </div>
 
-            <Fab color="primary" aria-label="add" className={classes.fab} onClick={() => history.push('/cadastro-marca')}>
-                <AddIcon />
-            </Fab>
         </div>
     );
 }
