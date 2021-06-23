@@ -15,9 +15,12 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { Container } from "@material-ui/core";
 import { Route, Switch } from "react-router-dom";
 import "./App.scss";
-
+import UserPage from '../src/pages/user/userPage'
+import { useHistory } from 'react-router';
 import CadastroMarca from './pages/CadastroMarca';
-import ListagemMarcas from './pages/ListagemMarcas';
+import CreateUserComponent from "./pages/user/createUser/createUser";
+import VehiclePage from "./pages/vehicle/vehiclePage";
+import CreateVehicleComponent from "./pages/vehicle/createVehicleComponent/createVehicleComponent";
 
 const drawerWidth = 240;
 
@@ -53,11 +56,22 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
+
 function App(props) {
   const { window } = props;
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const history = useHistory();
+
+  function vehiclePage() {
+    history.push('/vehiclePage');
+  }
+
+  function userPage() {
+    history.push('/userPage');
+  }
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -68,13 +82,13 @@ function App(props) {
       <div className={classes.toolbar} />
       <Divider />
       <List>
-        <ListItem button>
+        <ListItem button >
           <ListItemText primary="Marcas" />
         </ListItem>
-        <ListItem button>
+        <ListItem button onClick={() => vehiclePage()}>
           <ListItemText primary="Veiculos" />
         </ListItem>
-        <ListItem button>
+        <ListItem button onClick={() => userPage()}>
           <ListItemText primary="Usuarios" />
         </ListItem>
         <ListItem button>
@@ -91,7 +105,8 @@ function App(props) {
     <div className={classes.root}>
       <CssBaseline />
       <AppBar position="fixed" className={classes.appBar}>
-        <Toolbar>
+        <Toolbar >
+
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -102,7 +117,7 @@ function App(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-            Responsive drawer
+            Carango Bom
           </Typography>
         </Toolbar>
       </AppBar>
@@ -143,11 +158,20 @@ function App(props) {
             <Route path="/cadastro-marca">
               <CadastroMarca></CadastroMarca>
             </Route>
-            <Route path="/alteracao-marca/:id">
-              <CadastroMarca></CadastroMarca>
+            <Route path="/vehiclePage">
+              <VehiclePage></VehiclePage>
             </Route>
-            <Route path="/">
-              <ListagemMarcas></ListagemMarcas>
+            <Route path="/changeVehicle/:id">
+            <CreateVehicleComponent></CreateVehicleComponent>
+            </Route>
+            <Route path="/createVehicle">
+              <CreateVehicleComponent></CreateVehicleComponent>
+            </Route>
+            <Route path="/createUser">
+              <CreateUserComponent></CreateUserComponent>
+            </Route>
+            <Route path="/userPage">
+              <UserPage></UserPage>
             </Route>
           </Switch>
         </Container>

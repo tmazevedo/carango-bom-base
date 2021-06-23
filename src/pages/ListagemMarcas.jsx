@@ -51,10 +51,23 @@ function ListagemMarcas() {
     }
 
     return (
+
+
         <div style={{ height: 300, width: '100%' }}>
+
+
             <DataGrid rows={marcas} columns={colunas}
                 onRowSelected={gridSelection => setMarcaSelecionada(gridSelection.data)}
             />
+            <Button
+                // className={classes.actions}
+                variant="contained"
+                color="primary"
+                disabled={!marcaSelecionada}
+                // onClick={() => alterar()}
+                >
+                Adicionar
+            </Button>
 
             <div className={classes.actionsToolbar}>
                 <Button
@@ -64,7 +77,7 @@ function ListagemMarcas() {
                     disabled={!marcaSelecionada}
                     onClick={() => excluir()}>
                     Excluir
-                        </Button>
+                </Button>
                 <Button
                     className={classes.actions}
                     variant="contained"
