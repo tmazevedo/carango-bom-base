@@ -17,10 +17,11 @@ import { Route, Switch } from "react-router-dom";
 import "./App.scss";
 import UserPage from '../src/pages/user/userPage'
 import { useHistory } from 'react-router';
-import CadastroMarca from './pages/CadastroMarca';
 import CreateUserComponent from "./pages/user/createUser/createUser";
 import VehiclePage from "./pages/vehicle/vehiclePage";
 import CreateVehicleComponent from "./pages/vehicle/createVehicleComponent/createVehicleComponent";
+import BrandPage from "./pages/brand/brandPage";
+import CreateBrand from "./pages/brand/createBrand/createBrand";
 
 const drawerWidth = 240;
 
@@ -73,6 +74,10 @@ function App(props) {
     history.push('/userPage');
   }
 
+  function brandPage() {
+    history.push('/brandPage');
+  }
+
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
@@ -82,7 +87,7 @@ function App(props) {
       <div className={classes.toolbar} />
       <Divider />
       <List>
-        <ListItem button >
+        <ListItem button onClick={() => brandPage()}>
           <ListItemText primary="Marcas" />
         </ListItem>
         <ListItem button onClick={() => vehiclePage()}>
@@ -155,8 +160,8 @@ function App(props) {
         <div className={classes.toolbar} />
         <Container component="article" maxWidth="md">
           <Switch>
-            <Route path="/cadastro-marca">
-              <CadastroMarca></CadastroMarca>
+            <Route path="/brandPage">
+              <BrandPage></BrandPage>
             </Route>
             <Route path="/vehiclePage">
               <VehiclePage></VehiclePage>
@@ -169,6 +174,9 @@ function App(props) {
             </Route>
             <Route path="/createUser">
               <CreateUserComponent></CreateUserComponent>
+            </Route>
+            <Route path="/createBrand">
+              <CreateBrand></CreateBrand>
             </Route>
             <Route path="/userPage">
               <UserPage></UserPage>
