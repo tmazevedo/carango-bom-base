@@ -57,6 +57,13 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     padding: theme.spacing(3),
   },
+  menuLink: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100%",
+  },
 }));
 
 function App(props) {
@@ -100,29 +107,25 @@ function App(props) {
           <ListItemText primary="Dashboard" />
         </ListItem> */}
 
-        <Link to="/marcas">
-          <ListItem button>
-            <ListItemText primary="Marcas" />
-          </ListItem>
-        </Link>
+        <ListItem button>
+          <ListItemText primary="Marcas" />
+          <Link className={classes.menuLink} to="/marcas"></Link>
+        </ListItem>
 
-        <Link to="/veiculos">
-          <ListItem button>
-            <ListItemText primary="Veículos" />
-          </ListItem>
-        </Link>
+        <ListItem button>
+          <ListItemText primary="Veículos" />
+          <Link className={classes.menuLink} to="/veiculos"></Link>
+        </ListItem>
 
-        <Link to="/usuarios">
-          <ListItem button>
-            <ListItemText primary="Usuários" />
-          </ListItem>
-        </Link>
+        <ListItem button>
+          <ListItemText primary="Usuários" />
+          <Link className={classes.menuLink} to="/usuarios"></Link>
+        </ListItem>
 
-        <Link to="/dashboard">
-          <ListItem button>
-            <ListItemText primary="Dashboard" />
-          </ListItem>
-        </Link>
+        <ListItem button>
+          <ListItemText primary="Dashboard" />
+          <Link className={classes.menuLink} to="/dashboard"></Link>
+        </ListItem>
       </List>
     </div>
   );
