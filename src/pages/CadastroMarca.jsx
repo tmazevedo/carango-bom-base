@@ -1,7 +1,7 @@
 import { Button, TextField } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router';
-import useErros from '../hooks/useErros';
+import useErrors from '../hooks/useErrors';
 import MarcaService from '../services/MarcaService';
 
 function CadastroMarca() {
@@ -12,7 +12,7 @@ function CadastroMarca() {
 
     const { id } = useParams();
 
-    const validacoes = {
+    const validations = {
         marca: dado => {
             if (dado && dado.length >= 3) {
                 return { valido: true };
@@ -22,7 +22,7 @@ function CadastroMarca() {
         }
     }
 
-    const [erros, validarCampos, possoEnviar] = useErros(validacoes);
+    const [errors, validateFields, canSend] = useErrors(validations);
 
     function cancelar() {
         history.goBack();
@@ -39,7 +39,7 @@ function CadastroMarca() {
     return (
         <form onSubmit={(event) => {
             event.preventDefault();
-            if (possoEnviar()) {
+            if (canSend()) {
                 if (id) {
                     MarcaService.alterar({ id, nome: marca })
                         .then(res => {
@@ -57,9 +57,9 @@ function CadastroMarca() {
             <TextField
                 value={marca}
                 onChange={evt => setMarca(evt.target.value)}
-                onBlur={validarCampos}
-                helperText={erros.marca.texto}
-                error={!erros.marca.valido}
+                onBlur={validateFields}
+                helperText={errors.marca.texto}
+                error={!errors.marca.valido}
                 name="marca"
                 id="marca"
                 label="Marca"
@@ -74,7 +74,7 @@ function CadastroMarca() {
                 variant="contained"
                 color="primary"
                 type="submit"
-                disabled={!possoEnviar()}>
+                disabled={!canSend()}>
                 {id ? 'Alterar' : 'Cadastrar'}
             </Button>
 
