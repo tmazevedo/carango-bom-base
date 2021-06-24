@@ -13,7 +13,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { Container } from "@material-ui/core";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Link } from "react-router-dom";
 import "./App.scss";
 import UserPage from "../src/pages/user/UserPage";
 import { useHistory } from "react-router";
@@ -87,7 +87,7 @@ function App(props) {
       <div className={classes.toolbar} />
       <Divider />
       <List>
-        <ListItem button onClick={() => brandPage()}>
+        {/* <ListItem button onClick={() => brandPage()}>
           <ListItemText primary="Marcas" />
         </ListItem>
         <ListItem button onClick={() => vehiclePage()}>
@@ -98,7 +98,31 @@ function App(props) {
         </ListItem>
         <ListItem button>
           <ListItemText primary="Dashboard" />
-        </ListItem>
+        </ListItem> */}
+
+        <Link to="/marcas">
+          <ListItem button>
+            <ListItemText primary="Marcas" />
+          </ListItem>
+        </Link>
+
+        <Link to="/veiculos">
+          <ListItem button>
+            <ListItemText primary="Veículos" />
+          </ListItem>
+        </Link>
+
+        <Link to="/usuarios">
+          <ListItem button>
+            <ListItemText primary="Usuários" />
+          </ListItem>
+        </Link>
+
+        <Link to="/dashboard">
+          <ListItem button>
+            <ListItemText primary="Dashboard" />
+          </ListItem>
+        </Link>
       </List>
     </div>
   );
@@ -165,23 +189,23 @@ function App(props) {
             <Route path="/marcas">
               <BrandPage></BrandPage>
             </Route>
+            <Route path="/marcas/novo">
+              <CreateBrand></CreateBrand>
+            </Route>
             <Route path="/veiculos">
               <VehiclePage></VehiclePage>
-            </Route>
-            <Route path="/veiculos/editar/:id">
-              <CreateVehicleComponent></CreateVehicleComponent>
             </Route>
             <Route path="/veiculos/novo">
               <CreateVehicleComponent></CreateVehicleComponent>
             </Route>
-            <Route path="/usuarios/novo">
-              <CreateUserComponent></CreateUserComponent>
-            </Route>
-            <Route path="/marcas/novo">
-              <CreateBrand></CreateBrand>
+            <Route path="/veiculos/editar/:id">
+              <CreateVehicleComponent></CreateVehicleComponent>
             </Route>
             <Route path="/usuarios">
               <UserPage></UserPage>
+            </Route>
+            <Route path="/usuarios/novo">
+              <CreateUserComponent></CreateUserComponent>
             </Route>
             <Route>
               <Page404></Page404>
