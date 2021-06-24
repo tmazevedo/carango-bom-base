@@ -35,7 +35,7 @@ const BrandPage = () => {
           display="flex"
           variant="outlined"
           color="primary"
-          style={{ margin: "25px 0", display: "flex" }}
+          style={{ marginBottom: "25px", display: "flex" }}
         >
           Novo
         </Button>
