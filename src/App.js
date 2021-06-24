@@ -1,3 +1,4 @@
+import "./App.sass";
 import React from "react";
 import AppBar from "@material-ui/core/AppBar";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -14,7 +15,6 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { Container } from "@material-ui/core";
 import { Route, Switch, Link } from "react-router-dom";
-import "./App.scss";
 import UserPage from "../src/pages/user/UserPage";
 import { useHistory } from "react-router";
 import CreateUserComponent from "./pages/user/createUser/createUser";
@@ -24,6 +24,7 @@ import BrandPage from "./pages/brand/BrandPage";
 import CreateBrand from "./pages/brand/createBrand/createBrand";
 import Page404 from "./pages/page404/Page404";
 import DashboardPage from "./pages/dashboard/DashboardPage";
+import LoginPage from "./pages/login/LoginPage";
 
 const drawerWidth = 240;
 
@@ -108,6 +109,11 @@ function App(props) {
         </ListItem> */}
 
         <ListItem button>
+          <ListItemText primary="Entrar" />
+          <Link className={classes.menuLink} to="/login"></Link>
+        </ListItem>
+
+        <ListItem button>
           <ListItemText primary="Marcas" />
           <Link className={classes.menuLink} to="/marcas"></Link>
         </ListItem>
@@ -189,13 +195,14 @@ function App(props) {
             <Route exact path="/">
               <DashboardPage></DashboardPage>
             </Route>
-            <Route path="/marcas">
+            <Route exact path="/marcas">
               <BrandPage></BrandPage>
             </Route>
             <Route path="/marcas/novo">
               <CreateBrand></CreateBrand>
             </Route>
-            <Route path="/veiculos">
+            <Route path="/marcas/editar/:id"></Route>
+            <Route exact path="/veiculos">
               <VehiclePage></VehiclePage>
             </Route>
             <Route path="/veiculos/novo">
@@ -204,12 +211,17 @@ function App(props) {
             <Route path="/veiculos/editar/:id">
               <CreateVehicleComponent></CreateVehicleComponent>
             </Route>
-            <Route path="/usuarios">
+            <Route exact path="/usuarios">
               <UserPage></UserPage>
             </Route>
             <Route path="/usuarios/novo">
               <CreateUserComponent></CreateUserComponent>
             </Route>
+            <Route path="/usuarios/editar/:id"></Route>
+            <Route path="/login">
+              <LoginPage></LoginPage>
+            </Route>
+            <Route path="/recuperar-senha"></Route>
             <Route>
               <Page404></Page404>
             </Route>
