@@ -15,13 +15,15 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { Container } from "@material-ui/core";
 import { Route, Switch } from "react-router-dom";
 import "./App.scss";
-import UserPage from '../src/pages/user/userPage'
-import { useHistory } from 'react-router';
+import UserPage from "../src/pages/user/UserPage";
+import { useHistory } from "react-router";
 import CreateUserComponent from "./pages/user/createUser/createUser";
-import VehiclePage from "./pages/vehicle/vehiclePage";
+import VehiclePage from "./pages/vehicle/VehiclePage";
 import CreateVehicleComponent from "./pages/vehicle/createVehicleComponent/createVehicleComponent";
-import BrandPage from "./pages/brand/brandPage";
+import BrandPage from "./pages/brand/BrandPage";
 import CreateBrand from "./pages/brand/createBrand/createBrand";
+import Page404 from "./pages/page404/Page404";
+import DashboardPage from "./pages/dashboard/DashboardPage";
 
 const drawerWidth = 240;
 
@@ -57,8 +59,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
-
 function App(props) {
   const { window } = props;
   const classes = useStyles();
@@ -67,15 +67,15 @@ function App(props) {
   const history = useHistory();
 
   function vehiclePage() {
-    history.push('/vehiclePage');
+    history.push("/vehiclePage");
   }
 
   function userPage() {
-    history.push('/userPage');
+    history.push("/userPage");
   }
 
   function brandPage() {
-    history.push('/brandPage');
+    history.push("/brandPage");
   }
 
   const handleDrawerToggle = () => {
@@ -91,10 +91,10 @@ function App(props) {
           <ListItemText primary="Marcas" />
         </ListItem>
         <ListItem button onClick={() => vehiclePage()}>
-          <ListItemText primary="Veiculos" />
+          <ListItemText primary="Veículos" />
         </ListItem>
         <ListItem button onClick={() => userPage()}>
-          <ListItemText primary="Usuarios" />
+          <ListItemText primary="Usuários" />
         </ListItem>
         <ListItem button>
           <ListItemText primary="Dashboard" />
@@ -110,8 +110,7 @@ function App(props) {
     <div className={classes.root}>
       <CssBaseline />
       <AppBar position="fixed" className={classes.appBar}>
-        <Toolbar >
-
+        <Toolbar>
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -160,26 +159,32 @@ function App(props) {
         <div className={classes.toolbar} />
         <Container component="article" maxWidth="md">
           <Switch>
-            <Route path="/brandPage">
+            <Route exact path="/">
+              <DashboardPage></DashboardPage>
+            </Route>
+            <Route path="/marcas">
               <BrandPage></BrandPage>
             </Route>
-            <Route path="/vehiclePage">
+            <Route path="/veiculos">
               <VehiclePage></VehiclePage>
             </Route>
-            <Route path="/changeVehicle/:id">
-            <CreateVehicleComponent></CreateVehicleComponent>
-            </Route>
-            <Route path="/createVehicle">
+            <Route path="/veiculos/editar/:id">
               <CreateVehicleComponent></CreateVehicleComponent>
             </Route>
-            <Route path="/createUser">
+            <Route path="/veiculos/novo">
+              <CreateVehicleComponent></CreateVehicleComponent>
+            </Route>
+            <Route path="/usuarios/novo">
               <CreateUserComponent></CreateUserComponent>
             </Route>
-            <Route path="/createBrand">
+            <Route path="/marcas/novo">
               <CreateBrand></CreateBrand>
             </Route>
-            <Route path="/userPage">
+            <Route path="/usuarios">
               <UserPage></UserPage>
+            </Route>
+            <Route>
+              <Page404></Page404>
             </Route>
           </Switch>
         </Container>

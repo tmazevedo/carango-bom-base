@@ -30,7 +30,7 @@ const useStyles = makeStyles(() => ({
 
 
 
-function VehiclePage() {
+const VehiclePage = () => {
     const [vehicle, setVehicle] = useState([{ "id": "10", "marca": 'teste', "modelo": 'teste', "ano": 'teste', "valor": "teste" }]);
     const [vehicleSelected, setvehicleSelected] = useState();
     const classes = useStyles();

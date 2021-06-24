@@ -27,7 +27,7 @@ const useStyles = makeStyles(() => ({
 
 
 
-function UserPage() {
+const UserPage = () => {
     const [user, setuser] = useState([{ "id": '10', "nome": "teste" }, { "id": '1', "nome": "teste" }]);
     const [userSelecionada, setuserSelecionada] = useState();
     const classes = useStyles();

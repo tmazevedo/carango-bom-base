@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Forms from '../../../sharedComponents/forms/forms';
+import Forms from '../../../components/forms/forms';
 import { Container } from '@material-ui/core';
 
 
