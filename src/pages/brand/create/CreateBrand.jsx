@@ -19,7 +19,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-function CreateBrand() {
+const CreateBrand = () => {
   const [brand, setBrand] = useState("");
   const history = useHistory();
   const classes = useStyles();
@@ -66,4 +66,4 @@ function CreateBrand() {
   );
 }
 
-export default CreateBrand;
+export default CreateBrand

@@ -1,95 +1,69 @@
-import React, { useEffect, useState } from 'react';
-import { DataGrid } from '@material-ui/data-grid';
-import "./vehiclePage.scss";
-import { Button, makeStyles } from '@material-ui/core';
-import { useHistory } from 'react-router';
-
+import React, { useEffect, useState } from "react";
+import { DataGrid } from "@material-ui/data-grid";
+import { Button, makeStyles } from "@material-ui/core";
+import { useHistory } from "react-router";
+import { Link } from "react-router-dom";
 
 const colunas = [
-    { field: 'marca', headerName: 'Marca', width: 200 },
-    { field: 'modelo', headerName: 'Modelo', width: 200 },
-    { field: 'ano', headerName: 'Ano', width: 200 },
-    { field: 'valor', headerName: 'Valor', width: 200 }
+  { field: "marca", headerName: "Marca", width: 200 },
+  { field: "modelo", headerName: "Modelo", width: 200 },
+  { field: "ano", headerName: "Ano", width: 200 },
+  { field: "valor", headerName: "Valor", width: 200 },
 ];
 
-const useStyles = makeStyles(() => ({
-    fab: {
-        position: 'absolute',
-        bottom: '100px',
-        right: '100px',
-    },
-    actionsToolbar: {
-        float: 'right'
-    },
-    actions: {
-        top: '10px',
-        marginLeft: '10px',
-    }
-}));
-
-
-
+const useStyles = makeStyles(() => ({}));
 
 const VehiclePage = () => {
-    const [vehicle, setVehicle] = useState([{ "id": "10", "marca": 'teste', "modelo": 'teste', "ano": 'teste', "valor": "teste" }]);
-    const [vehicleSelected, setvehicleSelected] = useState();
-    const classes = useStyles();
-    const history = useHistory();
+  const [vehicle, setVehicle] = useState([
+    { id: "10", marca: "teste", modelo: "teste", ano: "teste", valor: "teste" },
+  ]);
+  const [vehicleSelected, setvehicleSelected] = useState();
+  const classes = useStyles();
+  const history = useHistory();
 
-    function createVehicle() {
-        history.push('/createVehicle');
-    }
+  function remove() {}
 
-    function remove() {
+  return (
+    <div style={{ height: "50vh" }}>
+      <Link className="link" to="/veiculos/novo">
+        <Button className="create-button" variant="outlined" color="primary">
+          Novo
+        </Button>
+      </Link>
 
-    }
+      <DataGrid
+        hideFooter="true"
+        rows={vehicle}
+        columns={colunas}
+        onRowSelected={(gridSelection) =>
+          setvehicleSelected(gridSelection.data)
+        }
+      />
 
-    function change() {
-        history.push('/changeVehicle/' + vehicleSelected.id);
-    }
+      <div className="action-itens">
+        <Button
+          className="action-item"
+          variant="outlined"
+          color="secondary"
+          disabled={!vehicleSelected}
+          onClick={() => remove()}
+        >
+          Excluir
+        </Button>
 
-    return (
-        <div style={{ height: 300, width: '100%' }}>
-
-            <Button
-                variant="contained"
-                color="primary"
-                style={{ marginLeft: '767px' }}
-                onClick={() => createVehicle()}
-            >
-                Criar Veículo
-            </Button>
-            <br />
-            <br />
-            <DataGrid
-                rows={vehicle}
-                columns={colunas}
-                onRowSelected={gridSelection => setvehicleSelected(gridSelection.data)}
-            />
-
-            <div className={classes.actionsToolbar}>
-                <Button
-                    className={classes.actions}
-                    variant="contained"
-                    color="secondary"
-                    disabled={!vehicleSelected}
-                    onClick={() => remove()}
-                >
-                    Excluir
-                </Button>
-                <Button
-                    className={classes.actions}
-                    variant="contained"
-                    color="primary"
-                    disabled={!vehicleSelected}
-                    onClick={() => change()}
-                >
-                    Alterar
-                </Button>
-            </div>
-        </div>
-    );
-
-}
+        <Link className="link" to={"/veiculos/editar/" + vehicleSelected?.id}>
+          <Button
+            className="action-item"
+            variant="outlined"
+            color="primary"
+            disabled={!vehicleSelected}
+          >
+            Alterar
+          </Button>
+        </Link>
+      </div>
+    </div>
+  );
+};
 
 export default VehiclePage;

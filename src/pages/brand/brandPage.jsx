@@ -19,7 +19,7 @@ const useStyles = makeStyles(() => ({
   actions: {
     top: "10px",
     marginLeft: "10px",
-  }
+  },
 }));
 
 const BrandPage = () => {
@@ -29,13 +29,12 @@ const BrandPage = () => {
 
   return (
     <div style={{ height: "50vh" }}>
-
       <Link className="link" to="/marcas/novo">
         <Button
+          className="create-button"
           display="flex"
           variant="outlined"
           color="primary"
-          style={{ marginBottom: "25px", display: "flex" }}
         >
           Novo
         </Button>

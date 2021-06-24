@@ -21,7 +21,7 @@ import CreateUserComponent from "./pages/user/createUser/createUser";
 import VehiclePage from "./pages/vehicle/VehiclePage";
 import CreateVehicleComponent from "./pages/vehicle/createVehicleComponent/createVehicleComponent";
 import BrandPage from "./pages/brand/BrandPage";
-import CreateBrand from "./pages/brand/createBrand/createBrand";
+import CreateBrand from "./pages/brand/create/CreateBrand";
 import Page404 from "./pages/page404/Page404";
 import DashboardPage from "./pages/dashboard/DashboardPage";
 import LoginPage from "./pages/login/LoginPage";
