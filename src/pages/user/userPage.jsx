@@ -1,84 +1,66 @@
-import React, { useEffect, useState } from 'react';
-import { DataGrid } from '@material-ui/data-grid';
-import "./userPage.scss";
-import { Button, makeStyles } from '@material-ui/core';
-import { useHistory } from 'react-router';
+import React, { useEffect, useState } from "react";
+import { DataGrid } from "@material-ui/data-grid";
+import { Button, makeStyles } from "@material-ui/core";
+import { useHistory } from "react-router";
+import { Link } from "react-router-dom";
 
+const colunas = [{ field: "nome", headerName: "Nome", width: 200 }];
 
-const colunas = [
-    { field: 'nome', headerName: 'Nome', width: 200 }
-];
-
-const useStyles = makeStyles(() => ({
-    fab: {
-        position: 'absolute',
-        bottom: '100px',
-        right: '100px',
-    },
-    actionsToolbar: {
-        float: 'right'
-    },
-    actions: {
-        top: '10px',
-        marginLeft: '10px',
-    }
-}));
-
-
-
+const useStyles = makeStyles(() => ({}));
 
 const UserPage = () => {
-    const [user, setuser] = useState([{ "id": '10', "nome": "teste" }, { "id": '1', "nome": "teste" }]);
-    const [userSelecionada, setuserSelecionada] = useState();
-    const classes = useStyles();
-    const history = useHistory();
+  const [user, setuser] = useState([
+    { id: "10", nome: "teste" },
+    { id: "1", nome: "teste" },
+  ]);
+  const [userSelecionada, setuserSelecionada] = useState();
+  const classes = useStyles();
+  const history = useHistory();
 
-    function createUser() {
-        history.push('/createUser');
-    }
+  function createUser() {
+    history.push("/createUser");
+  }
 
-    return (
-        <div style={{ height: 300, width: '100%' }}>
+  return (
+    <div style={{ height: 300, width: "100%" }}>
+      <Link className="link" to="/usuarios/novo">
+        <Button className="custom-button" variant="outlined" color="primary">
+          Novo
+        </Button>
+      </Link>
 
-            <Button
-                variant="contained"
-                color="primary"
-                style={{ marginLeft: '767px' }}
-                onClick={() => createUser()}
-            >
-                Criar Usuario
-            </Button>
-            <br />
-            <br />
-            <DataGrid
-                rows={user}
-                columns={colunas}
-                onRowSelected={gridSelection => setuserSelecionada(gridSelection.data)}
-            />
+      <DataGrid
+        hideFooter="true"
+        rows={user}
+        columns={colunas}
+        onRowSelected={(gridSelection) =>
+          setuserSelecionada(gridSelection.data)
+        }
+      />
 
-            <div className={classes.actionsToolbar}>
-                <Button
-                    className={classes.actions}
-                    variant="contained"
-                    color="secondary"
-                    disabled={!userSelecionada}
-                // onClick={() => excluir()}
-                >
-                    Excluir
-                </Button>
-                <Button
-                    className={classes.actions}
-                    variant="contained"
-                    color="primary"
-                    disabled={!userSelecionada}
-                // onClick={() => alterar()}
-                >
-                    Alterar
-                </Button>
-            </div>
-        </div>
-    );
-
-}
+      <div className="action-itens">
+        <Button
+          className="action-item"
+          variant="outlined"
+          color="secondary"
+          disabled={!userSelecionada}
+          // onClick={() => excluir()}
+        >
+          Excluir
+        </Button>
+        <Link className="link" to={"/usuarios/editar/" + userSelecionada?.id}>
+          <Button
+            className="action-item"
+            variant="outlined"
+            color="primary"
+            disabled={!userSelecionada}
+          >
+            Alterar
+          </Button>
+        </Link>
+      </div>
+    </div>
+  );
+};
 
 export default UserPage;

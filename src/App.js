@@ -17,7 +17,7 @@ import { Container } from "@material-ui/core";
 import { Route, Switch, Link } from "react-router-dom";
 import UserPage from "../src/pages/user/UserPage";
 import { useHistory } from "react-router";
-import CreateUserComponent from "./pages/user/createUser/createUser";
+import CreateUser from "./pages/user/create/CreateUser";
 import VehiclePage from "./pages/vehicle/VehiclePage";
 import CreateVehicle from "./pages/vehicle/create/CreateVehicle";
 import BrandPage from "./pages/brand/BrandPage";
@@ -215,9 +215,11 @@ function App(props) {
               <UserPage></UserPage>
             </Route>
             <Route path="/usuarios/novo">
-              <CreateUserComponent></CreateUserComponent>
+              <CreateUser></CreateUser>
             </Route>
-            <Route path="/usuarios/editar/:id"></Route>
+            <Route path="/usuarios/editar/:id">
+              <CreateUser></CreateUser>
+            </Route>
             <Route path="/login">
               <LoginPage></LoginPage>
             </Route>
