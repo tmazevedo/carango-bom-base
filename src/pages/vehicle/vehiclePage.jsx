@@ -26,7 +26,7 @@ const VehiclePage = () => {
   return (
     <div style={{ height: "50vh" }}>
       <Link className="link" to="/veiculos/novo">
-        <Button className="create-button" variant="outlined" color="primary">
+        <Button className="custom-button" variant="outlined" color="primary">
           Novo
         </Button>
       </Link>

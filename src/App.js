@@ -19,7 +19,7 @@ import UserPage from "../src/pages/user/UserPage";
 import { useHistory } from "react-router";
 import CreateUserComponent from "./pages/user/createUser/createUser";
 import VehiclePage from "./pages/vehicle/VehiclePage";
-import CreateVehicleComponent from "./pages/vehicle/createVehicleComponent/createVehicleComponent";
+import CreateVehicle from "./pages/vehicle/create/CreateVehicle";
 import BrandPage from "./pages/brand/BrandPage";
 import CreateBrand from "./pages/brand/create/CreateBrand";
 import Page404 from "./pages/page404/Page404";
@@ -206,10 +206,10 @@ function App(props) {
               <VehiclePage></VehiclePage>
             </Route>
             <Route path="/veiculos/novo">
-              <CreateVehicleComponent></CreateVehicleComponent>
+              <CreateVehicle></CreateVehicle>
             </Route>
             <Route path="/veiculos/editar/:id">
-              <CreateVehicleComponent></CreateVehicleComponent>
+              <CreateVehicle></CreateVehicle>
             </Route>
             <Route exact path="/usuarios">
               <UserPage></UserPage>

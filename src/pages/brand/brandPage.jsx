@@ -31,8 +31,7 @@ const BrandPage = () => {
     <div style={{ height: "50vh" }}>
       <Link className="link" to="/marcas/novo">
         <Button
-          className="create-button"
-          display="flex"
+          className="custom-button"
           variant="outlined"
           color="primary"
         >

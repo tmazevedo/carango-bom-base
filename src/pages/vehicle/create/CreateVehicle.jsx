@@ -1,56 +1,59 @@
-import React, { useEffect, useState } from 'react';
-import Forms from '../../../components/forms/forms';
-import { Container } from '@material-ui/core';
-import { FormControl } from '@material-ui/core';
-import { MenuItem } from '@material-ui/core';
-import { Select } from '@material-ui/core';
-import { InputLabel } from '@material-ui/core';
-import "./createVehicleComponent.scss";
-
+import React, { useEffect, useState } from "react";
+import Forms from "../../../components/forms/forms";
+import {
+  Container,
+  Button,
+  FormControl,
+  MenuItem,
+  Select,
+  InputLabel,
+} from "@material-ui/core";
+import { Link } from "react-router-dom";
 
 function validateCar() {
-    return { valido: true, text: "" }
+  return { valido: true, text: "" };
 }
 
 function onSubmit(value) {
-    // TO-DO Insert a request, need to create service from vehicle.
-    console.log(value)
+  // TO-DO Insert a request, need to create service from vehicle.
+  console.log(value);
 }
 
-function CreateVehicleComponent() {
+const CreateVehicle = () => {
+  return (
+    <>
+      <Link className="link" to="/veiculos">
+        <Button className="custom-button" variant="outlined" type="submit">
+          Voltar
+        </Button>
+      </Link>
 
-    return (
-        <Container component="article" maxWidth="sm">
-            <h1>Cadastrar Veículo</h1>
+      <FormControl fullWidth variant="outlined" size="medium">
+        <InputLabel id="demo-simple-select-outlined-label">Marca</InputLabel>
+        <Select
+          labelId="demo-simple-select-outlined-label"
+          id="demo-simple-select-outlined"
+          // value={age}
+          label="Age"
+        >
+          <MenuItem value="" className="select-item">
+            <em>None</em>
+          </MenuItem>
+          <MenuItem value={10}>Ten</MenuItem>
+          <MenuItem value={20}>Twenty</MenuItem>
+          <MenuItem value={30}>Thirty</MenuItem>
+        </Select>
+      </FormControl>
+      <Forms
+        onSubmit={onSubmit}
+        labelField1="Modelo"
+        labelField2="Ano"
+        labelField3="Valor"
+        validation={validateCar}
+        type=""
+      ></Forms>
+    </>
+  );
+};
 
-            <FormControl variant="outlined" size="medium" >
-                <InputLabel id="demo-simple-select-outlined-label" >Marca</InputLabel>
-                <Select
-                    labelId="demo-simple-select-outlined-label"
-                    id="demo-simple-select-outlined"
-                    // value={age}
-                    className="formControl"
-                    label="Age"
-                >
-                    <MenuItem value="">
-                        <em>None</em>
-                    </MenuItem>
-                    <MenuItem value={10}>Ten</MenuItem>
-                    <MenuItem value={20}>Twenty</MenuItem>
-                    <MenuItem value={30}>Thirty</MenuItem>
-                </Select>
-            </FormControl>
-            <Forms onSubmit={onSubmit}
-                labelField1="Modelo"
-                labelField2="Ano"
-                labelField3="Valor"
-                validation={validateCar}
-                type="">
-            </Forms>
-        </Container>
-    );
-
-}
-
-
-export default CreateVehicleComponent;
+export default CreateVehicle;
