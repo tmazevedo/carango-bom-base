@@ -17,8 +17,8 @@ const LoginPage = () => {
         onSubmit
       }}
       fields={[
-        { id: "usuario", label: "Usuário", required: true },
-        { id: "senha", label: "Senha", type: "password", required: true }
+        { name: "usuario", label: "Usuário", required: true },
+        { name: "senha", label: "Senha", type: "password", required: true }
       ]}
     />
   );

@@ -16,15 +16,15 @@ const CreateVehicle = () => {
         }}
         fields={[
           {
-            id: "marca", label: "Marca",
+            name: "marca", label: "Marca",
             componentType: "autocomplete",
             options: ['Volks', 'Peugeot', 'Xablau'],
             required: true
           },
-          { id: "modelo", label: "Modelo", required: true },
-          { id: "valor", label: "Valor", required: true }
+          { name: "modelo", label: "Modelo", required: true },
+          { name: "valor", label: "Valor", required: true }
         ]}
-      ></Forms>
+      />
     </>
   );
 };

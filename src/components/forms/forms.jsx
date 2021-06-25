@@ -13,7 +13,7 @@ function Forms({ fields, mainButton, secondaryButton }) {
   useEffect(() => {
     const entries = {};
     for (const field of fields) {
-      entries[field.id] = ""
+      entries[field.name] = ""
     }
     setFieldStates({ ...entries })
   }, [fields])
@@ -27,14 +27,14 @@ function Forms({ fields, mainButton, secondaryButton }) {
   function makeTextFieldComponent(field) {
     return (
       <TextField
-        id={field.id}
+        name={field.name}
         label={field.label}
         required={field.required || false}
         type={field.type || "text"}
-        value={fieldStates[field.id]}
+        value={fieldStates[field.name]}
         variant="outlined"
         margin="normal"
-        onChange={event => changeFieldState(field.id, event.target.value)}
+        onChange={event => changeFieldState(field.name, event.target.value)}
         fullWidth
       />
     )
@@ -43,9 +43,9 @@ function Forms({ fields, mainButton, secondaryButton }) {
   function makeAutocompleteComponent(field) {
     return (
       <Autocomplete
-        id={field.id}
+        id={field.name}
         options={field.options}
-        onChange={event => changeFieldState(field.id, event.target.value)}
+        onChange={event => changeFieldState(field.name, event.target.value)}
         getOptionLabel={(option) => option}
         renderInput={(params) => <TextField {...params} label={field.label} variant="outlined" />}
       />

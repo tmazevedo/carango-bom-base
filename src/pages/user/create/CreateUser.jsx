@@ -15,11 +15,11 @@ const CreateUser = () => {
           onSubmit
         }}
         fields={[
-          { id: "usuario", label: "Usuário", required: true },
-          { id: "senha", label: "Senha", required: true, type: "password" },
-          { id: "senha-confirmar", label: "Confirmar senha", required: true, type: "password" }
+          { name: "usuario", label: "Usuário", required: true },
+          { name: "senha", label: "Senha", required: true, type: "password" },
+          { name: "senha-confirmar", label: "Confirmar senha", required: true, type: "password" }
         ]}
-      ></Forms>
+      />
     </>
   )
 }
