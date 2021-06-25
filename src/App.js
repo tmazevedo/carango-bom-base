@@ -193,6 +193,8 @@ function App(props) {
         <Container component="article" maxWidth="md">
           <Switch>
             <Route exact path="/">
+            </Route>
+            <Route exact path="/dashboard">
               <DashboardPage></DashboardPage>
             </Route>
             <Route exact path="/marcas">
