@@ -95,19 +95,6 @@ function App(props) {
       <div className={classes.toolbar} />
       <Divider />
       <List>
-        {/* <ListItem button onClick={() => brandPage()}>
-          <ListItemText primary="Marcas" />
-        </ListItem>
-        <ListItem button onClick={() => vehiclePage()}>
-          <ListItemText primary="Veículos" />
-        </ListItem>
-        <ListItem button onClick={() => userPage()}>
-          <ListItemText primary="Usuários" />
-        </ListItem>
-        <ListItem button>
-          <ListItemText primary="Dashboard" />
-        </ListItem> */}
-
         <ListItem button>
           <ListItemText primary="Entrar" />
           <Link className={classes.menuLink} to="/login"></Link>
