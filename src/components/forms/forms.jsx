@@ -67,7 +67,7 @@ function Forms({ fields, mainButton, secondaryButton }) {
           return typeToFunction[field.componentType](field)
         })
       }
-      <div class="action-itens">
+      <div className="action-itens">
         {secondaryButton &&
           <Button
             variant="outlined"
