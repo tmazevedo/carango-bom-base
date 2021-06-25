@@ -28,6 +28,7 @@ function Forms({ fields, mainButton, secondaryButton }) {
     return (
       <TextField
         name={field.name}
+        key={field.name}
         label={field.label}
         required={field.required || false}
         type={field.type || "text"}
@@ -43,7 +44,8 @@ function Forms({ fields, mainButton, secondaryButton }) {
   function makeAutocompleteComponent(field) {
     return (
       <Autocomplete
-        id={field.name}
+        name={field.name}
+        key={field.name}
         options={field.options}
         onChange={event => changeFieldState(field.name, event.target.value)}
         getOptionLabel={(option) => option}
