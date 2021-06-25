@@ -195,7 +195,7 @@ function App(props) {
             <Route exact path="/"/>
             <Route exact path="/dashboard" component={DashboardPage}/>
             <Route exact path="/marcas" component={BrandPage}/>
-            <Route path="/marcas/novo" component={CreateBrand}/>
+            <Route exact path="/marcas/novo" component={CreateBrand}/>
             <Route path="/marcas/editar/:id" component={CreateBrand}/>
             <Route exact path="/veiculos" component={VehiclePage}/>
             <Route path="/veiculos/novo" component={CreateVehicle}/>
