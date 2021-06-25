@@ -18,10 +18,11 @@ const CreateVehicle = () => {
           {
             id: "marca", label: "Marca",
             componentType: "autocomplete",
-            options: ['Volks', 'Peugeot', 'Xablau']
+            options: ['Volks', 'Peugeot', 'Xablau'],
+            required: true
           },
-          { id: "modelo", label: "Modelo" },
-          { id: "valor", label: "Valor" }
+          { id: "modelo", label: "Modelo", required: true },
+          { id: "valor", label: "Valor", required: true }
         ]}
       ></Forms>
     </>
