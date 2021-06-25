@@ -26,7 +26,6 @@ const useStyles = makeStyles({
 
 const DashboardPage = () => {
   const classes = useStyles();
-  const bull = <span className={classes.bullet}>•</span>;
 
   return (
     <>

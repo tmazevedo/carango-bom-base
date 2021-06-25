@@ -1,25 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { DataGrid } from "@material-ui/data-grid";
-import { Button, makeStyles } from "@material-ui/core";
-import { useHistory } from "react-router";
+import { Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
 
 const colunas = [{ field: "nome", headerName: "Nome", width: 200 }];
 
-const useStyles = makeStyles(() => ({}));
-
 const UserPage = () => {
-  const [user, setuser] = useState([
+  const [user,] = useState([
     { id: "10", nome: "teste" },
     { id: "1", nome: "teste" },
   ]);
   const [userSelecionada, setuserSelecionada] = useState();
-  const classes = useStyles();
-  const history = useHistory();
-
-  function createUser() {
-    history.push("/createUser");
-  }
 
   return (
     <div style={{ height: 300, width: "100%" }}>

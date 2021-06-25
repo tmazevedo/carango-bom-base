@@ -1,7 +1,5 @@
 import { Button, TextField } from "@material-ui/core";
-import React, { useEffect, useState } from "react";
-import { useHistory, useParams } from "react-router";
-// import MarcaService from '../services/MarcaService';
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core";
 import { Link } from "react-router-dom";
 
@@ -21,12 +19,7 @@ const useStyles = makeStyles(() => ({
 
 const CreateBrand = () => {
   const [brand, setBrand] = useState("");
-  const history = useHistory();
   const classes = useStyles();
-
-  function cancel() {
-    history.goBack();
-  }
 
   return (
     <>

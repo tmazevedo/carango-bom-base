@@ -1,6 +1,5 @@
-import { Button, TextField } from "@material-ui/core";
-import React, { useEffect, useState } from "react";
-import { useHistory, useParams } from "react-router";
+import { Button } from "@material-ui/core";
+import React, { useState } from "react";
 import { DataGrid } from "@material-ui/data-grid";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core";
@@ -23,7 +22,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 const BrandPage = () => {
-  const [brand, setBrand] = useState([{ id: "10", brand: "teste" }]);
+  const [brand,] = useState([{ id: "10", brand: "teste" }]);
   const classes = useStyles();
   const [brandSelecionada, setBrandSelecionada] = useState();
 

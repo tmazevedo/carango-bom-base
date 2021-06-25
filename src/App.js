@@ -16,7 +16,6 @@ import { makeStyles, useTheme } from "@material-ui/core/styles";
 import { Container } from "@material-ui/core";
 import { Route, Switch, Link } from "react-router-dom";
 import UserPage from "../src/pages/user/UserPage";
-import { useHistory } from "react-router";
 import CreateUser from "./pages/user/create/CreateUser";
 import VehiclePage from "./pages/vehicle/VehiclePage";
 import CreateVehicle from "./pages/vehicle/create/CreateVehicle";
@@ -72,19 +71,6 @@ function App(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const history = useHistory();
-
-  function vehiclePage() {
-    history.push("/vehiclePage");
-  }
-
-  function userPage() {
-    history.push("/userPage");
-  }
-
-  function brandPage() {
-    history.push("/brandPage");
-  }
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);

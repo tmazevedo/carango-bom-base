@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { DataGrid } from "@material-ui/data-grid";
-import { Button, makeStyles } from "@material-ui/core";
-import { useHistory } from "react-router";
+import { Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
 
 const colunas = [
@@ -11,15 +10,11 @@ const colunas = [
   { field: "valor", headerName: "Valor", width: 200 },
 ];
 
-const useStyles = makeStyles(() => ({}));
-
 const VehiclePage = () => {
-  const [vehicle, setVehicle] = useState([
+  const [vehicle,] = useState([
     { id: "10", marca: "teste", modelo: "teste", ano: "teste", valor: "teste" },
   ]);
   const [vehicleSelected, setvehicleSelected] = useState();
-  const classes = useStyles();
-  const history = useHistory();
 
   function remove() {}
 
