@@ -1,94 +1,87 @@
-import React, { useEffect, useState } from "react";
-import { Button, makeStyles } from "@material-ui/core";
+import React, { useState, useEffect } from "react";
+import { Button } from "@material-ui/core";
 import { TextField } from "@material-ui/core";
-import { useHistory } from "react-router";
+import { Autocomplete } from "@material-ui/lab"
 
-const useStyles = makeStyles(() => ({
-  actionsToolbar: {
-    float: "right",
-  },
-  actions: {
-    top: "10px",
-    marginLeft: "10px",
-  },
-}));
-
-function Forms(props) {
-  const [fild1, setFild1] = useState("");
-  const [fild2, setFild2] = useState("");
-  const [fild3, setFild3] = useState("");
-  const [erros, setErros] = useState({ error: { valido: true, text: "" } });
-  const classes = useStyles();
-  const history = useHistory();
+function Forms({ fields, mainButton, secondaryButton }) {
+  const [fieldStates, setFieldStates] = useState({})
+  const typeToFunction = {
+    "textfield": makeTextFieldComponent,
+    "autocomplete": makeAutocompleteComponent
+  }
 
   useEffect(() => {
-    if (props.id) {
-      // TO-DO make request to find selected user, and set values (Field1 , Field 2 and Field 3)
+    const entries = {};
+    for (const field of fields) {
+      entries[field.id] = ""
     }
-  });
+    setFieldStates({ ...entries })
+  }, [fields])
 
-  function cancel() {
-    history.goBack();
+  function changeFieldState(id, newValue) {
+    const entryChanged = {}
+    entryChanged[id] = newValue
+    setFieldStates({ ...fieldStates, ...entryChanged })
+  }
+
+  function makeTextFieldComponent(field) {
+    return (
+      <TextField
+        id={field.id}
+        label={field.label}
+        required={field.required || false}
+        type={field.type || "text"}
+        value={fieldStates[field.id]}
+        variant="outlined"
+        margin="normal"
+        onChange={event => changeFieldState(field.id, event.target.value)}
+        fullWidth
+      />
+    )
+  }
+
+  function makeAutocompleteComponent(field) {
+    return (
+      <Autocomplete
+        id={field.id}
+        options={field.options}
+        onChange={event => changeFieldState(field.id, event.target.value)}
+        getOptionLabel={(option) => option}
+        renderInput={(params) => <TextField {...params} label={field.label} variant="outlined" />}
+      />
+    )
   }
 
   return (
     <form
       onSubmit={(event) => {
-        history.goBack();
-        props.onSubmit({ fild1, fild2, fild3 });
+        event.preventDefault();
+        mainButton.onSubmit(fieldStates);
       }}
     >
-      <TextField
-        id={props.labelField1}
-        label={props.labelField1}
-        required
-        variant="outlined"
-        fullWidth
-        margin="normal"
-        value={fild1}
-        onChange={(event) => {
-          setFild1(event.target.value);
-        }}
-      />
-      <TextField
-        id={props.labelField2}
-        label={props.labelField2}
-        required
-        fullWidth
-        variant="outlined"
-        margin="normal"
-        value={fild2}
-        onChange={(event) => {
-          setFild2(event.target.value);
-        }}
-        type={props.type}
-      />
-      <TextField
-        id={props.labelField3}
-        label={props.labelField3}
-        required
-        fullWidth
-        variant="outlined"
-        margin="normal"
-        value={fild3}
-        error={!erros.error.valido}
-        helperText={erros.error.text}
-        onBlur={(event) => {
-          setErros({ error: props.validation(fild2, event.target.value) });
-        }}
-        type={props.type}
-        onChange={(event) => {
-          setFild3(event.target.value);
-        }}
-      />
-      <div className={classes.actionsToolbar}>
+      {
+        fields.map(field => {
+          field.componentType = field.componentType || "textfield"
+          return typeToFunction[field.componentType](field)
+        })
+      }
+      <div class="action-itens">
+        {secondaryButton &&
+          <Button
+            variant="outlined"
+            className="action-item"
+            color="primary"
+            onClick={secondaryButton.onSubmit}>
+            {secondaryButton.text}
+          </Button>
+        }
         <Button
           type="submit"
           variant="contained"
-          className={classes.actions}
+          className="action-item"
           color="primary"
         >
-          Salvar
+          {mainButton.text}
         </Button>
       </div>
     </form>

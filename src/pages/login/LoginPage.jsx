@@ -1,45 +1,26 @@
 import React from "react";
-import { TextField } from "@material-ui/core";
-import { Button } from "@material-ui/core";
+import Forms from '../../components/forms/forms'
 
 const LoginPage = () => {
+  function onSubmit(value) {
+    console.log(value)
+  }
+
   return (
-    <>
-      <form autoComplete="off">
-        <TextField
-          label="Usuário"
-          required
-          variant="outlined"
-          fullWidth
-          margin="normal"
-          type="text"
-        />
-        <TextField
-          label="Senha"
-          required
-          variant="outlined"
-          fullWidth
-          margin="normal"
-          type="password"
-        />
-        <div class="action-itens">
-          <Button
-            className="action-item"
-            variant="outlined"
-            color="primary"
-            type="submit">
-            Recuperar senha
-          </Button>
-          <Button
-            className="action-item"
-            variant="contained"
-            color="primary"
-            type="submit">
-            Entrar
-          </Button>
-        </div>
-      </form>
-    </>
+    <Forms
+      mainButton={{
+        text: "Login",
+        onSubmit
+      }}
+      secondaryButton={{
+        text: "Recuperar senha",
+        onSubmit
+      }}
+      fields={[
+        { id: "usuario", label: "Usuário", required: true },
+        { id: "senha", label: "Senha", type: "password", required: true }
+      ]}
+    />
   );
 };
 
