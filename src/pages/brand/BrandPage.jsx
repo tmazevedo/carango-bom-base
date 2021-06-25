@@ -72,4 +72,4 @@ const BrandPage = () => {
   );
 };
 
-export default BrandPage;
+export default BrandPage

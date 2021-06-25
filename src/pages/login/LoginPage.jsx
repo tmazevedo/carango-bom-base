@@ -22,15 +22,23 @@ const LoginPage = () => {
           margin="normal"
           type="password"
         />
+        <div class="action-itens">
+          <Button
+            className="action-item"
+            variant="outlined"
+            color="primary"
+            type="submit">
+            Recuperar senha
+          </Button>
+          <Button
+            className="action-item"
+            variant="contained"
+            color="primary"
+            type="submit">
+            Entrar
+          </Button>
+        </div>
       </form>
-      <div>
-        <Button className="action-item">Recuperar senha</Button>
-      </div>
-      <div className="action-itens">
-        <Button className="action-item" variant="outlined" color="primary">
-          Entrar
-        </Button>
-      </div>
     </>
   );
 };

@@ -192,7 +192,8 @@ function App(props) {
         <div className={classes.toolbar} />
         <Container component="article" maxWidth="md">
           <Switch>
-            <Route exact path="/" component={DashboardPage}/>
+            <Route exact path="/"/>
+            <Route exact path="/dashboard" component={DashboardPage}/>
             <Route exact path="/marcas" component={BrandPage}/>
             <Route path="/marcas/novo" component={CreateBrand}/>
             <Route path="/marcas/editar/:id" component={CreateBrand}/>
