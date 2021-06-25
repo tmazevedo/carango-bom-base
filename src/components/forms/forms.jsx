@@ -32,7 +32,6 @@ function Forms({ fields, mainButton, secondaryButton }) {
         label={field.label}
         required={field.required || false}
         type={field.type || "text"}
-        value={fieldStates[field.name]}
         variant="outlined"
         margin="normal"
         onChange={event => changeFieldState(field.name, event.target.value)}
