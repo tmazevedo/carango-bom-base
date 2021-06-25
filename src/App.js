@@ -192,41 +192,19 @@ function App(props) {
         <div className={classes.toolbar} />
         <Container component="article" maxWidth="md">
           <Switch>
-            <Route exact path="/">
-              <DashboardPage></DashboardPage>
-            </Route>
-            <Route exact path="/marcas">
-              <BrandPage></BrandPage>
-            </Route>
-            <Route path="/marcas/novo">
-              <CreateBrand></CreateBrand>
-            </Route>
-            <Route path="/marcas/editar/:id"></Route>
-            <Route exact path="/veiculos">
-              <VehiclePage></VehiclePage>
-            </Route>
-            <Route path="/veiculos/novo">
-              <CreateVehicle></CreateVehicle>
-            </Route>
-            <Route path="/veiculos/editar/:id">
-              <CreateVehicle></CreateVehicle>
-            </Route>
-            <Route exact path="/usuarios">
-              <UserPage></UserPage>
-            </Route>
-            <Route path="/usuarios/novo">
-              <CreateUser></CreateUser>
-            </Route>
-            <Route path="/usuarios/editar/:id">
-              <CreateUser></CreateUser>
-            </Route>
-            <Route path="/login">
-              <LoginPage></LoginPage>
-            </Route>
-            <Route path="/recuperar-senha"></Route>
-            <Route>
-              <Page404></Page404>
-            </Route>
+            <Route exact path="/" component={DashboardPage}/>
+            <Route exact path="/marcas" component={BrandPage}/>
+            <Route path="/marcas/novo" component={CreateBrand}/>
+            <Route path="/marcas/editar/:id" component={CreateBrand}/>
+            <Route exact path="/veiculos" component={VehiclePage}/>
+            <Route path="/veiculos/novo" component={CreateVehicle}/>
+            <Route path="/veiculos/editar/:id" component={CreateVehicle}/>
+            <Route exact path="/usuarios" component={UserPage}/>
+            <Route path="/usuarios/novo" component={CreateUser}/>
+            <Route path="/usuarios/editar/:id" component={CreateUser}/>
+            <Route path="/login" component={LoginPage}/>
+            <Route path="/recuperar-senha"/>
+            <Route component={Page404}/>
           </Switch>
         </Container>
       </main>
