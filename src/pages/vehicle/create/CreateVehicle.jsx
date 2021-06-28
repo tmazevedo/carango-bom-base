@@ -1,32 +1,31 @@
-import React from "react";
-import Forms from "../../../components/forms/forms";
+import React from 'react';
+import Forms from '../../../components/forms/forms';
 
 function onSubmit(value) {
-  // TO-DO Insert a request, need to create service from vehicle.
+  // eslint-disable-next-line no-console
   console.log(value);
 }
 
 const CreateVehicle = ({ changePageTitle }) => {
-  //TODO
-  changePageTitle("Criar veículo");
+  changePageTitle('Criar veículo');
 
   return (
     <>
       <Forms
         mainButton={{
-          text: "Salvar",
+          text: 'Salvar',
           onSubmit,
         }}
         fields={[
           {
-            name: "marca",
-            label: "Marca",
-            componentType: "autocomplete",
-            options: ["Volks", "Peugeot", "Xablau"],
+            name: 'marca',
+            label: 'Marca',
+            componentType: 'autocomplete',
+            options: ['Volks', 'Peugeot', 'Xablau'],
             required: true,
           },
-          { name: "modelo", label: "Modelo", required: true },
-          { name: "valor", label: "Valor", required: true },
+          { name: 'modelo', label: 'Modelo', required: true },
+          { name: 'valor', label: 'Valor', required: true },
         ]}
       />
     </>

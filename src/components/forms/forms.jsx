@@ -1,27 +1,15 @@
-import React, { useState, useEffect } from "react";
-import { Button } from "@material-ui/core";
-import { TextField } from "@material-ui/core";
-import { Autocomplete } from "@material-ui/lab"
+import React, { useState, useEffect } from 'react';
+import { Button, TextField } from '@material-ui/core';
+
+import { Autocomplete } from '@material-ui/lab';
 
 function Forms({ fields, mainButton, secondaryButton }) {
-  const [fieldStates, setFieldStates] = useState({})
-  const typeToFunction = {
-    "textfield": makeTextFieldComponent,
-    "autocomplete": makeAutocompleteComponent
-  }
-
-  useEffect(() => {
-    const entries = {};
-    for (const field of fields) {
-      entries[field.name] = ""
-    }
-    setFieldStates({ ...entries })
-  }, [fields])
+  const [fieldStates, setFieldStates] = useState({});
 
   function changeFieldState(id, newValue) {
-    const entryChanged = {}
-    entryChanged[id] = newValue
-    setFieldStates({ ...fieldStates, ...entryChanged })
+    const entryChanged = {};
+    entryChanged[id] = newValue;
+    setFieldStates({ ...fieldStates, ...entryChanged });
   }
 
   function makeTextFieldComponent(field) {
@@ -31,13 +19,13 @@ function Forms({ fields, mainButton, secondaryButton }) {
         key={field.name}
         label={field.label}
         required={field.required || false}
-        type={field.type || "text"}
+        type={field.type || 'text'}
         variant="outlined"
         margin="normal"
-        onChange={event => changeFieldState(field.name, event.target.value)}
+        onChange={(event) => changeFieldState(field.name, event.target.value)}
         fullWidth
       />
-    )
+    );
   }
 
   function makeAutocompleteComponent(field) {
@@ -46,12 +34,26 @@ function Forms({ fields, mainButton, secondaryButton }) {
         name={field.name}
         key={field.name}
         options={field.options}
-        onChange={event => changeFieldState(field.name, event.target.value)}
+        onChange={(event) => changeFieldState(field.name, event.target.value)}
         getOptionLabel={(option) => option}
+        // eslint-disable-next-line react/jsx-props-no-spreading
         renderInput={(params) => <TextField {...params} label={field.label} variant="outlined" />}
       />
-    )
+    );
   }
+
+  const typeToFunction = {
+    textfield: makeTextFieldComponent,
+    autocomplete: makeAutocompleteComponent,
+  };
+
+  useEffect(() => {
+    const entries = {};
+    fields.forEach((field) => {
+      entries[field.name] = '';
+    });
+    setFieldStates({ ...entries });
+  }, [fields]);
 
   return (
     <form
@@ -61,21 +63,23 @@ function Forms({ fields, mainButton, secondaryButton }) {
       }}
     >
       {
-        fields.map(field => {
-          field.componentType = field.componentType || "textfield"
-          return typeToFunction[field.componentType](field)
+        fields.map((field) => {
+          const componentType = field.componentType || 'textfield';
+          return typeToFunction[componentType](field);
         })
       }
       <div className="action-itens">
-        {secondaryButton &&
+        {secondaryButton
+          && (
           <Button
             variant="outlined"
             className="action-item"
             color="primary"
-            onClick={secondaryButton.onSubmit}>
+            onClick={secondaryButton.onSubmit}
+          >
             {secondaryButton.text}
           </Button>
-        }
+          )}
         <Button
           type="submit"
           variant="contained"

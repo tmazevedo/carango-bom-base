@@ -1,26 +1,29 @@
-import React from "react";
-import Forms from "../../components/forms/forms";
+import React from 'react';
+import Forms from '../../components/forms/forms';
 
 const LoginPage = ({ changePageTitle }) => {
-  changePageTitle("Entrar");
+  changePageTitle('Entrar');
 
   function onSubmit(value) {
+    // eslint-disable-next-line no-console
     console.log(value);
   }
 
   return (
     <Forms
       mainButton={{
-        text: "Login",
+        text: 'Login',
         onSubmit,
       }}
       secondaryButton={{
-        text: "Recuperar senha",
+        text: 'Recuperar senha',
         onSubmit,
       }}
       fields={[
-        { name: "usuario", label: "Usuário", required: true },
-        { name: "senha", label: "Senha", type: "password", required: true },
+        { name: 'usuario', label: 'Usuário', required: true },
+        {
+          name: 'senha', label: 'Senha', type: 'password', required: true,
+        },
       ]}
     />
   );

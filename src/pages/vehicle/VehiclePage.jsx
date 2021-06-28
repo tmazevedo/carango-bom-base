@@ -1,27 +1,29 @@
-import React, { useState } from "react";
-import { DataGrid } from "@material-ui/data-grid";
-import { Button } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import React, { useState } from 'react';
+import { DataGrid } from '@material-ui/data-grid';
+import { Button } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 
 const colunas = [
-  { field: "marca", headerName: "Marca", width: 200 },
-  { field: "modelo", headerName: "Modelo", width: 200 },
-  { field: "ano", headerName: "Ano", width: 200 },
-  { field: "valor", headerName: "Valor", width: 200 },
+  { field: 'marca', headerName: 'Marca', width: 200 },
+  { field: 'modelo', headerName: 'Modelo', width: 200 },
+  { field: 'ano', headerName: 'Ano', width: 200 },
+  { field: 'valor', headerName: 'Valor', width: 200 },
 ];
 
 const VehiclePage = ({ changePageTitle }) => {
-  changePageTitle("Veículos");
+  changePageTitle('Veículos');
 
   const [vehicle] = useState([
-    { id: "10", marca: "teste", modelo: "teste", ano: "teste", valor: "teste" },
+    {
+      id: '10', marca: 'teste', modelo: 'teste', ano: 'teste', valor: 'teste',
+    },
   ]);
   const [vehicleSelected, setvehicleSelected] = useState();
 
   function remove() {}
 
   return (
-    <div style={{ height: "50vh" }}>
+    <div style={{ height: '50vh' }}>
       <Link className="link" to="/veiculos/novo">
         <Button className="custom-button" variant="outlined" color="primary">
           Novo
@@ -32,9 +34,7 @@ const VehiclePage = ({ changePageTitle }) => {
         hideFooter="true"
         rows={vehicle}
         columns={colunas}
-        onRowSelected={(gridSelection) =>
-          setvehicleSelected(gridSelection.data)
-        }
+        onRowSelected={(gridSelection) => setvehicleSelected(gridSelection.data)}
       />
 
       <div className="action-itens">
@@ -48,7 +48,7 @@ const VehiclePage = ({ changePageTitle }) => {
           Excluir
         </Button>
 
-        <Link className="link" to={"/veiculos/editar/" + vehicleSelected?.id}>
+        <Link className="link" to={`/veiculos/editar/${vehicleSelected.id}`}>
           <Button
             className="action-item"
             variant="outlined"

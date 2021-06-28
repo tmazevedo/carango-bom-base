@@ -1,21 +1,21 @@
-import React, { useState } from "react";
-import { DataGrid } from "@material-ui/data-grid";
-import { Button } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import React, { useState } from 'react';
+import { DataGrid } from '@material-ui/data-grid';
+import { Button } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 
-const colunas = [{ field: "nome", headerName: "Nome", width: 200 }];
+const colunas = [{ field: 'nome', headerName: 'Nome', width: 200 }];
 
 const UserPage = ({ changePageTitle }) => {
-  changePageTitle("Usuários");
+  changePageTitle('Usuários');
 
   const [user] = useState([
-    { id: "10", nome: "teste" },
-    { id: "1", nome: "teste" },
+    { id: '10', nome: 'teste' },
+    { id: '1', nome: 'teste' },
   ]);
   const [userSelecionada, setuserSelecionada] = useState();
 
   return (
-    <div style={{ height: 300, width: "100%" }}>
+    <div style={{ height: 300, width: '100%' }}>
       <Link className="link" to="/usuarios/novo">
         <Button className="custom-button" variant="outlined" color="primary">
           Novo
@@ -26,9 +26,7 @@ const UserPage = ({ changePageTitle }) => {
         hideFooter="true"
         rows={user}
         columns={colunas}
-        onRowSelected={(gridSelection) =>
-          setuserSelecionada(gridSelection.data)
-        }
+        onRowSelected={(gridSelection) => setuserSelecionada(gridSelection.data)}
       />
 
       <div className="action-itens">
@@ -41,7 +39,7 @@ const UserPage = ({ changePageTitle }) => {
         >
           Excluir
         </Button>
-        <Link className="link" to={"/usuarios/editar/" + userSelecionada?.id}>
+        <Link className="link" to={`/usuarios/editar/${userSelecionada.id}`}>
           <Button
             className="action-item"
             variant="outlined"

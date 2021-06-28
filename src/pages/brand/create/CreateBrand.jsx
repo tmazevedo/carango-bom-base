@@ -1,27 +1,27 @@
-import { Button, TextField } from "@material-ui/core";
-import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import { Button, TextField, makeStyles } from '@material-ui/core';
+import React, { useState } from 'react';
+
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles(() => ({
   fab: {
-    position: "absolute",
-    bottom: "100px",
-    right: "100px",
+    position: 'absolute',
+    bottom: '100px',
+    right: '100px',
   },
   actionsToolbar: {
-    float: "right",
+    float: 'right',
   },
   actions: {
-    top: "10px",
+    top: '10px',
   },
 }));
 
 const CreateBrand = ({ changePageTitle }) => {
   // TODO
-  changePageTitle("Criar marca");
+  changePageTitle('Criar marca');
 
-  const [brand, setBrand] = useState("");
+  const [brand, setBrand] = useState('');
   const classes = useStyles();
 
   return (

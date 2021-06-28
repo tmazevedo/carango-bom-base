@@ -1,35 +1,34 @@
-import { Button } from "@material-ui/core";
-import React, { useState } from "react";
-import { DataGrid } from "@material-ui/data-grid";
-import { Link } from "react-router-dom";
-import { makeStyles } from "@material-ui/core";
+import { Button, makeStyles } from '@material-ui/core';
+import React, { useState } from 'react';
+import { DataGrid } from '@material-ui/data-grid';
+import { Link } from 'react-router-dom';
 
-const colunas = [{ field: "brand", headerName: "Marca", width: 200 }];
+const colunas = [{ field: 'brand', headerName: 'Marca', width: 200 }];
 
 const useStyles = makeStyles(() => ({
   fab: {
-    position: "absolute",
-    bottom: "100px",
-    right: "100px",
+    position: 'absolute',
+    bottom: '100px',
+    right: '100px',
   },
   actionsToolbar: {
-    float: "right",
+    float: 'right',
   },
   actions: {
-    top: "10px",
-    marginLeft: "10px",
+    top: '10px',
+    marginLeft: '10px',
   },
 }));
 
 const BrandPage = ({ changePageTitle }) => {
-  changePageTitle("Marcas");
+  changePageTitle('Marcas');
 
-  const [brand] = useState([{ id: "10", brand: "teste" }]);
+  const [brand] = useState([{ id: '10', brand: 'teste' }]);
   const classes = useStyles();
   const [brandSelecionada, setBrandSelecionada] = useState();
 
   return (
-    <div style={{ height: "50vh" }}>
+    <div style={{ height: '50vh' }}>
       <Link className="link" to="/marcas/novo">
         <Button className="custom-button" variant="outlined" color="primary">
           Novo
@@ -40,9 +39,7 @@ const BrandPage = ({ changePageTitle }) => {
         hideFooter="true"
         rows={brand}
         columns={colunas}
-        onRowSelected={(gridSelection) =>
-          setBrandSelecionada(gridSelection.data)
-        }
+        onRowSelected={(gridSelection) => setBrandSelecionada(gridSelection.data)}
       />
 
       <div className={classes.actionsToolbar}>
