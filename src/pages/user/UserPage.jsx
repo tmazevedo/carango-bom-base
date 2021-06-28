@@ -12,7 +12,7 @@ const UserPage = ({ changePageTitle }) => {
     { id: '10', nome: 'teste' },
     { id: '1', nome: 'teste' },
   ]);
-  const [userSelecionada, setuserSelecionada] = useState();
+  const [selectedUser, setSelectedUser] = useState();
 
   return (
     <div style={{ height: 300, width: '100%' }}>
@@ -26,7 +26,7 @@ const UserPage = ({ changePageTitle }) => {
         hideFooter="true"
         rows={user}
         columns={colunas}
-        onRowSelected={(gridSelection) => setuserSelecionada(gridSelection.data)}
+        onRowSelected={(gridSelection) => setSelectedUser(gridSelection.data)}
       />
 
       <div className="action-itens">
@@ -34,17 +34,15 @@ const UserPage = ({ changePageTitle }) => {
           className="action-item"
           variant="outlined"
           color="secondary"
-          disabled={!userSelecionada}
-          // onClick={() => excluir()}
         >
           Excluir
         </Button>
-        <Link className="link" to={`/usuarios/editar/${userSelecionada.id}`}>
+        <Link className="link" to={`/usuarios/editar/${selectedUser?.id}`}>
           <Button
             className="action-item"
             variant="outlined"
             color="primary"
-            disabled={!userSelecionada}
+            disabled={!selectedUser}
           >
             Alterar
           </Button>

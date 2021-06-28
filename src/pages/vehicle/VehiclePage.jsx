@@ -48,16 +48,21 @@ const VehiclePage = ({ changePageTitle }) => {
           Excluir
         </Button>
 
-        <Link className="link" to={`/veiculos/editar/${vehicleSelected.id}`}>
-          <Button
-            className="action-item"
-            variant="outlined"
-            color="primary"
-            disabled={!vehicleSelected}
-          >
-            Alterar
-          </Button>
-        </Link>
+        {
+          vehicleSelected
+          && (
+          <Link className="link" to={`/veiculos/editar/${vehicleSelected?.id}`}>
+            <Button
+              className="action-item"
+              variant="outlined"
+              color="primary"
+              disabled={!vehicleSelected}
+            >
+              Alterar
+            </Button>
+          </Link>
+          )
+        }
       </div>
     </div>
   );
