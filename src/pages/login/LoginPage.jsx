@@ -1,5 +1,5 @@
 import React from 'react';
-import Forms from '../../components/forms/forms';
+import Form from '../../components/form';
 
 const LoginPage = () => {
   function onSubmit(value) {
@@ -8,7 +8,7 @@ const LoginPage = () => {
   }
 
   return (
-    <Forms
+    <Form
       mainButton={{
         text: 'Login',
         onSubmit,

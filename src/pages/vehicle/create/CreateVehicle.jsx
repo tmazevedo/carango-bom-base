@@ -1,5 +1,5 @@
 import React from 'react';
-import Forms from '../../../components/forms/forms';
+import Form from '../../../components/form';
 
 function onSubmit(value) {
   // eslint-disable-next-line no-console
@@ -8,7 +8,7 @@ function onSubmit(value) {
 
 const CreateVehicle = () => (
   <>
-    <Forms
+    <Form
       mainButton={{
         text: 'Salvar',
         onSubmit,

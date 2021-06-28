@@ -3,7 +3,7 @@ import { Button, TextField } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
 import PropTypes from 'prop-types';
 
-function Forms({ fields, mainButton, secondaryButton }) {
+function Form({ fields, mainButton, secondaryButton }) {
   const [fieldStates, setFieldStates] = useState({});
 
   function changeFieldState(id, newValue) {
@@ -93,11 +93,11 @@ function Forms({ fields, mainButton, secondaryButton }) {
   );
 }
 
-Forms.defaultProps = {
+Form.defaultProps = {
   secondaryButton: null,
 };
 
-Forms.propTypes = {
+Form.propTypes = {
   fields: PropTypes.arrayOf(
     PropTypes.exact({
       name: PropTypes.string.isRequired,
@@ -116,4 +116,4 @@ Forms.propTypes = {
   }),
 };
 
-export default Forms;
+export default Form;
