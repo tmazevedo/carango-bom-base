@@ -204,7 +204,7 @@ function App({ window }) {
             <Route
               path="/marcas/editar/:id"
               component={() => (
-                <WithTitle title="Criar Marca" component={CreateBrand} />
+                <WithTitle title="Editar Marca" component={CreateBrand} />
               )}
             />
             <Route
@@ -223,7 +223,7 @@ function App({ window }) {
             <Route
               path="/veiculos/editar/:id"
               component={() => (
-                <WithTitle title="Criar Veículo" component={CreateVehicle} />
+                <WithTitle title="Editar Veículo" component={CreateVehicle} />
               )}
             />
             <Route
@@ -242,7 +242,7 @@ function App({ window }) {
             <Route
               path="/usuarios/editar/:id"
               component={() => (
-                <WithTitle title="Criar Usuário" component={CreateUser} />
+                <WithTitle title="Editar Usuário" component={CreateUser} />
               )}
             />
             <Route
