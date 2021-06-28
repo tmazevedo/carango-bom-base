@@ -1,5 +1,5 @@
 import "./App.sass";
-import React from "react";
+import React, { useState } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Divider from "@material-ui/core/Divider";
@@ -67,6 +67,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function App(props) {
+  const [pageTitle, setPageTitle] = useState("");
+
+  function changePageTitle(title) {
+    setPageTitle(title);
+  }
+
   const { window } = props;
   const classes = useStyles();
   const theme = useTheme();
@@ -127,7 +133,7 @@ function App(props) {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-            Carango Bom
+            {pageTitle}
           </Typography>
         </Toolbar>
       </AppBar>
@@ -165,20 +171,90 @@ function App(props) {
         <div className={classes.toolbar} />
         <Container component="article" maxWidth="md">
           <Switch>
-            <Route exact path="/"/>
-            <Route exact path="/dashboard" component={DashboardPage}/>
-            <Route exact path="/marcas" component={BrandPage}/>
-            <Route exact path="/marcas/novo" component={CreateBrand}/>
-            <Route path="/marcas/editar/:id" component={CreateBrand}/>
-            <Route exact path="/veiculos" component={VehiclePage}/>
-            <Route path="/veiculos/novo" component={CreateVehicle}/>
-            <Route path="/veiculos/editar/:id" component={CreateVehicle}/>
-            <Route exact path="/usuarios" component={UserPage}/>
-            <Route path="/usuarios/novo" component={CreateUser}/>
-            <Route path="/usuarios/editar/:id" component={CreateUser}/>
-            <Route path="/login" component={LoginPage}/>
-            <Route path="/recuperar-senha"/>
-            <Route component={Page404}/>
+            <Route exact path="/" />
+            <Route
+              exact
+              path="/dashboard"
+              component={() => (
+                <DashboardPage
+                  changePageTitle={changePageTitle}
+                ></DashboardPage>
+              )}
+            />
+            <Route
+              exact
+              path="/marcas"
+              component={() => (
+                <BrandPage changePageTitle={changePageTitle}></BrandPage>
+              )}
+            />
+            <Route
+              exact
+              path="/marcas/novo"
+              component={() => (
+                <CreateBrand changePageTitle={changePageTitle}></CreateBrand>
+              )}
+            />
+            <Route
+              path="/marcas/editar/:id"
+              component={() => (
+                <CreateBrand changePageTitle={changePageTitle}></CreateBrand>
+              )}
+            />
+            <Route
+              exact
+              path="/veiculos"
+              component={() => (
+                <VehiclePage changePageTitle={changePageTitle}></VehiclePage>
+              )}
+            />
+            <Route
+              path="/veiculos/novo"
+              component={() => (
+                <CreateVehicle
+                  changePageTitle={changePageTitle}
+                ></CreateVehicle>
+              )}
+            />
+            <Route
+              path="/veiculos/editar/:id"
+              component={() => (
+                <CreateVehicle
+                  changePageTitle={changePageTitle}
+                ></CreateVehicle>
+              )}
+            />
+            <Route
+              exact
+              path="/usuarios"
+              component={() => (
+                <UserPage changePageTitle={changePageTitle}></UserPage>
+              )}
+            />
+            <Route
+              path="/usuarios/novo"
+              component={() => (
+                <CreateUser changePageTitle={changePageTitle}></CreateUser>
+              )}
+            />
+            <Route
+              path="/usuarios/editar/:id"
+              component={() => (
+                <CreateUser changePageTitle={changePageTitle}></CreateUser>
+              )}
+            />
+            <Route
+              path="/login"
+              component={() => (
+                <LoginPage changePageTitle={changePageTitle}></LoginPage>
+              )}
+            />
+            <Route path="/recuperar-senha" />
+            <Route
+              component={() => (
+                <Page404 changePageTitle={changePageTitle}></Page404>
+              )}
+            />
           </Switch>
         </Container>
       </main>

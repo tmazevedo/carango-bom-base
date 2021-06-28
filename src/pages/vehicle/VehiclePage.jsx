@@ -10,8 +10,10 @@ const colunas = [
   { field: "valor", headerName: "Valor", width: 200 },
 ];
 
-const VehiclePage = () => {
-  const [vehicle,] = useState([
+const VehiclePage = ({ changePageTitle }) => {
+  changePageTitle("Veículos");
+
+  const [vehicle] = useState([
     { id: "10", marca: "teste", modelo: "teste", ano: "teste", valor: "teste" },
   ]);
   const [vehicleSelected, setvehicleSelected] = useState();

@@ -6,22 +6,30 @@ function onSubmit(value) {
   console.log(value);
 }
 
-const CreateUser = () => {
+const CreateUser = ({ changePageTitle }) => {
+  // TODO
+  changePageTitle("Criar usuário");
+
   return (
     <>
       <Forms
         mainButton={{
           text: "Salvar",
-          onSubmit
+          onSubmit,
         }}
         fields={[
           { name: "usuario", label: "Usuário", required: true },
           { name: "senha", label: "Senha", required: true, type: "password" },
-          { name: "senha-confirmar", label: "Confirmar senha", required: true, type: "password" }
+          {
+            name: "senha-confirmar",
+            label: "Confirmar senha",
+            required: true,
+            type: "password",
+          },
         ]}
       />
     </>
-  )
-}
+  );
+};
 
-export default CreateUser
+export default CreateUser;

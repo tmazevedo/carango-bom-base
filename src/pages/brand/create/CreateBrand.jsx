@@ -13,11 +13,14 @@ const useStyles = makeStyles(() => ({
     float: "right",
   },
   actions: {
-    top: "10px"
+    top: "10px",
   },
 }));
 
-const CreateBrand = () => {
+const CreateBrand = ({ changePageTitle }) => {
+  // TODO
+  changePageTitle("Criar marca");
+
   const [brand, setBrand] = useState("");
   const classes = useStyles();
 
@@ -46,17 +49,13 @@ const CreateBrand = () => {
           margin="normal"
         />
         <div className={classes.actionsToolbar}>
-          <Button
-            variant="outlined"
-            color="primary"
-            type="submit"
-          >
+          <Button variant="outlined" color="primary" type="submit">
             Salvar
           </Button>
         </div>
       </form>
     </>
   );
-}
+};
 
-export default CreateBrand
+export default CreateBrand;

@@ -6,23 +6,27 @@ function onSubmit(value) {
   console.log(value);
 }
 
-const CreateVehicle = () => {
+const CreateVehicle = ({ changePageTitle }) => {
+  //TODO
+  changePageTitle("Criar veículo");
+
   return (
     <>
       <Forms
         mainButton={{
           text: "Salvar",
-          onSubmit
+          onSubmit,
         }}
         fields={[
           {
-            name: "marca", label: "Marca",
+            name: "marca",
+            label: "Marca",
             componentType: "autocomplete",
-            options: ['Volks', 'Peugeot', 'Xablau'],
-            required: true
+            options: ["Volks", "Peugeot", "Xablau"],
+            required: true,
           },
           { name: "modelo", label: "Modelo", required: true },
-          { name: "valor", label: "Valor", required: true }
+          { name: "valor", label: "Valor", required: true },
         ]}
       />
     </>

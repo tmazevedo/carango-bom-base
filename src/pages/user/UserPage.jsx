@@ -5,8 +5,10 @@ import { Link } from "react-router-dom";
 
 const colunas = [{ field: "nome", headerName: "Nome", width: 200 }];
 
-const UserPage = () => {
-  const [user,] = useState([
+const UserPage = ({ changePageTitle }) => {
+  changePageTitle("Usuários");
+
+  const [user] = useState([
     { id: "10", nome: "teste" },
     { id: "1", nome: "teste" },
   ]);

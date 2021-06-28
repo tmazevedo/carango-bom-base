@@ -1,24 +1,26 @@
 import React from "react";
-import Forms from '../../components/forms/forms'
+import Forms from "../../components/forms/forms";
 
-const LoginPage = () => {
+const LoginPage = ({ changePageTitle }) => {
+  changePageTitle("Entrar");
+
   function onSubmit(value) {
-    console.log(value)
+    console.log(value);
   }
 
   return (
     <Forms
       mainButton={{
         text: "Login",
-        onSubmit
+        onSubmit,
       }}
       secondaryButton={{
         text: "Recuperar senha",
-        onSubmit
+        onSubmit,
       }}
       fields={[
         { name: "usuario", label: "Usuário", required: true },
-        { name: "senha", label: "Senha", type: "password", required: true }
+        { name: "senha", label: "Senha", type: "password", required: true },
       ]}
     />
   );

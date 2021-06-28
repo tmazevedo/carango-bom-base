@@ -21,19 +21,17 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const BrandPage = () => {
-  const [brand,] = useState([{ id: "10", brand: "teste" }]);
+const BrandPage = ({ changePageTitle }) => {
+  changePageTitle("Marcas");
+
+  const [brand] = useState([{ id: "10", brand: "teste" }]);
   const classes = useStyles();
   const [brandSelecionada, setBrandSelecionada] = useState();
 
   return (
     <div style={{ height: "50vh" }}>
       <Link className="link" to="/marcas/novo">
-        <Button
-          className="custom-button"
-          variant="outlined"
-          color="primary"
-        >
+        <Button className="custom-button" variant="outlined" color="primary">
           Novo
         </Button>
       </Link>
@@ -71,4 +69,4 @@ const BrandPage = () => {
   );
 };
 
-export default BrandPage
+export default BrandPage;

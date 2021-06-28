@@ -9,7 +9,7 @@ import Grid from "@material-ui/core/Grid";
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
-    width: "100%"
+    width: "100%",
   },
   bullet: {
     display: "inline-block",
@@ -24,7 +24,9 @@ const useStyles = makeStyles({
   },
 });
 
-const DashboardPage = () => {
+const DashboardPage = ({ changePageTitle }) => {
+  changePageTitle("Dashboard");
+
   const classes = useStyles();
 
   return (
@@ -51,7 +53,7 @@ const DashboardPage = () => {
             </Card>
           </Grid>
 
-          <Grid container item lg={4} >
+          <Grid container item lg={4}>
             <Card className={classes.root} variant="outlined">
               <CardContent>
                 <Typography variant="h5" component="h2">
