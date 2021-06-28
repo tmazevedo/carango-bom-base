@@ -1,28 +1,13 @@
-import { Button, makeStyles } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import React, { useState } from 'react';
 import { DataGrid } from '@material-ui/data-grid';
 import { Link } from 'react-router-dom';
+import CustomModal from '../../components/modal/CustomModal';
 
 const colunas = [{ field: 'brand', headerName: 'Marca', width: 200 }];
 
-const useStyles = makeStyles(() => ({
-  fab: {
-    position: 'absolute',
-    bottom: '100px',
-    right: '100px',
-  },
-  actionsToolbar: {
-    float: 'right',
-  },
-  actions: {
-    top: '10px',
-    marginLeft: '10px',
-  },
-}));
-
 const BrandPage = () => {
   const [brand] = useState([{ id: '10', brand: 'teste' }]);
-  const classes = useStyles();
   const [brandSelecionada, setBrandSelecionada] = useState();
 
   return (
@@ -40,18 +25,10 @@ const BrandPage = () => {
         onRowSelected={(gridSelection) => setBrandSelecionada(gridSelection.data)}
       />
 
-      <div className={classes.actionsToolbar}>
+      <div className="action-itens">
+        <CustomModal />
         <Button
-          className={classes.actions}
-          variant="outlined"
-          color="secondary"
-          disabled={!brandSelecionada}
-          // onClick={() => excluir()}
-        >
-          Excluir
-        </Button>
-        <Button
-          className={classes.actions}
+          className="action-item"
           variant="outlined"
           color="primary"
           disabled={!brandSelecionada}
