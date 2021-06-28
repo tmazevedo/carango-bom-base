@@ -1,14 +1,11 @@
 import { Button } from '@material-ui/core';
-import React, { useState } from 'react';
-import { DataGrid } from '@material-ui/data-grid';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import CustomModal from '../../components/modal/CustomModal';
-
-const colunas = [{ field: 'brand', headerName: 'Marca', width: 200 }];
+import TableComponent from '../../components/table/table';
 
 const BrandPage = () => {
-  const [brand] = useState([{ id: '10', brand: 'teste' }]);
-  const [brandSelecionada, setBrandSelecionada] = useState();
+
+  function remove() { }
 
   return (
     <div style={{ height: '50vh' }}>
@@ -17,26 +14,23 @@ const BrandPage = () => {
           Novo
         </Button>
       </Link>
+      <TableComponent
+        fields={
+          [
+            { id: '10', brand: 'teste' },
+          ]
 
-      <DataGrid
-        hideFooter="true"
-        rows={brand}
-        columns={colunas}
-        onRowSelected={(gridSelection) => setBrandSelecionada(gridSelection.data)}
+          // List from BackEnd
+        }
+        colunas={
+          [
+            { field: 'brand', headerName: 'Marca', width: 200 },
+          ]
+        }
+        routeToChange={'/marcas/editar/'}
+        remove={remove()}
       />
 
-      <div className="action-itens">
-        <CustomModal />
-        <Button
-          className="action-item"
-          variant="outlined"
-          color="primary"
-          disabled={!brandSelecionada}
-          // onClick={() => alterar()}
-        >
-          Alterar
-        </Button>
-      </div>
     </div>
   );
 };

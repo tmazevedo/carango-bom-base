@@ -1,6 +1,18 @@
 {
-    "extends": ["airbnb", "airbnb/hooks"],
-    "parserOptions": {
-        "ecmaVersion": 2020
-      }
+  "extends": [
+    "airbnb",
+    "airbnb/hooks"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 2020
+  },
+  "rules": {
+    "react/prop-types": "off",
+    "indent":"off",
+    "react/jsx-indent-props":"off",
+    "react/jsx-indent":"off",
+    "object-curly-newline":"off",
+    "padded-blocks":"off",
+    "react/jsx-curly-brace-presence":"off"
+  }
 }
