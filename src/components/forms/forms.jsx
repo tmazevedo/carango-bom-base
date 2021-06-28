@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button, TextField } from '@material-ui/core';
-
 import { Autocomplete } from '@material-ui/lab';
+import PropTypes from 'prop-types';
 
 function Forms({ fields, mainButton, secondaryButton }) {
   const [fieldStates, setFieldStates] = useState({});
@@ -92,5 +92,28 @@ function Forms({ fields, mainButton, secondaryButton }) {
     </form>
   );
 }
+
+Forms.defaultProps = {
+  secondaryButton: null,
+};
+
+Forms.propTypes = {
+  fields: PropTypes.arrayOf(
+    PropTypes.exact({
+      name: PropTypes.string.isRequired,
+      componentType: PropTypes.oneOf(['textfield', 'autocomplete']),
+      label: PropTypes.string.isRequired,
+      type: PropTypes.string,
+    }).isRequired,
+  ).isRequired,
+  mainButton: PropTypes.exact({
+    text: PropTypes.string.isRequired,
+    onSubmit: PropTypes.any,
+  }).isRequired,
+  secondaryButton: PropTypes.exact({
+    text: PropTypes.string.isRequired,
+    onSubmit: PropTypes.any,
+  }),
+};
 
 export default Forms;
