@@ -24,9 +24,7 @@ const useStyles = makeStyles({
   },
 });
 
-const DashboardPage = ({ changePageTitle }) => {
-  changePageTitle('Dashboard');
-
+const DashboardPage = () => {
   const classes = useStyles();
 
   return (

@@ -5,9 +5,7 @@ import { Link } from 'react-router-dom';
 
 const colunas = [{ field: 'nome', headerName: 'Nome', width: 200 }];
 
-const UserPage = ({ changePageTitle }) => {
-  changePageTitle('Usuários');
-
+const UserPage = () => {
   const [user] = useState([
     { id: '10', nome: 'teste' },
     { id: '1', nome: 'teste' },

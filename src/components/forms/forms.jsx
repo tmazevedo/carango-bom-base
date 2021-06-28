@@ -108,11 +108,11 @@ Forms.propTypes = {
   ).isRequired,
   mainButton: PropTypes.exact({
     text: PropTypes.string.isRequired,
-    onSubmit: PropTypes.any,
+    onSubmit: PropTypes.func,
   }).isRequired,
   secondaryButton: PropTypes.exact({
     text: PropTypes.string.isRequired,
-    onSubmit: PropTypes.any,
+    onSubmit: PropTypes.func,
   }),
 };
 

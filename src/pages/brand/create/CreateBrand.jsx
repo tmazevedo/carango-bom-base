@@ -17,10 +17,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const CreateBrand = ({ changePageTitle }) => {
-  // TODO
-  changePageTitle('Criar marca');
-
+const CreateBrand = () => {
   const [brand, setBrand] = useState('');
   const classes = useStyles();
 

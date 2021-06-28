@@ -20,9 +20,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-const BrandPage = ({ changePageTitle }) => {
-  changePageTitle('Marcas');
-
+const BrandPage = () => {
   const [brand] = useState([{ id: '10', brand: 'teste' }]);
   const classes = useStyles();
   const [brandSelecionada, setBrandSelecionada] = useState();

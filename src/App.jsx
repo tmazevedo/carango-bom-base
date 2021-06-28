@@ -1,5 +1,6 @@
 import './App.sass';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Divider from '@material-ui/core/Divider';
@@ -66,12 +67,21 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+// eslint-disable-next-line react/prop-types
 function App({ window }) {
   const [pageTitle, setPageTitle] = useState('');
 
-  function changePageTitle(title) {
-    setPageTitle(title);
+  function WithTitle({ title, component: Component }) {
+    useEffect(() => setPageTitle(title));
+    return (
+      <Component />
+    );
   }
+
+  WithTitle.propTypes = {
+    title: PropTypes.string.isRequired,
+    component: PropTypes.func.isRequired,
+  };
 
   const classes = useStyles();
   const theme = useTheme();
@@ -174,83 +184,77 @@ function App({ window }) {
               exact
               path="/dashboard"
               component={() => (
-                <DashboardPage
-                  changePageTitle={changePageTitle}
-                />
+                <WithTitle title="Dashboard" component={DashboardPage} />
               )}
             />
             <Route
               exact
               path="/marcas"
               component={() => (
-                <BrandPage changePageTitle={changePageTitle} />
+                <WithTitle title="Marcas" component={BrandPage} />
               )}
             />
             <Route
               exact
               path="/marcas/novo"
               component={() => (
-                <CreateBrand changePageTitle={changePageTitle} />
+                <WithTitle title="Criar Marca" component={CreateBrand} />
               )}
             />
             <Route
               path="/marcas/editar/:id"
               component={() => (
-                <CreateBrand changePageTitle={changePageTitle} />
+                <WithTitle title="Criar Marca" component={CreateBrand} />
               )}
             />
             <Route
               exact
               path="/veiculos"
               component={() => (
-                <VehiclePage changePageTitle={changePageTitle} />
+                <WithTitle title="Veículos" component={VehiclePage} />
               )}
             />
             <Route
               path="/veiculos/novo"
               component={() => (
-                <CreateVehicle
-                  changePageTitle={changePageTitle}
-                />
+                <WithTitle title="Criar Veículo" component={CreateVehicle} />
               )}
             />
             <Route
               path="/veiculos/editar/:id"
               component={() => (
-                <CreateVehicle
-                  changePageTitle={changePageTitle}
-                />
+                <WithTitle title="Criar Veículo" component={CreateVehicle} />
               )}
             />
             <Route
               exact
               path="/usuarios"
               component={() => (
-                <UserPage changePageTitle={changePageTitle} />
+                <WithTitle title="Usuários" component={UserPage} />
               )}
             />
             <Route
               path="/usuarios/novo"
               component={() => (
-                <CreateUser changePageTitle={changePageTitle} />
+                <WithTitle title="Criar Usuário" component={CreateUser} />
               )}
             />
             <Route
               path="/usuarios/editar/:id"
               component={() => (
-                <CreateUser changePageTitle={changePageTitle} />
+                <WithTitle title="Criar Usuário" component={CreateUser} />
               )}
             />
             <Route
               path="/login"
               component={() => (
-                <LoginPage changePageTitle={changePageTitle} />
+                <WithTitle title="Login" component={LoginPage} />
               )}
             />
             <Route path="/recuperar-senha" />
             <Route
               component={() => (
-                <Page404 changePageTitle={changePageTitle} />
+                <WithTitle title="Página não encontrada" component={Page404} />
               )}
             />
           </Switch>

@@ -1,9 +1,7 @@
 import React from 'react';
 import Forms from '../../components/forms/forms';
 
-const LoginPage = ({ changePageTitle }) => {
-  changePageTitle('Entrar');
-
+const LoginPage = () => {
   function onSubmit(value) {
     // eslint-disable-next-line no-console
     console.log(value);

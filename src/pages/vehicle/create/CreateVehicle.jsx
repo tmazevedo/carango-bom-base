@@ -6,30 +6,26 @@ function onSubmit(value) {
   console.log(value);
 }
 
-const CreateVehicle = ({ changePageTitle }) => {
-  changePageTitle('Criar veículo');
-
-  return (
-    <>
-      <Forms
-        mainButton={{
-          text: 'Salvar',
-          onSubmit,
-        }}
-        fields={[
-          {
-            name: 'marca',
-            label: 'Marca',
-            componentType: 'autocomplete',
-            options: ['Volks', 'Peugeot', 'Xablau'],
-            required: true,
-          },
-          { name: 'modelo', label: 'Modelo', required: true },
-          { name: 'valor', label: 'Valor', required: true },
-        ]}
-      />
-    </>
-  );
-};
+const CreateVehicle = () => (
+  <>
+    <Forms
+      mainButton={{
+        text: 'Salvar',
+        onSubmit,
+      }}
+      fields={[
+        {
+          name: 'marca',
+          label: 'Marca',
+          componentType: 'autocomplete',
+          options: ['Volks', 'Peugeot', 'Xablau'],
+          required: true,
+        },
+        { name: 'modelo', label: 'Modelo', required: true },
+        { name: 'valor', label: 'Valor', required: true },
+      ]}
+    />
+  </>
+);
 
 export default CreateVehicle;
