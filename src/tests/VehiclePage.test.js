@@ -23,5 +23,6 @@ describe('Create Vehicle Component', () => {
     render(<VehiclePage />);
     expect(screen.getByText('Ano')).toBeInTheDocument;
   });
-
 });
+
+// TODO Test a remove Method when is implemmented
