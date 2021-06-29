@@ -3,7 +3,7 @@ import { render, screen, RenderResult } from '@testing-library/react';
 import Table from '../../components/table/table';
 import { vehicleTable, userTable, brandTable } from './constants';
 
-describe('When I Create Table Component', () => {
+describe('When Create Table Component', () => {
     describe('the Columns Render', () => {
         describe('should render columns from Vehicle Table', () => {
             it('should expect all columns', () => {

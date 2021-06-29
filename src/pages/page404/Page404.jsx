@@ -6,7 +6,7 @@ const Page404 = () => (
   <div style={{ textAlign: 'center' }}>
     <br />
     <br />
-    <ErrorIcon style={{ fontSize: 100 }} variant="outlined" color="primary" />
+    <ErrorIcon data-testid="erro-icon" style={{ fontSize: 100 }} variant="outlined" color="primary" />
     <Typography variant="h4"> Página não encontrada</Typography>
   </div>
 );
