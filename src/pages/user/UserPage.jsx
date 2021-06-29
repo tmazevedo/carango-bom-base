@@ -22,7 +22,7 @@ const UserPage = () => {
 
           // List from BackEnd
         }
-        colunas={
+        columns={
           [
             { field: 'nome', headerName: 'Nome', width: 200 },
           ]

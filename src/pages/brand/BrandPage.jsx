@@ -22,7 +22,7 @@ const BrandPage = () => {
 
           // List from BackEnd
         }
-        colunas={
+        columns={
           [
             { field: 'brand', headerName: 'Marca', width: 200 },
           ]

@@ -26,7 +26,7 @@ const VehiclePage = () => {
           ]
           // List from BackEnd
         }
-        colunas={
+        columns={
           [
             { field: 'marca', headerName: 'Marca', width: 200 },
             { field: 'modelo', headerName: 'Modelo', width: 200 },

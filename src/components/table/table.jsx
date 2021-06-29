@@ -4,7 +4,7 @@ import { Link, BrowserRouter } from 'react-router-dom';
 import { Button } from '@material-ui/core';
 import CustomModal from '../modal/CustomModal';
 
-function Table({ fields, colunas, routeToChange, remove }) {
+function Table({ fields, columns, routeToChange, remove }) {
   const [listFields] = useState(fields);
   const [lineSelected, setLineSelected] = useState();
 
@@ -13,7 +13,7 @@ function Table({ fields, colunas, routeToChange, remove }) {
       <DataGrid
         hideFooter="true"
         rows={listFields}
-        columns={colunas}
+        columns={columns}
         onRowSelected={(gridSelection) => setLineSelected(gridSelection.data)}
       />
 
