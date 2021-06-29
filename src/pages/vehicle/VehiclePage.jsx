@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from '@material-ui/core';
 import { Link, BrowserRouter } from 'react-router-dom';
-import TableComponent from '../../components/table/table';
+import Table from '../../components/table/table';
 
 const VehiclePage = () => {
 
@@ -17,7 +17,7 @@ const VehiclePage = () => {
         </Link>
       </BrowserRouter>
 
-      <TableComponent
+      <Table
         fields={
           [
             {
@@ -35,7 +35,7 @@ const VehiclePage = () => {
           ]
         }
         routeToChange={'/veiculos/editar/'}
-        remove={remove()}
+        remove={remove}
       />
     </div>
   );

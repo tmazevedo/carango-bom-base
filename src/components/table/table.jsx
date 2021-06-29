@@ -4,7 +4,7 @@ import { Link, BrowserRouter } from 'react-router-dom';
 import { Button } from '@material-ui/core';
 import CustomModal from '../modal/CustomModal';
 
-function TableComponent({ fields, colunas, routeToChange }) {
+function Table({ fields, colunas, routeToChange, remove }) {
   const [listFields] = useState(fields);
   const [lineSelected, setLineSelected] = useState();
 
@@ -18,7 +18,7 @@ function TableComponent({ fields, colunas, routeToChange }) {
       />
 
       <div className="action-itens">
-        <CustomModal disabled={!lineSelected} />
+        <CustomModal disabled={!lineSelected} remove={remove} />
         <BrowserRouter>
           <Link
             className={lineSelected ? 'link' : 'link link-disabled'}
@@ -39,4 +39,4 @@ function TableComponent({ fields, colunas, routeToChange }) {
   );
 }
 
-export default TableComponent;
+export default Table;

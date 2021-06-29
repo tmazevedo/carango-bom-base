@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CustomModal = ({ disabled }) => {
+const CustomModal = ({ disabled, remove }) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -51,6 +51,7 @@ const CustomModal = ({ disabled }) => {
               className="action-item"
               variant="outlined"
               color="primary"
+              onClick={remove}
             >
               Sim
             </Button>
