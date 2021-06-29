@@ -20,6 +20,8 @@ function Form({ fields, mainButton, secondaryButton }) {
         label={field.label}
         required={field.required || false}
         type={field.type || 'text'}
+        InputLabelProps={{ id: field.name }}
+        inputProps={{ 'aria-labelledby': field.name }}
         variant="outlined"
         margin="normal"
         onChange={(event) => changeFieldState(field.name, event.target.value)}
@@ -34,6 +36,7 @@ function Form({ fields, mainButton, secondaryButton }) {
         name={field.name}
         key={field.name}
         options={field.options}
+        data-testid="form-autocomplete"
         onChange={(event) => changeFieldState(field.name, event.target.value)}
         getOptionLabel={(option) => option}
         // eslint-disable-next-line react/jsx-props-no-spreading
@@ -68,7 +71,7 @@ function Form({ fields, mainButton, secondaryButton }) {
           return typeToFunction[componentType](field);
         })
       }
-      <div className="action-itens">
+      <div data-testid="form-actions" className="action-itens">
         {secondaryButton
           && (
           <Button
@@ -101,9 +104,11 @@ Form.propTypes = {
   fields: PropTypes.arrayOf(
     PropTypes.exact({
       name: PropTypes.string.isRequired,
-      componentType: PropTypes.oneOf(['textfield', 'autocomplete']),
       label: PropTypes.string.isRequired,
+      componentType: PropTypes.oneOf(['textfield', 'autocomplete']),
       type: PropTypes.string,
+      options: PropTypes.arrayOf(PropTypes.string),
+      required: PropTypes.bool,
     }).isRequired,
   ).isRequired,
   mainButton: PropTypes.exact({
