@@ -1,7 +1,7 @@
 import { Button } from '@material-ui/core';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import TableComponent from '../../components/table/table';
+import Table from '../../components/table/table';
 
 const BrandPage = () => {
 
@@ -14,7 +14,7 @@ const BrandPage = () => {
           Novo
         </Button>
       </Link>
-      <TableComponent
+      <Table
         fields={
           [
             { id: '10', brand: 'teste' },

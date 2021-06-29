@@ -4,7 +4,7 @@ import { Link, BrowserRouter } from 'react-router-dom';
 import { Button } from '@material-ui/core';
 // import CustomModal from '../modal/CustomModal';
 
-function TableComponent({ fields, colunas, routeToChange, remove }) {
+function Table({ fields, colunas, routeToChange, remove }) {
 
     const [listFields] = useState(fields);
     const [lineSelected, setLineSelected] = useState();
@@ -51,4 +51,4 @@ function TableComponent({ fields, colunas, routeToChange, remove }) {
     );
 }
 
-export default TableComponent;
+export default Table;

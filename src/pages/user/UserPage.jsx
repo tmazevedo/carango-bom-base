@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import TableComponent from '../../components/forms/table';
+import Table from '../../components/table/table';
 
 const UserPage = () => {
   function remove() { }
@@ -13,7 +13,7 @@ const UserPage = () => {
           Novo
         </Button>
       </Link>
-      <TableComponent
+      <Table
         fields={
           [
             { id: '10', nome: 'teste' },
