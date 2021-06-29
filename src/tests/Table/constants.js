@@ -9,8 +9,8 @@ const vehicleTable = {
         {
             id: '10', marca: 'teste', modelo: 'teste', ano: 'teste', valor: 'teste',
         },
-    ]
-}
+    ],
+};
 
 const userTable = {
     columns: [
@@ -19,20 +19,20 @@ const userTable = {
     fields: [
         { id: '10', nome: 'teste' },
         { id: '1', nome: 'teste' },
-    ]
-}
+    ],
+};
 
 const brandTable = {
-    columns:[
+    columns: [
         { field: 'brand', headerName: 'Marca', width: 200 },
     ],
     fields: [
         { id: '10', brand: 'teste' },
-    ]
-}
+    ],
+};
 
 export {
     vehicleTable,
     userTable,
-    brandTable
+    brandTable,
 };

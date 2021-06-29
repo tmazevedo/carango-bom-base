@@ -20,17 +20,17 @@ describe('When I create a Vehicle Component', () => {
   describe('and the Columns Table', () => {
     it('should expect Marca Column', () => {
       render(<VehiclePage />);
-      expect(screen.getByText('Marca')).toBeInTheDocument;
+      expect(screen.getByText('Marca')).toBeInTheDocument();
     });
     it('should expect Modelo Column', () => {
       render(<VehiclePage />);
-      expect(screen.getByText('Modelo')).toBeInTheDocument;
+      expect(screen.getByText('Modelo')).toBeInTheDocument();
     });
     it('should expect Ano Column', () => {
       render(<VehiclePage />);
-      expect(screen.getByText('Ano')).toBeInTheDocument;
+      expect(screen.getByText('Ano')).toBeInTheDocument();
     });
-  })
+  });
 });
 
 // TODO Test a remove Method when is implemmented
