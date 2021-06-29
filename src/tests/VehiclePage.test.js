@@ -11,4 +11,17 @@ describe('Create Vehicle Component', () => {
     render(<VehiclePage />);
     expect(screen.getByText('Excluir')).toBeInTheDocument;
   });
+  it('Brand column Render', () => {
+    render(<VehiclePage />);
+    expect(screen.getByText('Marca')).toBeInTheDocument;
+  });
+  it('Model column Render', () => {
+    render(<VehiclePage />);
+    expect(screen.getByText('Modelo')).toBeInTheDocument;
+  });
+  it('Year column Render', () => {
+    render(<VehiclePage />);
+    expect(screen.getByText('Ano')).toBeInTheDocument;
+  });
+
 });
