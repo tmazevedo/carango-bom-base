@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CustomModal = () => {
+const CustomModal = ({ disabled }) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -29,7 +29,7 @@ const CustomModal = () => {
 
   return (
     <>
-      <Button variant="outlined" color="secondary" className="action-item" onClick={handleOpen}>
+      <Button disabled={disabled} variant="outlined" color="secondary" className="action-item" onClick={handleOpen}>
         Excluir
       </Button>
       <Modal

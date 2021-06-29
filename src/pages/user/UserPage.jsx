@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
-import TableComponent from '../../components/forms/table';
+import TableComponent from '../../components/table/table';
 
 const UserPage = () => {
   function remove() { }
