@@ -5,11 +5,11 @@ import VehiclePage from '../pages/vehicle/VehiclePage';
 describe('Create Vehicle Component', () => {
   it('New Button Render', () => {
     render(<VehiclePage />);
-    expect(screen.getByText('Novo')).toBeInTheDocument;
+    expect(screen.getByText('Novo')).toBeInTheDocument();
   });
   it('Delete Button Render', () => {
     render(<VehiclePage />);
-    expect(screen.getByText('Excluir')).toBeInTheDocument;
+    expect(screen.getByText('Excluir')).toBeInTheDocument();
   });
   it('Brand column Render', () => {
     render(<VehiclePage />);
