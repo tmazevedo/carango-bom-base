@@ -1,4 +1,5 @@
 import React from 'react';
+import Container from '@material-ui/core/Container';
 import Form from '../../components/form';
 
 const LoginPage = () => {
@@ -8,22 +9,24 @@ const LoginPage = () => {
   }
 
   return (
-    <Form
-      mainButton={{
-        text: 'Login',
-        onSubmit,
-      }}
-      secondaryButton={{
-        text: 'Recuperar senha',
-        onSubmit,
-      }}
-      fields={[
-        { name: 'usuario', label: 'Usuário', required: true },
-        {
-          name: 'senha', label: 'Senha', type: 'password', required: true,
-        },
-      ]}
-    />
+    <Container maxWidth="xs">
+      <Form
+        mainButton={{
+          text: 'Login',
+          onSubmit,
+        }}
+        secondaryButton={{
+          text: 'Recuperar senha',
+          onSubmit,
+        }}
+        fields={[
+          { name: 'usuario', label: 'Usuário', required: true },
+          {
+            name: 'senha', label: 'Senha', type: 'password', required: true,
+          },
+        ]}
+      />
+    </Container>
   );
 };
 
