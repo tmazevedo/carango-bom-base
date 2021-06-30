@@ -2,6 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import { Button } from '@material-ui/core';
+import Alert from '@material-ui/lab/Alert';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -53,11 +54,13 @@ const CustomModal = ({ disabled, remove }) => {
               color="primary"
               onClick={remove}
             >
-              Sim
+              Confirmar
             </Button>
           </div>
         </div>
       </Modal>
+
+      <Alert className="alert" onClose={() => {}}>This is a success alert — check it out!</Alert>
     </>
   );
 };
