@@ -19,6 +19,11 @@
     "react/jsx-indent":"off",
     "object-curly-newline":"off",
     "padded-blocks":"off",
-    "react/jsx-curly-brace-presence":"off"
+    "react/jsx-curly-brace-presence":"off",
+    "quote-props":"off",
+    "arrow-parens":"off",
+    "prefer-template":"off",
+    "object-shorthand":"off"
+
   }
 }
