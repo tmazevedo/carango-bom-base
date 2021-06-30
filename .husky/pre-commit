@@ -1,0 +1,4 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+find src -name "*.js*" | xargs npx eslint --fix
