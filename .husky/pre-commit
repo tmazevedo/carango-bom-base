@@ -1,4 +1,5 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-find src -name "*.js*" | xargs npx eslint --fix
+STAGED=$(git diff --staged --name-only | { egrep '.+\.jsx?' || :; })
+echo $STAGED | xargs -r npx eslint --fix
