@@ -1,7 +1,6 @@
-const url = 'https://carango-bom-api-base.herokuapp.com/';
 const LoginService = {
     auth(user, password) {
-        return fetch(url + 'auth', {
+        return fetch(process.env.React_App_SERVER_URL + 'auth', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
