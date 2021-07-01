@@ -1,5 +1,5 @@
 import './App.sass';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -15,7 +15,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { Container } from '@material-ui/core';
-import { Route, Switch, Link } from 'react-router-dom';
+import { Route, Switch, Link, Redirect } from 'react-router-dom';
 import UserPage from './pages/user/UserPage';
 import CreateUser from './pages/user/create/CreateUser';
 import VehiclePage from './pages/vehicle/VehiclePage';
@@ -25,7 +25,7 @@ import CreateBrand from './pages/brand/create/CreateBrand';
 import Page404 from './pages/page404/Page404';
 import DashboardPage from './pages/dashboard/DashboardPage';
 import LoginPage from './pages/login/LoginPage';
-import { AuthProvider } from './contexts/AuthProvider';
+import { AuthProvider, AuthContext } from './contexts/AuthProvider';
 
 const drawerWidth = 240;
 
@@ -77,6 +77,17 @@ function App({ window }) {
     return (
       <Component />
     );
+  }
+
+  function CustomRoute({ isPrivate, ...rest }) {
+    const { authenticated } = useContext(AuthContext);
+
+    if (isPrivate && !authenticated) {
+      return <Redirect to="/login" />;
+    }
+
+    // eslint-disable-next-line
+    return <Route { ...rest } />;
   }
 
   WithTitle.propTypes = {
@@ -182,66 +193,67 @@ function App({ window }) {
           <AuthProvider>
             <Switch>
               <Route exact path="/" />
-              <Route
+              <CustomRoute
+                isPrivate
                 exact
                 path="/dashboard"
                 component={() => (
                   <WithTitle title="Dashboard" component={DashboardPage} />
                 )}
               />
-              <Route
+              <CustomRoute
                 exact
                 path="/marcas"
                 component={() => (
                   <WithTitle title="Marcas" component={BrandPage} />
                 )}
               />
-              <Route
+              <CustomRoute
                 exact
                 path="/marcas/novo"
                 component={() => (
                   <WithTitle title="Criar Marca" component={CreateBrand} />
                 )}
               />
-              <Route
+              <CustomRoute
                 path="/marcas/editar/:id"
                 component={() => (
                   <WithTitle title="Editar Marca" component={CreateBrand} />
                 )}
               />
-              <Route
+              <CustomRoute
                 exact
                 path="/veiculos"
                 component={() => (
                   <WithTitle title="Veículos" component={VehiclePage} />
                 )}
               />
-              <Route
+              <CustomRoute
                 path="/veiculos/novo"
                 component={() => (
                   <WithTitle title="Criar Veículo" component={CreateVehicle} />
                 )}
               />
-              <Route
+              <CustomRoute
                 path="/veiculos/editar/:id"
                 component={() => (
                   <WithTitle title="Editar Veículo" component={CreateVehicle} />
                 )}
               />
-              <Route
+              <CustomRoute
                 exact
                 path="/usuarios"
                 component={() => (
                   <WithTitle title="Usuários" component={UserPage} />
                 )}
               />
-              <Route
+              <CustomRoute
                 path="/usuarios/novo"
                 component={() => (
                   <WithTitle title="Criar Usuário" component={CreateUser} />
                 )}
               />
-              <Route
+              <CustomRoute
                 path="/usuarios/editar/:id"
                 component={() => (
                   <WithTitle title="Editar Usuário" component={CreateUser} />
