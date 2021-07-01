@@ -1,5 +1,24 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-STAGED=$(git diff --staged --name-only | { egrep '.+\.jsx?' || :; })
-echo $STAGED | xargs -r npx eslint --fix
+ALL_STAGED=$(git diff --staged --name-only | { egrep '.+\.jsx?' || :; })
+TO_LINT=""
+for staged_file in $ALL_STAGED
+do
+    [ -f $staged_file ] && \
+    TO_LINT="$TO_LINT $staged_file"
+done
+
+if [ -z $TO_LINT ]
+then
+    echo "No files to lint check."
+else
+    echo "Files to lint check:"
+    for file in $TO_LINT
+    do
+        echo "  - $file"
+    done
+fi
+
+echo $TO_LINT | xargs -r npx eslint --fix
+echo
