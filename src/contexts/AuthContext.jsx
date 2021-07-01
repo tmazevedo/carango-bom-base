@@ -21,7 +21,6 @@ const AuthProvider = ({ children }) => {
     }
 
     function handleLogout() {
-        console.log('teste');
         setAuthenticated(false);
 
         // eslint-disable-next-line
