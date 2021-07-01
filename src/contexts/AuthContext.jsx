@@ -11,8 +11,8 @@ const AuthProvider = ({ children }) => {
     async function handleLogin(props) {
         if (props) {
             const token = await LoginService.auth(props.usuario, props.senha);
-
             setAuthenticated(true);
+
             // eslint-disable-next-line
             localStorage.setItem('token', JSON.stringify(token));
         }
@@ -21,10 +21,16 @@ const AuthProvider = ({ children }) => {
     }
 
     function handleLogout() {
+        console.log('teste');
+        setAuthenticated(false);
+
+        // eslint-disable-next-line
+        localStorage.removeItem('token');
+        history.push('/login');
     }
 
     return (
-        <AuthContext.Provider value={{ handleLogin, handleLogout, authenticated }}>
+        <AuthContext.Provider value={{ authenticated, handleLogin, handleLogout }}>
             { children }
         </AuthContext.Provider>
     );

@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import Container from '@material-ui/core/Container';
 import Form from '../../components/form';
-import { AuthContext } from '../../contexts/AuthProvider';
+import { AuthContext } from '../../contexts/AuthContext';
 
 const LoginPage = () => {
   const { handleLogin } = useContext(AuthContext);
