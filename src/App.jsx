@@ -25,6 +25,7 @@ import CreateBrand from './pages/brand/create/CreateBrand';
 import Page404 from './pages/page404/Page404';
 import DashboardPage from './pages/dashboard/DashboardPage';
 import LoginPage from './pages/login/LoginPage';
+import { AuthProvider } from './contexts/AuthProvider';
 
 const drawerWidth = 240;
 
@@ -178,86 +179,88 @@ function App({ window }) {
       <main className={classes.content}>
         <div className={classes.toolbar} />
         <Container component="article" maxWidth="md">
-          <Switch>
-            <Route exact path="/" />
-            <Route
-              exact
-              path="/dashboard"
-              component={() => (
-                <WithTitle title="Dashboard" component={DashboardPage} />
-              )}
-            />
-            <Route
-              exact
-              path="/marcas"
-              component={() => (
-                <WithTitle title="Marcas" component={BrandPage} />
-              )}
-            />
-            <Route
-              exact
-              path="/marcas/novo"
-              component={() => (
-                <WithTitle title="Criar Marca" component={CreateBrand} />
-              )}
-            />
-            <Route
-              path="/marcas/editar/:id"
-              component={() => (
-                <WithTitle title="Editar Marca" component={CreateBrand} />
-              )}
-            />
-            <Route
-              exact
-              path="/veiculos"
-              component={() => (
-                <WithTitle title="Veículos" component={VehiclePage} />
-              )}
-            />
-            <Route
-              path="/veiculos/novo"
-              component={() => (
-                <WithTitle title="Criar Veículo" component={CreateVehicle} />
-              )}
-            />
-            <Route
-              path="/veiculos/editar/:id"
-              component={() => (
-                <WithTitle title="Editar Veículo" component={CreateVehicle} />
-              )}
-            />
-            <Route
-              exact
-              path="/usuarios"
-              component={() => (
-                <WithTitle title="Usuários" component={UserPage} />
-              )}
-            />
-            <Route
-              path="/usuarios/novo"
-              component={() => (
-                <WithTitle title="Criar Usuário" component={CreateUser} />
-              )}
-            />
-            <Route
-              path="/usuarios/editar/:id"
-              component={() => (
-                <WithTitle title="Editar Usuário" component={CreateUser} />
-              )}
-            />
-            <Route
-              path="/login"
-              component={() => (
-                <WithTitle title="Login" component={LoginPage} />
-              )}
-            />
-            <Route path="/recuperar-senha" />
-            <Route
-              component={() => (
-                <WithTitle title="Página não encontrada" component={Page404} />
-              )}
-            />
-          </Switch>
+          <AuthProvider>
+            <Switch>
+              <Route exact path="/" />
+              <Route
+                exact
+                path="/dashboard"
+                component={() => (
+                  <WithTitle title="Dashboard" component={DashboardPage} />
+                )}
+              />
+              <Route
+                exact
+                path="/marcas"
+                component={() => (
+                  <WithTitle title="Marcas" component={BrandPage} />
+                )}
+              />
+              <Route
+                exact
+                path="/marcas/novo"
+                component={() => (
+                  <WithTitle title="Criar Marca" component={CreateBrand} />
+                )}
+              />
+              <Route
+                path="/marcas/editar/:id"
+                component={() => (
+                  <WithTitle title="Editar Marca" component={CreateBrand} />
+                )}
+              />
+              <Route
+                exact
+                path="/veiculos"
+                component={() => (
+                  <WithTitle title="Veículos" component={VehiclePage} />
+                )}
+              />
+              <Route
+                path="/veiculos/novo"
+                component={() => (
+                  <WithTitle title="Criar Veículo" component={CreateVehicle} />
+                )}
+              />
+              <Route
+                path="/veiculos/editar/:id"
+                component={() => (
+                  <WithTitle title="Editar Veículo" component={CreateVehicle} />
+                )}
+              />
+              <Route
+                exact
+                path="/usuarios"
+                component={() => (
+                  <WithTitle title="Usuários" component={UserPage} />
+                )}
+              />
+              <Route
+                path="/usuarios/novo"
+                component={() => (
+                  <WithTitle title="Criar Usuário" component={CreateUser} />
+                )}
+              />
+              <Route
+                path="/usuarios/editar/:id"
+                component={() => (
+                  <WithTitle title="Editar Usuário" component={CreateUser} />
+                )}
+              />
+              <Route
+                path="/login"
+                component={() => (
+                  <WithTitle title="Login" component={LoginPage} />
+                )}
+              />
+              <Route path="/recuperar-senha" />
+              <Route
+                component={() => (
+                  <WithTitle title="Página não encontrada" component={Page404} />
+                )}
+              />
+            </Switch>
+          </AuthProvider>
         </Container>
       </main>
     </div>

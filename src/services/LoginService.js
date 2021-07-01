@@ -1,6 +1,6 @@
 const LoginService = {
     auth(user, password) {
-        return fetch(process.env.React_App_SERVER_URL + 'auth', {
+        return fetch(process.env.REACT_APP_SERVER_URL + 'auth', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

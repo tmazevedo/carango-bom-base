@@ -1,13 +1,13 @@
-import React from 'react';
-import Cookies from 'universal-cookie';
+import React, { useContext } from 'react';
 import Container from '@material-ui/core/Container';
 import Form from '../../components/form';
-import LoginService from '../../services/LoginService';
+import { AuthContext } from '../../contexts/AuthProvider';
 
 const LoginPage = () => {
+  const { handleLogin } = useContext(AuthContext);
+
   function onSubmit(value) {
-    const cookies = new Cookies();
-    LoginService.auth(value.usuario, value.senha).then(valueToken => cookies.set('token', valueToken.token));
+    handleLogin(value);
   }
 
   return (
