@@ -1,13 +1,13 @@
 import React from 'react';
+import Cookies from 'universal-cookie';
 import Container from '@material-ui/core/Container';
 import Form from '../../components/form';
 import LoginService from '../../services/LoginService';
 
 const LoginPage = () => {
   function onSubmit(value) {
-    // eslint-disable-next-line no-console
-    LoginService.auth(value.usuario, value.senha).then(valor => console.log(valor));
-    console.log(value);
+    const cookies = new Cookies();
+    LoginService.auth(value.usuario, value.senha).then(valueToken => cookies.set('token', valueToken.token));
   }
 
   return (
