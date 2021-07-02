@@ -24,7 +24,7 @@ const AuthProvider = ({ children }) => {
             setAuthenticated(true);
 
             // eslint-disable-next-line
-            localStorage.setItem('token', JSON.stringify(token.token));
+            localStorage.setItem('token', String((token.token)));
         }
 
         history.push('/');

@@ -1,9 +1,35 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import Table from '../../components/table/table';
+import UserService from '../../services/UserService';
 
 const UserPage = () => {
+  const [userList, setUserList] = useState([]);
+
+  function standardUserList(data) {
+    const list = [];
+    for (let index = 0; index < data.length; index++) {
+      const objectList = {
+        'id': data[index].id,
+        'name': data[index].username,
+      };
+      list.push(objectList);
+    }
+    return list;
+  }
+
+  useEffect(() => {
+    async function loadUsers() {
+      await UserService.List()
+        .then(data => {
+          const list = standardUserList(data);
+          setUserList(list);
+        });
+    }
+    loadUsers();
+  }, []);
+
   function remove() { }
 
   return (
@@ -15,16 +41,11 @@ const UserPage = () => {
       </Link>
       <Table
         fields={
-          [
-            { id: '10', nome: 'teste' },
-            { id: '1', nome: 'teste' },
-          ]
-
-          // List from BackEnd
+          userList
         }
         columns={
           [
-            { field: 'nome', headerName: 'Nome', width: 200 },
+            { field: 'name', headerName: 'Nome', width: 200 },
           ]
         }
         routeToChange={'/usuarios/editar/'}

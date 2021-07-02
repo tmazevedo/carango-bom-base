@@ -12,7 +12,6 @@ const CreateVehicle = () => {
   const [brandList, setbrandList] = useState([]);
 
   function standardBrandList(data) {
-    console.log(data);
     const list = [];
     for (let index = 0; index < data.length; index++) {
       list.push(data[index].name);
@@ -25,7 +24,6 @@ const CreateVehicle = () => {
       await BrandService.List()
         .then(data => {
           const list = standardBrandList(data);
-          console.log(list);
           setbrandList(data);
         });
     }

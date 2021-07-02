@@ -2,7 +2,6 @@ const token = localStorage.getItem('token');
 
 const BrandService = {
     List() {
-
         return fetch(process.env.REACT_APP_SERVER_URL + 'brands', {
             method: 'GET',
             withCredentials: true,
