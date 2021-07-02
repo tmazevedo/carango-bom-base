@@ -27,6 +27,18 @@ const UserService = {
             }),
         }).then(r => r.json());
     },
+    Remove(id) {
+        return fetch(process.env.REACT_APP_SERVER_URL + 'users', {
+            method: 'DELETE',
+            withCredentials: true,
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            },
+            body: id,
+        }).then(r => r.json());
+    },
 
 };
 

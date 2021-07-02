@@ -30,7 +30,9 @@ const UserPage = () => {
     loadUsers();
   }, []);
 
-  function remove() { }
+  function remove(values) {
+    console.log(values);
+  }
 
   return (
     <div style={{ height: 300, width: '100%' }}>
@@ -49,7 +51,7 @@ const UserPage = () => {
           ]
         }
         routeToChange={'/usuarios/editar/'}
-        remove={remove()}
+        remove={remove}
       />
 
     </div>
