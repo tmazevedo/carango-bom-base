@@ -14,8 +14,7 @@ const AuthProvider = ({ children }) => {
 
         if (token) {
             // eslint-disable-next-line
-          localStorage.setItem('token', JSON.stringify(token));
-          setAuthenticated(true);
+            setAuthenticated(true);
         }
     }, []);
 
@@ -25,7 +24,7 @@ const AuthProvider = ({ children }) => {
             setAuthenticated(true);
 
             // eslint-disable-next-line
-            localStorage.setItem('token', JSON.stringify(token));
+            localStorage.setItem('token', JSON.stringify(token.token));
         }
 
         history.push('/');
@@ -41,7 +40,7 @@ const AuthProvider = ({ children }) => {
 
     return (
         <AuthContext.Provider value={{ authenticated, handleLogin, handleLogout }}>
-            { children }
+            {children}
         </AuthContext.Provider>
     );
 };

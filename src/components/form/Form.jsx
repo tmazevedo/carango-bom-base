@@ -38,7 +38,7 @@ function Form({ fields, mainButton, secondaryButton }) {
         options={field.options}
         data-testid="form-autocomplete"
         onChange={(event) => changeFieldState(field.name, event.target.value)}
-        getOptionLabel={(option) => option}
+        getOptionLabel={(option) => option.name}
         // eslint-disable-next-line react/jsx-props-no-spreading
         renderInput={(params) => <TextField {...params} label={field.label} variant="outlined" />}
       />

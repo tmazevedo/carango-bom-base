@@ -23,7 +23,11 @@
     "quote-props":"off",
     "arrow-parens":"off",
     "prefer-template":"off",
-    "object-shorthand":"off"
+    "object-shorthand":"off",
+    "no-plusplus":"off",
+    "react-hooks/exhaustive-deps":"off",
+    "arrow-body-style":"off",
+    "no-unused-vars":"off"
 
   }
 }

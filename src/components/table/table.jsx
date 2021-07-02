@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { DataGrid } from '@material-ui/data-grid';
 import { Link, BrowserRouter } from 'react-router-dom';
 import { Button } from '@material-ui/core';
 import CustomModal from '../modal/CustomModal';
 
 function Table({ fields, columns, routeToChange, remove }) {
-  const [listFields] = useState(fields);
+  const [listFields, setListFields] = useState([]);
   const [lineSelected, setLineSelected] = useState();
+
+  useEffect(() => {
+    setListFields(fields);
+  });
 
   return (
     <>
