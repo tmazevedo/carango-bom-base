@@ -149,7 +149,7 @@ function App({ window }) {
           <div className={classes.toolbar} />
           <Container component="article" maxWidth="md">
             <Switch>
-              <Route exact path="/" />
+              <Route exact path="/" component={() => <Redirect to="/dashboard" />} />
               <CustomRoute
                 isPrivate
                 exact

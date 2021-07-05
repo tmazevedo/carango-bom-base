@@ -27,7 +27,7 @@ const AuthProvider = ({ children }) => {
             localStorage.setItem('token', String((token.token)));
         }
 
-        history.push('/');
+        history.push('/dashboard');
     }
 
     function handleLogout() {
