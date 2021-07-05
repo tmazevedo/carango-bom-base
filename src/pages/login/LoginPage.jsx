@@ -22,9 +22,9 @@ const LoginPage = () => {
           onSubmit,
         }}
         fields={[
-          { name: 'usuario', label: 'Usuário', required: true },
+          { name: 'user', label: 'Usuário', required: true },
           {
-            name: 'senha', label: 'Senha', type: 'password', required: true,
+            name: 'password', label: 'Senha', type: 'password', required: true,
           },
         ]}
       />

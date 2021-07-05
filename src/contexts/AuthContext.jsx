@@ -18,9 +18,9 @@ const AuthProvider = ({ children }) => {
         }
     }, []);
 
-    async function handleLogin(props) {
-        if (props) {
-            const token = await LoginService.auth(props.usuario, props.senha);
+    async function handleLogin({ user, password }) {
+        if (user && password) {
+            const token = await LoginService.auth(user, password);
             setAuthenticated(true);
 
             // eslint-disable-next-line
