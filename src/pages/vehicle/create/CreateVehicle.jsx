@@ -11,7 +11,6 @@ const CreateVehicle = () => {
   function onSubmit(value) {
     VehicleService.Save(value);
     history.goBack();
-    console.log(value);
   }
 
   useEffect(() => {
