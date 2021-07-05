@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import Form from '../../../components/form';
 import BrandService from '../../../services/BrandService';
 import VehicleService from '../../../services/Vehicleservice';
 
-function onSubmit(value) {
-  VehicleService.Save(value);
-  console.log(value);
-}
-
 const CreateVehicle = () => {
   const [brandList, setbrandList] = useState([]);
+  const history = useHistory();
+
+  function onSubmit(value) {
+    VehicleService.Save(value);
+    history.goBack();
+    console.log(value);
+  }
 
   useEffect(() => {
     async function loadBrands() {
