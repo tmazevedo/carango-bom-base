@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-function Sidebar() {
+const Sidebar = () => {
    const classes = useStyles();
    const { authenticated, handleLogout } = useContext(AuthContext);
 
@@ -71,6 +71,6 @@ function Sidebar() {
       </List>
     </div>
   );
-}
+};
 
 export default Sidebar;

@@ -159,6 +159,7 @@ function App({ window }) {
                 )}
               />
               <CustomRoute
+                isPrivate
                 exact
                 path="/marcas"
                 component={() => (
@@ -166,6 +167,7 @@ function App({ window }) {
                 )}
               />
               <CustomRoute
+                isPrivate
                 exact
                 path="/marcas/novo"
                 component={() => (
@@ -173,6 +175,7 @@ function App({ window }) {
                 )}
               />
               <CustomRoute
+                isPrivate
                 path="/marcas/editar/:id"
                 component={() => (
                   <WithTitle title="Editar Marca" component={CreateBrand} />
@@ -186,18 +189,21 @@ function App({ window }) {
                 )}
               />
               <CustomRoute
+                isPrivate
                 path="/veiculos/novo"
                 component={() => (
                   <WithTitle title="Criar Veículo" component={CreateVehicle} />
                 )}
               />
               <CustomRoute
+                isPrivate
                 path="/veiculos/editar/:id"
                 component={() => (
                   <WithTitle title="Editar Veículo" component={CreateVehicle} />
                 )}
               />
               <CustomRoute
+                isPrivate
                 exact
                 path="/usuarios"
                 component={() => (
@@ -205,12 +211,14 @@ function App({ window }) {
                 )}
               />
               <CustomRoute
+                isPrivate
                 path="/usuarios/novo"
                 component={() => (
                   <WithTitle title="Criar Usuário" component={CreateUser} />
                 )}
               />
               <CustomRoute
+                isPrivate
                 path="/usuarios/editar/:id"
                 component={() => (
                   <WithTitle title="Editar Usuário" component={CreateUser} />
