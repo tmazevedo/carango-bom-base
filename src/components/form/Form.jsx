@@ -8,6 +8,7 @@ function Form({ fields, mainButton, secondaryButton }) {
 
   function changeFieldState(id, newValue) {
     const entryChanged = {};
+
     entryChanged[id] = newValue;
     setFieldStates({ ...fieldStates, ...entryChanged });
   }
@@ -31,13 +32,23 @@ function Form({ fields, mainButton, secondaryButton }) {
   }
 
   function makeAutocompleteComponent(field) {
+
+    function getBrandId(index) {
+      const arrayBrands = field.options;
+      console.log(arrayBrands[index].id);
+      return arrayBrands[index].id;
+    }
+
     return (
       <Autocomplete
         name={field.name}
         key={field.name}
         options={field.options}
         data-testid="form-autocomplete"
-        onChange={(event) => changeFieldState(field.name, event.target.value)}
+        onChange={(event) => {
+          const valueBrand = getBrandId(event.target.value);
+          changeFieldState(field.name, valueBrand);
+        }}
         getOptionLabel={(option) => option.name}
         // eslint-disable-next-line react/jsx-props-no-spreading
         renderInput={(params) => <TextField {...params} label={field.label} variant="outlined" />}
@@ -74,14 +85,14 @@ function Form({ fields, mainButton, secondaryButton }) {
       <div data-testid="form-actions" className="action-itens">
         {secondaryButton
           && (
-          <Button
-            variant="outlined"
-            className="action-item"
-            color="primary"
-            onClick={secondaryButton.onSubmit}
-          >
-            {secondaryButton.text}
-          </Button>
+            <Button
+              variant="outlined"
+              className="action-item"
+              color="primary"
+              onClick={secondaryButton.onSubmit}
+            >
+              {secondaryButton.text}
+            </Button>
           )}
         <Button
           type="submit"

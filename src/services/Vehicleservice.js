@@ -6,16 +6,17 @@ const VehicleService = {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': token,
             },
         }).then(r => r.json());
     },
     Save(objectToSave) {
         return fetch(process.env.REACT_APP_SERVER_URL + 'cars', {
             method: 'POST',
+            withCredentials: true,
+            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': token.token,
+                'Authorization': `Bearer ${token}`,
             },
             body: JSON.stringify(objectToSave),
         }).then(r => r.json());

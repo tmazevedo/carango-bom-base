@@ -4,26 +4,17 @@ import BrandService from '../../../services/BrandService';
 import VehicleService from '../../../services/Vehicleservice';
 
 function onSubmit(value) {
-  // eslint-disable-next-line no-console
+  VehicleService.Save(value);
   console.log(value);
 }
 
 const CreateVehicle = () => {
   const [brandList, setbrandList] = useState([]);
 
-  function standardBrandList(data) {
-    const list = [];
-    for (let index = 0; index < data.length; index++) {
-      list.push(data[index].name);
-    }
-    return list;
-  }
-
   useEffect(() => {
     async function loadBrands() {
       await BrandService.List()
         .then(data => {
-          const list = standardBrandList(data);
           setbrandList(data);
         });
     }
