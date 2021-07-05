@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import Container from '@material-ui/core/Container';
 import Form from '../../components/form';
 import { AuthContext } from '../../contexts/AuthContext';
@@ -9,6 +9,16 @@ const LoginPage = () => {
   function onSubmit(value) {
     handleLogin(value);
   }
+
+  useEffect(() => {
+    // eslint-disable-next-line
+    const token = localStorage.getItem('token');
+
+    if (token) {
+        // eslint-disable-next-line
+        setAuthenticated(true);
+    }
+}, []);
 
   return (
     <Container maxWidth="xs">

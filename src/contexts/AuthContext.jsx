@@ -1,12 +1,14 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import LoginService from '../services/LoginService';
+import { AlertContext } from './AlertContext';
 
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
     const history = useHistory();
     const [authenticated, setAuthenticated] = useState(false);
+    const { handleAlert } = useContext(AlertContext);
 
     useEffect(() => {
         // eslint-disable-next-line
@@ -25,6 +27,9 @@ const AuthProvider = ({ children }) => {
 
             // eslint-disable-next-line
             localStorage.setItem('token', String((token.token)));
+            history.push('/');
+
+            return;
         }
 
         history.push('/dashboard');

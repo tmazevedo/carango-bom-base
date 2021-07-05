@@ -22,6 +22,7 @@ import Page404 from './pages/page404/Page404';
 import DashboardPage from './pages/dashboard/DashboardPage';
 import LoginPage from './pages/login/LoginPage';
 import { AuthContext, AuthProvider } from './contexts/AuthContext';
+import { AlertProvider } from './contexts/AlertContext';
 import Sidebar from './components/sidebar/Sidebar';
 
 const drawerWidth = 240;
@@ -97,149 +98,151 @@ function App({ window }) {
 
   return (
     <div className={classes.root}>
-      <AuthProvider>
-        <CssBaseline />
-        <AppBar position="fixed" className={classes.appBar}>
-          <Toolbar>
-            <IconButton
-              color="inherit"
-              aria-label="open drawer"
-              edge="start"
-              onClick={handleDrawerToggle}
-              className={classes.menuButton}
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography variant="h6" noWrap>
-              {pageTitle}
-            </Typography>
-          </Toolbar>
-        </AppBar>
-        <nav className={classes.drawer} aria-label="mailbox folders">
-          <Hidden smUp implementation="css">
-            <Drawer
-              container={container}
-              variant="temporary"
-              anchor={theme.direction === 'rtl' ? 'right' : 'left'}
-              open={mobileOpen}
-              onClose={handleDrawerToggle}
-              classes={{
-                paper: classes.drawerPaper,
-              }}
-              ModalProps={{
-                keepMounted: true,
-              }}
-            >
-              <Sidebar> </Sidebar>
-            </Drawer>
-          </Hidden>
-          <Hidden xsDown implementation="css">
-            <Drawer
-              classes={{
-                paper: classes.drawerPaper,
-              }}
-              variant="permanent"
-              open
-            >
-              <Sidebar> </Sidebar>
-            </Drawer>
-          </Hidden>
-        </nav>
-        <main className={classes.content}>
-          <div className={classes.toolbar} />
-          <Container component="article" maxWidth="md">
-            <Switch>
-              <Route exact path="/" component={() => <Redirect to="/dashboard" />} />
-              <CustomRoute
-                isPrivate
-                exact
-                path="/dashboard"
-                component={() => (
-                  <WithTitle title="Dashboard" component={DashboardPage} />
-                )}
-              />
-              <CustomRoute
-                isPrivate
-                exact
-                path="/marcas"
-                component={() => (
-                  <WithTitle title="Marcas" component={BrandPage} />
-                )}
-              />
-              <CustomRoute
-                isPrivate
-                exact
-                path="/marcas/novo"
-                component={() => (
-                  <WithTitle title="Criar Marca" component={CreateBrand} />
-                )}
-              />
-              <CustomRoute
-                isPrivate
-                path="/marcas/editar/:id"
-                component={() => (
-                  <WithTitle title="Editar Marca" component={CreateBrand} />
-                )}
-              />
-              <CustomRoute
-                exact
-                path="/veiculos"
-                component={() => (
-                  <WithTitle title="Veículos" component={VehiclePage} />
-                )}
-              />
-              <CustomRoute
-                isPrivate
-                path="/veiculos/novo"
-                component={() => (
-                  <WithTitle title="Criar Veículo" component={CreateVehicle} />
-                )}
-              />
-              <CustomRoute
-                isPrivate
-                path="/veiculos/editar/:id"
-                component={() => (
-                  <WithTitle title="Editar Veículo" component={CreateVehicle} />
-                )}
-              />
-              <CustomRoute
-                isPrivate
-                exact
-                path="/usuarios"
-                component={() => (
-                  <WithTitle title="Usuários" component={UserPage} />
-                )}
-              />
-              <CustomRoute
-                isPrivate
-                path="/usuarios/novo"
-                component={() => (
-                  <WithTitle title="Criar Usuário" component={CreateUser} />
-                )}
-              />
-              <CustomRoute
-                isPrivate
-                path="/usuarios/editar/:id"
-                component={() => (
-                  <WithTitle title="Editar Usuário" component={CreateUser} />
-                )}
-              />
-              <Route
-                path="/login"
-                component={() => (
-                  <WithTitle title="Login" component={LoginPage} />
-                )}
-              />
-              <Route path="/recuperar-senha" />
-              <Route
-                component={() => (
-                  <WithTitle title="Página não encontrada" component={Page404} />
-                )}
-              />
-            </Switch>
-          </Container>
-        </main>
-      </AuthProvider>
+      <AlertProvider>
+        <AuthProvider>
+          <CssBaseline />
+          <AppBar position="fixed" className={classes.appBar}>
+            <Toolbar>
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                edge="start"
+                onClick={handleDrawerToggle}
+                className={classes.menuButton}
+              >
+                <MenuIcon />
+              </IconButton>
+              <Typography variant="h6" noWrap>
+                {pageTitle}
+              </Typography>
+            </Toolbar>
+          </AppBar>
+          <nav className={classes.drawer} aria-label="mailbox folders">
+            <Hidden smUp implementation="css">
+              <Drawer
+                container={container}
+                variant="temporary"
+                anchor={theme.direction === 'rtl' ? 'right' : 'left'}
+                open={mobileOpen}
+                onClose={handleDrawerToggle}
+                classes={{
+                  paper: classes.drawerPaper,
+                }}
+                ModalProps={{
+                  keepMounted: true,
+                }}
+              >
+                <Sidebar> </Sidebar>
+              </Drawer>
+            </Hidden>
+            <Hidden xsDown implementation="css">
+              <Drawer
+                classes={{
+                  paper: classes.drawerPaper,
+                }}
+                variant="permanent"
+                open
+              >
+                <Sidebar> </Sidebar>
+              </Drawer>
+            </Hidden>
+          </nav>
+          <main className={classes.content}>
+            <div className={classes.toolbar} />
+            <Container component="article" maxWidth="md">
+              <Switch>
+                <Route exact path="/" />
+                <CustomRoute
+                  isPrivate
+                  exact
+                  path="/dashboard"
+                  component={() => (
+                    <WithTitle title="Dashboard" component={DashboardPage} />
+                  )}
+                />
+                <CustomRoute
+                  isPrivate
+                  exact
+                  path="/marcas"
+                  component={() => (
+                    <WithTitle title="Marcas" component={BrandPage} />
+                  )}
+                />
+                <CustomRoute
+                  isPrivate
+                  exact
+                  path="/marcas/novo"
+                  component={() => (
+                    <WithTitle title="Criar Marca" component={CreateBrand} />
+                  )}
+                />
+                <CustomRoute
+                  isPrivate
+                  path="/marcas/editar/:id"
+                  component={() => (
+                    <WithTitle title="Editar Marca" component={CreateBrand} />
+                  )}
+                />
+                <CustomRoute
+                  exact
+                  path="/veiculos"
+                  component={() => (
+                    <WithTitle title="Veículos" component={VehiclePage} />
+                  )}
+                />
+                <CustomRoute
+                  isPrivate
+                  path="/veiculos/novo"
+                  component={() => (
+                    <WithTitle title="Criar Veículo" component={CreateVehicle} />
+                  )}
+                />
+                <CustomRoute
+                  isPrivate
+                  path="/veiculos/editar/:id"
+                  component={() => (
+                    <WithTitle title="Editar Veículo" component={CreateVehicle} />
+                  )}
+                />
+                <CustomRoute
+                  isPrivate
+                  exact
+                  path="/usuarios"
+                  component={() => (
+                    <WithTitle title="Usuários" component={UserPage} />
+                  )}
+                />
+                <CustomRoute
+                  isPrivate
+                  path="/usuarios/novo"
+                  component={() => (
+                    <WithTitle title="Criar Usuário" component={CreateUser} />
+                  )}
+                />
+                <CustomRoute
+                  isPrivate
+                  path="/usuarios/editar/:id"
+                  component={() => (
+                    <WithTitle title="Editar Usuário" component={CreateUser} />
+                  )}
+                />
+                <Route
+                  path="/login"
+                  component={() => (
+                    <WithTitle title="Login" component={LoginPage} />
+                  )}
+                />
+                <Route path="/recuperar-senha" />
+                <Route
+                  component={() => (
+                    <WithTitle title="Página não encontrada" component={Page404} />
+                  )}
+                />
+              </Switch>
+            </Container>
+          </main>
+        </AuthProvider>
+      </AlertProvider>
     </div>
   );
 }
