@@ -2,18 +2,20 @@ import React, { useState, useContext, useEffect } from 'react';
 import Alert from '@material-ui/lab/Alert';
 import Collapse from '@material-ui/core/Collapse';
 
-const CustomAlert = ({ hidden, status, message }) => {
-    const [open, setOpen] = React.useState(true);
-    // const [customModal, setCustomModal] = useState({ hidden: true, status: '', message: '' });
-
-    // useEffect(() => {
-    //     setCustomModal({ hiddem: hidden, status: status, message: message });
-    // }, []);
-
+const CustomAlert = ({ hidden, status, message, onClose }) => {
     return (
         <>
-            <Collapse hidden={hidden} in={open}>
-                <Alert variant="outlined" className="alert" severity={status} onClose={() => setOpen(false)}>{message}</Alert>
+            <Collapse hidden={hidden} in>
+                <Alert
+                    variant="outlined"
+                    className="alert"
+                    severity={status}
+                    onClose={() => {
+                        onClose();
+                    }}
+                >
+                        {message}
+                </Alert>
             </Collapse>
         </>
     );

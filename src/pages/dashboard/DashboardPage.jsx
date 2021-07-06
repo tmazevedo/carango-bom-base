@@ -61,9 +61,10 @@ const DashboardPage = () => {
         veículos encontrados
       </Box>
       {
-        dashboardList.map((value) => {
+        dashboardList.map((value, idx) => {
           return (
-            <div style={{ padding: '0 12px', margin: '40px 0' }}>
+            // eslint-disable-next-line react/no-array-index-key
+            <div style={{ padding: '0 12px', margin: '40px 0' }} key={idx}>
               <Grid container spacing={5}>
                 <Grid container item lg={4}>
                   <Card className={classes.root} variant="outlined">

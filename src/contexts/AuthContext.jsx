@@ -26,13 +26,12 @@ const AuthProvider = ({ children }) => {
                 setAuthenticated(true);
                 // eslint-disable-next-line
                 localStorage.setItem('token', String((data.token)));
-                history.push('/');
+                history.push('/dashboard');
+            }).catch((e) => {
+                handleAlert({ status: 'error', message: e.message });
+                history.push('/login');
             });
-            history.push('/dashboard');
-            return;
         }
-
-        history.push('/dashboard');
     }
 
     function handleLogout() {

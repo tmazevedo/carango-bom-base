@@ -1,6 +1,7 @@
 const LoginService = {
     async auth(user, password) {
-        return fetch(process.env.REACT_APP_SERVER_URL + 'auth', {
+        // eslint-disable-next-line
+        const response = await fetch(process.env.REACT_APP_SERVER_URL + 'auth', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -9,7 +10,13 @@ const LoginService = {
                 username: user,
                 password: password,
             }),
-        }).then(r => r.json());
+        });
+
+        if (response.ok) {
+            return response.json();
+        }
+
+        throw new Error('Usuário ou senha inválida!');
     },
 };
 
