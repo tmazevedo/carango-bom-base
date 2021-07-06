@@ -38,7 +38,6 @@ function Form({ fields, mainButton, secondaryButton, value }) {
 
     function getBrandId(index) {
       const arrayBrands = field.options;
-      console.log(arrayBrands[index].id);
       return arrayBrands[index].id;
     }
 
@@ -65,7 +64,6 @@ function Form({ fields, mainButton, secondaryButton, value }) {
   };
 
   useEffect(() => {
-    console.log(value);
     const entries = {};
     fields.forEach((field) => {
       entries[field.name] = '';

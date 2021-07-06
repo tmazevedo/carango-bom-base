@@ -39,6 +39,29 @@ const UserService = {
             body: id,
         }).then(r => r.json());
     },
+    FindById(id) {
+        return fetch(process.env.REACT_APP_SERVER_URL + 'users/' + id, {
+            method: 'GET',
+            withCredentials: true,
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            },
+        }).then(r => r.json());
+    },
+    UpdateUser(objectToChange, id) {
+        return fetch(process.env.REACT_APP_SERVER_URL + 'users/' + id, {
+            method: 'PUT',
+            withCredentials: true,
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            },
+            body: objectToChange,
+        }).then(r => r.json());
+    },
 
 };
 
