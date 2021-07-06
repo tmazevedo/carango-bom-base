@@ -3,7 +3,7 @@ import { Button, TextField } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
 import PropTypes from 'prop-types';
 
-function Form({ fields, mainButton, secondaryButton }) {
+function Form({ fields, mainButton, secondaryButton, value }) {
   const [fieldStates, setFieldStates] = useState({});
 
   function changeFieldState(id, newValue) {
@@ -18,6 +18,7 @@ function Form({ fields, mainButton, secondaryButton }) {
       <TextField
         name={field.name}
         key={field.name}
+        defaultValue={value ? value[field.name] : ''}
         label={field.label}
         required={field.required || false}
         type={field.type || 'text'}
@@ -25,7 +26,9 @@ function Form({ fields, mainButton, secondaryButton }) {
         inputProps={{ 'aria-labelledby': field.name }}
         variant="outlined"
         margin="normal"
-        onChange={(event) => changeFieldState(field.name, event.target.value)}
+        onChange={(event) => {
+          changeFieldState(field.name, event.target.value);
+        }}
         fullWidth
       />
     );
@@ -62,12 +65,13 @@ function Form({ fields, mainButton, secondaryButton }) {
   };
 
   useEffect(() => {
+    console.log(value);
     const entries = {};
     fields.forEach((field) => {
       entries[field.name] = '';
     });
     setFieldStates({ ...entries });
-  }, [fields]);
+  }, [fields, value]);
 
   return (
     <form

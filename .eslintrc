@@ -29,7 +29,10 @@
     "arrow-body-style":"off",
     "no-unused-vars":"off",
     "no-useless-concat":"off",
-    "react-hooks/rules-of-hooks":"off"
+    "react-hooks/rules-of-hooks":"off",
+    "react/jsx-wrap-multilines":"off",
+    "prefer-const":"off",
+    "radix":"off",
 
   }
 }

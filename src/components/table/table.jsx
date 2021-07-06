@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { DataGrid } from '@material-ui/data-grid';
-import { Link, BrowserRouter } from 'react-router-dom';
+import { Link, BrowserRouter, useHistory } from 'react-router-dom';
 import { Button } from '@material-ui/core';
 import CustomModal from '../modal/CustomModal';
 
 function Table({ fields, columns, routeToChange, remove }) {
   const [listFields, setListFields] = useState([]);
   const [lineSelected, setLineSelected] = useState();
+  const history = useHistory();
 
   useEffect(() => {
     setListFields(fields);
@@ -33,6 +34,9 @@ function Table({ fields, columns, routeToChange, remove }) {
               className="action-item"
               variant="outlined"
               color="primary"
+              onClick={() => {
+                history.push(routeToChange + lineSelected?.id);
+              }}
             >
               Alterar
             </Button>

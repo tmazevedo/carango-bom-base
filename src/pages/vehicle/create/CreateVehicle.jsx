@@ -1,31 +1,65 @@
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Form from '../../../components/form';
 import BrandService from '../../../services/BrandService';
 import VehicleService from '../../../services/Vehicleservice';
 
 const CreateVehicle = () => {
   const [brandList, setbrandList] = useState([]);
+  const [vehicleFind, setVehicleFind] = useState('');
+  const [loading, setLoading] = useState(true);
   const history = useHistory();
+  const { id } = useParams();
 
   function onSubmit(value) {
-    VehicleService.Save(value);
+    if (id) {
+      const objectVehicle = {
+        'model': value.model,
+        'year': parseInt(value.year),
+        'value': parseInt(value.value),
+        'idBrand': parseInt(value.idBrand),
+      };
+      VehicleService.UpdateVehicle(objectVehicle, id);
+    } else {
+      VehicleService.Save(value);
+      history.goBack();
+    }
     history.goBack();
   }
 
-  useEffect(() => {
-    async function loadBrands() {
-      await BrandService.List()
+  const findCar = () => {
+    if (id) {
+      VehicleService.FindById(id).then(dataFind => {
+        const objectVehicle = {
+          'model': dataFind.model,
+          'year': parseInt(dataFind.year),
+          'value': parseInt(dataFind.value),
+          'idBrand': dataFind.brand,
+        };
+        setVehicleFind(objectVehicle);
+        setLoading(false);
+      });
+      BrandService.List()
         .then(data => {
           setbrandList(data);
         });
+    } else {
+      BrandService.List()
+        .then(data => {
+          setbrandList(data);
+          setLoading(false);
+        });
     }
-    loadBrands();
+  };
+
+  useEffect(async () => {
+    findCar();
   }, []);
 
   return (
-    <>
-      <Form
+    loading ? <CircularProgress />
+      : <Form
         mainButton={{
           text: 'Salvar',
           onSubmit,
@@ -42,8 +76,8 @@ const CreateVehicle = () => {
           { name: 'year', label: 'Ano', required: true },
           { name: 'value', label: 'Valor', required: true },
         ]}
+        value={vehicleFind}
       />
-    </>
   );
 };
 

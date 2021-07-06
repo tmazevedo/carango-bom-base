@@ -21,6 +21,29 @@ const VehicleService = {
             body: JSON.stringify(objectToSave),
         }).then(r => r.json());
     },
+    FindById(id) {
+        return fetch(process.env.REACT_APP_SERVER_URL + 'cars/' + id, {
+            method: 'GET',
+            withCredentials: true,
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            },
+        }).then(r => r.json());
+    },
+    UpdateVehicle(objectToChange, id) {
+        return fetch(process.env.REACT_APP_SERVER_URL + 'cars/' + id, {
+            method: 'PUT',
+            withCredentials: true,
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            },
+            body: JSON.stringify(objectToChange),
+        }).then(r => r.json());
+    },
 };
 
 export default VehicleService;
