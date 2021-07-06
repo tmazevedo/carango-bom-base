@@ -15,10 +15,10 @@ const CreateVehicle = () => {
   function onSubmit(value) {
     if (id) {
       const objectVehicle = {
-        'model': value.model,
-        'year': parseInt(value.year),
-        'value': parseInt(value.value),
-        'idBrand': parseInt(value.idBrand),
+        model: value.model,
+        year: parseInt(value.year, 10),
+        value: parseInt(value.value, 10),
+        idBrand: parseInt(value.idBrand, 10),
       };
       VehicleService.UpdateVehicle(objectVehicle, id);
     } else {
@@ -32,10 +32,10 @@ const CreateVehicle = () => {
     if (id) {
       VehicleService.FindById(id).then(dataFind => {
         const objectVehicle = {
-          'model': dataFind.model,
-          'year': parseInt(dataFind.year),
-          'value': parseInt(dataFind.value),
-          'idBrand': dataFind.brand,
+          model: dataFind.model,
+          year: parseInt(dataFind.year, 10),
+          value: parseInt(dataFind.value, 10),
+          idBrand: dataFind.brand,
         };
         setVehicleFind(objectVehicle);
         setLoading(false);
@@ -59,25 +59,27 @@ const CreateVehicle = () => {
 
   return (
     loading ? <CircularProgress />
-      : <Form
-        mainButton={{
-          text: 'Salvar',
-          onSubmit,
-        }}
-        fields={[
-          {
-            name: 'idBrand',
-            label: 'Marca',
-            componentType: 'autocomplete',
-            options: brandList,
-            required: true,
-          },
-          { name: 'model', label: 'Modelo', required: true },
-          { name: 'year', label: 'Ano', required: true },
-          { name: 'value', label: 'Valor', required: true },
-        ]}
-        value={vehicleFind}
-      />
+      : (
+        <Form
+          mainButton={{
+            text: 'Salvar',
+            onSubmit,
+          }}
+          fields={[
+            {
+              name: 'idBrand',
+              label: 'Marca',
+              componentType: 'autocomplete',
+              options: brandList,
+              required: true,
+            },
+            { name: 'model', label: 'Modelo', required: true },
+            { name: 'year', label: 'Ano', required: true },
+            { name: 'value', label: 'Valor', required: true },
+          ]}
+          value={vehicleFind}
+        />
+      )
   );
 };
 
