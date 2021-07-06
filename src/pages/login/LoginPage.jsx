@@ -14,10 +14,10 @@ const LoginPage = () => {
     // eslint-disable-next-line
     const token = localStorage.getItem('token');
 
-    if (token) {
-      // eslint-disable-next-line
-      setAuthenticated(true);
-    }
+    // if (token) {
+    //   // eslint-disable-next-line
+    //   setAuthenticated(true);
+    // }
   }, []);
 
   return (
@@ -37,6 +37,7 @@ const LoginPage = () => {
             name: 'password', label: 'Senha', type: 'password', required: true,
           },
         ]}
+        value={''}
       />
     </Container>
   );

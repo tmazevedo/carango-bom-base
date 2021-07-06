@@ -29,7 +29,7 @@ const DashboardPage = () => {
   const [dashboardList, setDashboardList] = useState([]);
   const [totalCars, setTotalCars] = useState('');
 
-  useEffect(() => {
+  useEffect(async () => {
 
     function countCars(data) {
       let element = 0;
