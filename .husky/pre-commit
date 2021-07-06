@@ -9,7 +9,7 @@ do
     TO_LINT="$TO_LINT $staged_file"
 done
 
-if [ -z $TO_LINT ]
+if [ -z "$TO_LINT" ]
 then
     echo "No files to lint check."
     exit 0
