@@ -20,15 +20,15 @@ const AuthProvider = ({ children }) => {
         }
     }, []);
 
-    async function handleLogin({ user, password }) {
+    async function handleLogin(user, password) {
         if (user && password) {
-            const token = await LoginService.auth(user, password);
-            setAuthenticated(true);
-
-            // eslint-disable-next-line
-            localStorage.setItem('token', String((token.token)));
-            history.push('/');
-
+            await LoginService.auth(user, password).then((data) => {
+                setAuthenticated(true);
+                // eslint-disable-next-line
+                localStorage.setItem('token', String((data.token)));
+                history.push('/');
+            });
+            history.push('/dashboard');
             return;
         }
 

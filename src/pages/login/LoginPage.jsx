@@ -7,7 +7,7 @@ const LoginPage = () => {
   const { handleLogin } = useContext(AuthContext);
 
   function onSubmit(value) {
-    handleLogin(value);
+    handleLogin(value.user, value.password);
   }
 
   useEffect(() => {
@@ -15,10 +15,10 @@ const LoginPage = () => {
     const token = localStorage.getItem('token');
 
     if (token) {
-        // eslint-disable-next-line
-        setAuthenticated(true);
+      // eslint-disable-next-line
+      setAuthenticated(true);
     }
-}, []);
+  }, []);
 
   return (
     <Container maxWidth="xs">
