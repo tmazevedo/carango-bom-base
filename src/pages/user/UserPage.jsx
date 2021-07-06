@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import Table from '../../components/table/table';
 import UserService from '../../services/UserService';
+import { AlertContext } from '../../contexts/AlertContext';
 
 const UserPage = () => {
+  const { handleAlert } = useContext(AlertContext);
   const [userList, setUserList] = useState([]);
 
   function standardUserList(data) {
@@ -19,19 +21,27 @@ const UserPage = () => {
     return list;
   }
 
+  async function loadUsers() {
+    await UserService.List()
+      .then(data => {
+        const list = standardUserList(data);
+        setUserList(list);
+      });
+  }
+
   useEffect(() => {
-    async function loadUsers() {
-      await UserService.List()
-        .then(data => {
-          const list = standardUserList(data);
-          setUserList(list);
-        });
-    }
     loadUsers();
   }, []);
 
-  function remove(values) {
-    console.log(values);
+  async function remove(id) {
+    if (Number.isInteger(id)) {
+      await UserService.Remove(id).catch((e) => {
+        handleAlert({ status: 'error', message: e.message });
+      });
+
+      handleAlert({ status: 'success', message: 'Removido com sucesso.' });
+      loadUsers();
+    }
   }
 
   return (

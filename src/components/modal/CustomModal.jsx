@@ -2,7 +2,6 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import { Button } from '@material-ui/core';
-import Alert from '@material-ui/lab/Alert';
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -16,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const CustomModal = ({ disabled, remove }) => {
+const CustomModal = ({ disabled, remove, item }) => {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -26,6 +25,11 @@ const CustomModal = ({ disabled, remove }) => {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleRemove = () => {
+    setOpen(false);
+    remove(item);
   };
 
   return (
@@ -52,15 +56,13 @@ const CustomModal = ({ disabled, remove }) => {
               className="action-item"
               variant="outlined"
               color="primary"
-              onClick={remove}
+              onClick={handleRemove}
             >
               Confirmar
             </Button>
           </div>
         </div>
       </Modal>
-
-      <Alert className="alert" onClose={() => {}}>This is a success alert — check it out!</Alert>
     </>
   );
 };

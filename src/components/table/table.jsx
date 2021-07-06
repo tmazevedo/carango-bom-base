@@ -23,7 +23,7 @@ function Table({ fields, columns, routeToChange, remove }) {
       />
 
       <div className="action-itens">
-        <CustomModal disabled={!lineSelected} remove={remove} />
+        <CustomModal disabled={!lineSelected} item={lineSelected?.id} remove={remove} />
         <BrowserRouter>
           <Link
             className={lineSelected ? 'link' : 'link link-disabled'}
