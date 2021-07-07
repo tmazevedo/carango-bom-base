@@ -1,86 +1,86 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import { CircularProgress } from '@material-ui/core';
 import Form from '../../../components/form';
 import BrandService from '../../../services/BrandService';
 import VehicleService from '../../../services/Vehicleservice';
 
 const CreateVehicle = () => {
   const history = useHistory();
-  const [brandList, setbrandList] = useState([]);
-  const [vehicleFind, setVehicleFind] = useState('');
+  const [brandsList, setBrandsList] = useState([]);
+  const [loadedVehicle, setloadedVehicle] = useState(null);
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
 
   function onSubmit(value) {
+    const objectVehicle = {
+      model: value.model,
+      year: parseInt(value.year, 10),
+      value: parseInt(value.value, 10),
+      idBrand: parseInt(value.brand, 10),
+    };
+
     if (id) {
-      const objectVehicle = {
-        model: value.model,
-        year: parseInt(value.year, 10),
-        value: parseInt(value.value, 10),
-        idBrand: parseInt(value.idBrand, 10),
-      };
       VehicleService.UpdateVehicle(objectVehicle, id);
     } else {
-      VehicleService.Save(value);
+      VehicleService.Save(objectVehicle);
     }
 
     history.push('/veiculos');
   }
 
   useEffect(() => {
-    async function findCar() {
-      setLoading(true);
-      if (id) {
-        VehicleService.FindById(id).then((dataFind) => {
-          const objectVehicle = {
-            model: dataFind.model,
-            year: parseInt(dataFind.year, 10),
-            value: parseInt(dataFind.value, 10),
-            idBrand: dataFind.brand,
-          };
-          setVehicleFind(objectVehicle);
-          setLoading(false);
-        });
-        BrandService.List()
-          .then((data) => {
-            setbrandList(data);
-          });
-      } else {
-        BrandService.List()
-          .then((data) => {
-            setbrandList(data);
-            setLoading(false);
-          });
-      }
+    async function getBrands() {
+      const brands = await BrandService.List();
+      setBrandsList(brands);
     }
 
-    findCar();
+    async function findCar() {
+      const vehiclePromise = VehicleService.FindById(id);
+
+      const vehicle = await vehiclePromise;
+      setloadedVehicle({
+        ...vehicle,
+        brand: vehicle.brand.id,
+        year: parseInt(vehicle.year, 10),
+        value: parseInt(vehicle.value, 10),
+      });
+    }
+
+    if (id) findCar();
+    getBrands();
   }, [id]);
 
+  useEffect(() => {
+    if (brandsList.length && ((id && loadedVehicle) || !id)) {
+      setLoading(false);
+    }
+  }, [brandsList, id, loadedVehicle]);
+
+  if (loading) {
+    return <CircularProgress />;
+  }
+
   return (
-    loading ? <CircularProgress />
-      : (
-        <Form
-          mainButton={{
-            text: 'Salvar',
-            onSubmit,
-          }}
-          fields={[
-            {
-              name: 'idBrand',
-              label: 'Marca',
-              componentType: 'autocomplete',
-              options: brandList,
-              required: true,
-            },
-            { name: 'model', label: 'Modelo', required: true },
-            { name: 'year', label: 'Ano', required: true },
-            { name: 'value', label: 'Valor', required: true },
-          ]}
-          value={vehicleFind}
-        />
-      )
+    <Form
+      mainButton={{
+        text: 'Salvar',
+        onSubmit,
+      }}
+      fields={[
+        {
+          name: 'brand',
+          label: 'Marca',
+          componentType: 'select',
+          options: brandsList,
+          required: true,
+        },
+        { name: 'model', label: 'Modelo', required: true },
+        { name: 'year', label: 'Ano', required: true },
+        { name: 'value', label: 'Valor', required: true },
+      ]}
+      defaultValues={loadedVehicle}
+    />
   );
 };
 
