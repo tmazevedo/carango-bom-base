@@ -1,7 +1,6 @@
 const LoginService = {
   async auth(user, password) {
-    // eslint-disable-next-line
-        const response = await fetch(process.env.REACT_APP_SERVER_URL + 'auth', {
+    const response = await fetch(`${process.env.REACT_APP_SERVER_URL}auth`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

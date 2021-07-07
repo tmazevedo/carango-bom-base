@@ -59,26 +59,31 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-// eslint-disable-next-line react/prop-types
 function App({ window }) {
   const [pageTitle, setPageTitle] = useState('');
 
   function WithTitle({ title, component: Component }) {
-    useEffect(() => setPageTitle(title));
+    useEffect(() => setPageTitle(title), [title]);
     return (
       <Component />
     );
   }
 
   function CustomRoute({ isPrivate, ...rest }) {
-    const { authenticated } = useContext(AuthContext);
+    const { authenticated, validateUserToken } = useContext(AuthContext);
+
+    const token = localStorage.getItem('token');
+
+    useEffect(() => {
+      validateUserToken(token);
+    }, [token, validateUserToken]);
 
     if (isPrivate && !authenticated) {
       return <Redirect to="/login" />;
     }
 
-    // eslint-disable-next-line
-    return <Route { ...rest } />;
+    // eslint-disable-next-line react/jsx-props-no-spreading
+    return <Route {...rest} />;
   }
 
   WithTitle.propTypes = {

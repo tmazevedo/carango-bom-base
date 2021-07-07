@@ -23,12 +23,12 @@ const CreateVehicle = () => {
       VehicleService.UpdateVehicle(objectVehicle, id);
     } else {
       VehicleService.Save(value);
-      history.goBack();
     }
   }
 
   useEffect(() => {
     async function findCar() {
+      setLoading(true);
       if (id) {
         VehicleService.FindById(id).then((dataFind) => {
           const objectVehicle = {

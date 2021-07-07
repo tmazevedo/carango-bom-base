@@ -19,7 +19,6 @@ const CreateUser = () => {
       UserService.UpdateUser(JSON.stringify(objectToSave), id);
       history.goBack();
     } else {
-      // eslint-disable-next-line no-console
       UserService.Save(value.username, value.confirmPassword);
       history.goBack();
     }

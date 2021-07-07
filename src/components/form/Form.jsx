@@ -121,7 +121,7 @@ Form.propTypes = {
       label: PropTypes.string.isRequired,
       componentType: PropTypes.oneOf(['textfield', 'autocomplete']),
       type: PropTypes.string,
-      options: PropTypes.arrayOf(PropTypes.string),
+      options: PropTypes.arrayOf(PropTypes.shape({ name: PropTypes.string.isRequired })),
       required: PropTypes.bool,
     }).isRequired,
   ).isRequired,

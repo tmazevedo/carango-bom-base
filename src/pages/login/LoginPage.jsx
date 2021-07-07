@@ -1,30 +1,14 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import Container from '@material-ui/core/Container';
-import { useHistory } from 'react-router-dom';
 import Form from '../../components/form';
 import { AuthContext } from '../../contexts/AuthContext';
 
 const LoginPage = () => {
-  const { authenticated, handleLogin } = useContext(AuthContext);
-  const history = useHistory();
+  const { handleLogin } = useContext(AuthContext);
 
   function onSubmit(value) {
     handleLogin(value.user, value.password);
   }
-
-  useEffect(() => {
-    // eslint-disable-next-line
-    const token = localStorage.getItem('token');
-
-    if (authenticated) {
-      history.push('/dashboard');
-    }
-
-    // if (token) {
-    //   // eslint-disable-next-line
-    //   setAuthenticated(true);
-    // }
-  }, [authenticated, history]);
 
   return (
     <Container maxWidth="xs">

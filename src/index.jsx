@@ -10,7 +10,6 @@ ReactDOM.render(
   <Router>
     <App />
   </Router>,
-  // eslint-disable-next-line no-undef
   document.getElementById('root'),
 );
 

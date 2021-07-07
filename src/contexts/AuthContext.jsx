@@ -4,6 +4,7 @@ import React, {
 import { useHistory } from 'react-router-dom';
 import LoginService from '../services/LoginService';
 import { AlertContext } from './AlertContext';
+import AuthService from '../services/AuthService';
 
 const AuthContext = createContext();
 
@@ -13,12 +14,10 @@ const AuthProvider = ({ children }) => {
   const { handleAlert } = useContext(AlertContext);
 
   useEffect(() => {
-    // eslint-disable-next-line
-        const token = localStorage.getItem('token');
+    const token = localStorage.getItem('token');
 
     if (token) {
-      // eslint-disable-next-line
-            setAuthenticated(true);
+      setAuthenticated(true);
     }
   }, []);
 
@@ -26,8 +25,7 @@ const AuthProvider = ({ children }) => {
     if (user && password) {
       await LoginService.auth(user, password).then((data) => {
         setAuthenticated(true);
-        // eslint-disable-next-line
-                localStorage.setItem('token', String((data.token)));
+        localStorage.setItem('token', String(data.token));
         history.push('/dashboard');
       }).catch((e) => {
         handleAlert({ status: 'error', message: e.message });
@@ -39,13 +37,29 @@ const AuthProvider = ({ children }) => {
   function handleLogout() {
     setAuthenticated(false);
 
-    // eslint-disable-next-line
-        localStorage.removeItem('token');
+    localStorage.removeItem('token');
     history.push('/login');
   }
 
+  function validateUserToken(token) {
+    if (!token || token.trim() === '') {
+      handleLogout();
+      return false;
+    }
+
+    const isValid = AuthService.verifyToken(token);
+
+    if (!isValid) handleLogout();
+
+    return isValid;
+  }
+
   return (
-    <AuthContext.Provider value={{ authenticated, handleLogin, handleLogout }}>
+    <AuthContext.Provider
+      value={{
+        authenticated, handleLogin, handleLogout, validateUserToken,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
