@@ -28,34 +28,34 @@ const CreateVehicle = () => {
     history.goBack();
   }
 
-  const findCar = () => {
-    if (id) {
-      VehicleService.FindById(id).then((dataFind) => {
-        const objectVehicle = {
-          model: dataFind.model,
-          year: parseInt(dataFind.year, 10),
-          value: parseInt(dataFind.value, 10),
-          idBrand: dataFind.brand,
-        };
-        setVehicleFind(objectVehicle);
-        setLoading(false);
-      });
-      BrandService.List()
-        .then((data) => {
-          setbrandList(data);
-        });
-    } else {
-      BrandService.List()
-        .then((data) => {
-          setbrandList(data);
+  useEffect(() => {
+    async function findCar() {
+      if (id) {
+        VehicleService.FindById(id).then((dataFind) => {
+          const objectVehicle = {
+            model: dataFind.model,
+            year: parseInt(dataFind.year, 10),
+            value: parseInt(dataFind.value, 10),
+            idBrand: dataFind.brand,
+          };
+          setVehicleFind(objectVehicle);
           setLoading(false);
         });
+        BrandService.List()
+          .then((data) => {
+            setbrandList(data);
+          });
+      } else {
+        BrandService.List()
+          .then((data) => {
+            setbrandList(data);
+            setLoading(false);
+          });
+      }
     }
-  };
 
-  useEffect(async () => {
     findCar();
-  }, []);
+  }, [id]);
 
   return (
     loading ? <CircularProgress />

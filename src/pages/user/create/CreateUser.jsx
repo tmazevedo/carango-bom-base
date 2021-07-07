@@ -26,23 +26,23 @@ const CreateUser = () => {
     history.goBack();
   }
 
-  const findUser = () => {
-    if (id) {
-      UserService.FindById(id).then((dataFind) => {
-        const objectVehicle = {
-          username: dataFind.username,
-        };
-        setUserFind(objectVehicle);
+  useEffect(() => {
+    async function findUser() {
+      if (id) {
+        UserService.FindById(id).then((dataFind) => {
+          const objectVehicle = {
+            username: dataFind.username,
+          };
+          setUserFind(objectVehicle);
+          setLoading(false);
+        });
+      } else {
         setLoading(false);
-      });
-    } else {
-      setLoading(false);
+      }
     }
-  };
 
-  useEffect(async () => {
     findUser();
-  }, []);
+  }, [id]);
 
   return (
     loading ? <CircularProgress />

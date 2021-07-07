@@ -12,5 +12,9 @@
   },
   "parserOptions": {
     "ecmaVersion": 2020
+  },
+  "rules": {
+    "react/prop-types": "off",
+    "no-plusplus": "off"
   }
 }

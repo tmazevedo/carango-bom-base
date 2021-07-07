@@ -13,7 +13,7 @@ function Table({
 
   useEffect(() => {
     setListFields(fields);
-  });
+  }, [fields]);
 
   return (
     <>

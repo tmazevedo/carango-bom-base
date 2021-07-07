@@ -21,23 +21,22 @@ const CreateBrand = () => {
     history.goBack();
   }
 
-  const findBrand = () => {
-    if (id) {
-      BrandService.FindById(id).then((dataFind) => {
-        const objectVehicle = {
-          name: dataFind.name,
-        };
-        setBrandFind(objectVehicle);
+  useEffect(() => {
+    async function findBrand() {
+      if (id) {
+        BrandService.FindById(id).then((dataFind) => {
+          const objectVehicle = {
+            name: dataFind.name,
+          };
+          setBrandFind(objectVehicle);
+          setLoading(false);
+        });
+      } else {
         setLoading(false);
-      });
-    } else {
-      setLoading(false);
+      }
     }
-  };
-
-  useEffect(async () => {
     findBrand();
-  }, []);
+  }, [id]);
 
   return (
     loading ? <CircularProgress />

@@ -21,26 +21,31 @@ const UserPage = () => {
     return list;
   }
 
-  async function loadUsers() {
-    await UserService.List()
-      .then((data) => {
-        const list = standardUserList(data);
-        setUserList(list);
-      });
-  }
-
   useEffect(() => {
+    async function loadUsers() {
+      await UserService.List()
+        .then((data) => {
+          const list = standardUserList(data);
+          setUserList(list);
+        });
+    }
+
     loadUsers();
   }, []);
 
   async function remove(id) {
     if (Number.isInteger(id)) {
-      await UserService.Remove(id).catch((e) => {
-        handleAlert({ status: 'error', message: e.message });
-      });
+      try {
+        await UserService.Remove(id);
+        handleAlert({ status: 'success', message: 'Removido com sucesso.' });
 
-      handleAlert({ status: 'success', message: 'Removido com sucesso.' });
-      loadUsers();
+        const newList = [...userList];
+        const userIndex = userList.findIndex((obj) => obj.id === id);
+        newList.splice(userIndex, 1);
+        setUserList(newList);
+      } catch (error) {
+        handleAlert({ status: 'error', message: error.message });
+      }
     }
   }
 
