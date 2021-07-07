@@ -1,7 +1,7 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-ALL_STAGED=$(git diff --staged --name-only | { egrep '.+\.jsx?' || :; })
+ALL_STAGED=$(git diff --staged --name-only | { egrep '.+\.jsx?$' || :; })
 TO_LINT=""
 for staged_file in $ALL_STAGED
 do
