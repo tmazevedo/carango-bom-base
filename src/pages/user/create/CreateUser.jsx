@@ -13,8 +13,8 @@ const CreateUser = () => {
   function onSubmit(value) {
     if (id) {
       const objectToSave = {
-        'username': value.username,
-        'password': value.confirmPassword,
+        username: value.username,
+        password: value.confirmPassword,
       };
       UserService.UpdateUser(JSON.stringify(objectToSave), id);
       history.goBack();
@@ -28,9 +28,9 @@ const CreateUser = () => {
 
   const findUser = () => {
     if (id) {
-      UserService.FindById(id).then(dataFind => {
+      UserService.FindById(id).then((dataFind) => {
         const objectVehicle = {
-          'username': dataFind.username,
+          username: dataFind.username,
         };
         setUserFind(objectVehicle);
         setLoading(false);
@@ -46,25 +46,27 @@ const CreateUser = () => {
 
   return (
     loading ? <CircularProgress />
-      : <Form
-        mainButton={{
-          text: 'Salvar',
-          onSubmit,
-        }}
-        fields={[
-          { name: 'username', label: 'Usuário', required: true },
-          {
-            name: 'password', label: 'Senha', required: true, type: 'password',
-          },
-          {
-            name: 'confirmPassword',
-            label: 'Confirmar senha',
-            required: true,
-            type: 'password',
-          },
-        ]}
-        value={userFind}
-      />
+      : (
+        <Form
+          mainButton={{
+            text: 'Salvar',
+            onSubmit,
+          }}
+          fields={[
+            { name: 'username', label: 'Usuário', required: true },
+            {
+              name: 'password', label: 'Senha', required: true, type: 'password',
+            },
+            {
+              name: 'confirmPassword',
+              label: 'Confirmar senha',
+              required: true,
+              type: 'password',
+            },
+          ]}
+          value={userFind}
+        />
+      )
   );
 };
 

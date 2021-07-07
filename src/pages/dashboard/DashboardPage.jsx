@@ -30,7 +30,6 @@ const DashboardPage = () => {
   const [totalCars, setTotalCars] = useState('');
 
   useEffect(async () => {
-
     function countCars(data) {
       let element = 0;
       for (let index = 0; index < data.length; index++) {
@@ -41,14 +40,12 @@ const DashboardPage = () => {
 
     async function loadDashboard() {
       await DashboardService.List()
-        .then(data => {
+        .then((data) => {
           setDashboardList(data);
           setTotalCars(countCars(data));
         });
-
     }
     loadDashboard();
-
   }, [totalCars]);
 
   const classes = useStyles();
@@ -61,31 +58,29 @@ const DashboardPage = () => {
         veículos encontrados
       </Box>
       {
-        dashboardList.map((value, idx) => {
-          return (
-            // eslint-disable-next-line react/no-array-index-key
-            <div style={{ padding: '0 12px', margin: '40px 0' }} key={idx}>
-              <Grid container spacing={5}>
-                <Grid container item lg={4}>
-                  <Card className={classes.root} variant="outlined">
-                    <CardContent>
-                      <Typography variant="h5" component="h2">
-                        {value.brand}
-                      </Typography>
-                      <Typography className={classes.pos} color="textSecondary">
-                        {value.count}
-                      </Typography>
-                      <Typography variant="body2" component="p">
-                        R$
-                        {value.totalPrice}
-                      </Typography>
-                    </CardContent>
-                  </Card>
-                </Grid>
+        dashboardList.map((value, idx) => (
+          // eslint-disable-next-line react/no-array-index-key
+          <div style={{ padding: '0 12px', margin: '40px 0' }} key={idx}>
+            <Grid container spacing={5}>
+              <Grid container item lg={4}>
+                <Card className={classes.root} variant="outlined">
+                  <CardContent>
+                    <Typography variant="h5" component="h2">
+                      {value.brand}
+                    </Typography>
+                    <Typography className={classes.pos} color="textSecondary">
+                      {value.count}
+                    </Typography>
+                    <Typography variant="body2" component="p">
+                      R$
+                      {value.totalPrice}
+                    </Typography>
+                  </CardContent>
+                </Card>
               </Grid>
-            </div>
-          );
-        })
+            </Grid>
+          </div>
+        ))
       }
 
     </>

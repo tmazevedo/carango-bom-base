@@ -30,7 +30,7 @@ const CreateVehicle = () => {
 
   const findCar = () => {
     if (id) {
-      VehicleService.FindById(id).then(dataFind => {
+      VehicleService.FindById(id).then((dataFind) => {
         const objectVehicle = {
           model: dataFind.model,
           year: parseInt(dataFind.year, 10),
@@ -41,12 +41,12 @@ const CreateVehicle = () => {
         setLoading(false);
       });
       BrandService.List()
-        .then(data => {
+        .then((data) => {
           setbrandList(data);
         });
     } else {
       BrandService.List()
-        .then(data => {
+        .then((data) => {
           setbrandList(data);
           setLoading(false);
         });

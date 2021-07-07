@@ -11,11 +11,11 @@ const VehiclePage = () => {
     const list = [];
     for (let index = 0; index < data.length; index++) {
       const objectList = {
-        'id': String(data[index].id),
-        'brand': data[index].brand.name,
-        'model': data[index].model,
-        'year': String(data[index].year),
-        'value': String(data[index].value),
+        id: String(data[index].id),
+        brand: data[index].brand.name,
+        model: data[index].model,
+        year: String(data[index].year),
+        value: String(data[index].value),
       };
       list.push(objectList);
     }
@@ -25,7 +25,7 @@ const VehiclePage = () => {
   useEffect(() => {
     async function loadVehicles() {
       await VehicleService.List()
-        .then(data => {
+        .then((data) => {
           const list = standardVehicleList(data);
           setVehicleList(list);
         });
@@ -55,7 +55,7 @@ const VehiclePage = () => {
             { field: 'value', headerName: 'Valor', width: 200 },
           ]
         }
-        routeToChange={'/veiculos/editar/'}
+        routeToChange="/veiculos/editar/"
         remove={remove}
       />
     </div>

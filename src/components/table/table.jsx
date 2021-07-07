@@ -4,7 +4,9 @@ import { Link, BrowserRouter, useHistory } from 'react-router-dom';
 import { Button } from '@material-ui/core';
 import CustomModal from '../modal/CustomModal';
 
-function Table({ fields, columns, routeToChange, remove }) {
+function Table({
+  fields, columns, routeToChange, remove,
+}) {
   const [listFields, setListFields] = useState([]);
   const [lineSelected, setLineSelected] = useState();
   const history = useHistory();

@@ -12,28 +12,5 @@
   },
   "parserOptions": {
     "ecmaVersion": 2020
-  },
-  "rules": {
-    "react/prop-types": "off",
-    "indent":"off",
-    "react/jsx-indent-props":"off",
-    "react/jsx-indent":"off",
-    "object-curly-newline":"off",
-    "padded-blocks":"off",
-    "react/jsx-curly-brace-presence":"off",
-    "quote-props":"off",
-    "arrow-parens":"off",
-    "prefer-template":"off",
-    "object-shorthand":"off",
-    "no-plusplus":"off",
-    "react-hooks/exhaustive-deps":"off",
-    "arrow-body-style":"off",
-    "no-unused-vars":"off",
-    "no-useless-concat":"off",
-    "react-hooks/rules-of-hooks":"off",
-    "react/jsx-wrap-multilines":"off",
-    "prefer-const":"off",
-    "radix":"off",
-
   }
 }

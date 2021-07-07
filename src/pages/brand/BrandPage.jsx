@@ -11,8 +11,8 @@ const BrandPage = () => {
     const list = [];
     for (let index = 0; index < data.length; index++) {
       const objectList = {
-        'id': data[index].id,
-        'name': data[index].name,
+        id: data[index].id,
+        name: data[index].name,
       };
       list.push(objectList);
     }
@@ -22,7 +22,7 @@ const BrandPage = () => {
   useEffect(() => {
     async function loadBrands() {
       await BrandService.List()
-        .then(data => {
+        .then((data) => {
           const list = standardBrandList(data);
           setBrandList(list);
         });
@@ -48,7 +48,7 @@ const BrandPage = () => {
             { field: 'name', headerName: 'Marca', width: 200 },
           ]
         }
-        routeToChange={'/marcas/editar/'}
+        routeToChange="/marcas/editar/"
         remove={remove()}
       />
 

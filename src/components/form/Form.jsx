@@ -3,7 +3,9 @@ import { Button, TextField } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
 import PropTypes from 'prop-types';
 
-function Form({ fields, mainButton, secondaryButton, value }) {
+function Form({
+  fields, mainButton, secondaryButton, value,
+}) {
   const [fieldStates, setFieldStates] = useState({});
 
   function changeFieldState(id, newValue) {
@@ -35,7 +37,6 @@ function Form({ fields, mainButton, secondaryButton, value }) {
   }
 
   function makeAutocompleteComponent(field) {
-
     function getBrandId(index) {
       const arrayBrands = field.options;
       return arrayBrands[index].id;

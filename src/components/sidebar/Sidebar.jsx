@@ -8,25 +8,25 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthContext';
 
 const useStyles = makeStyles((theme) => ({
-    toolbar: theme.mixins.toolbar,
-    menuButton: {
-      marginRight: theme.spacing(2),
-      [theme.breakpoints.up('sm')]: {
-        display: 'none',
-      },
+  toolbar: theme.mixins.toolbar,
+  menuButton: {
+    marginRight: theme.spacing(2),
+    [theme.breakpoints.up('sm')]: {
+      display: 'none',
     },
-    menuLink: {
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      width: '100%',
-      height: '100%',
-    },
-  }));
+  },
+  menuLink: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+  },
+}));
 
 const Sidebar = () => {
-   const classes = useStyles();
-   const { authenticated, handleLogout } = useContext(AuthContext);
+  const classes = useStyles();
+  const { authenticated, handleLogout } = useContext(AuthContext);
 
   return (
     <div>

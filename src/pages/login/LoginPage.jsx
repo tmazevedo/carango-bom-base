@@ -37,7 +37,7 @@ const LoginPage = () => {
             name: 'password', label: 'Senha', type: 'password', required: true,
           },
         ]}
-        value={''}
+        value=""
       />
     </Container>
   );

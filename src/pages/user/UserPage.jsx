@@ -13,8 +13,8 @@ const UserPage = () => {
     const list = [];
     for (let index = 0; index < data.length; index++) {
       const objectList = {
-        'id': data[index].id,
-        'name': data[index].username,
+        id: data[index].id,
+        name: data[index].username,
       };
       list.push(objectList);
     }
@@ -23,7 +23,7 @@ const UserPage = () => {
 
   async function loadUsers() {
     await UserService.List()
-      .then(data => {
+      .then((data) => {
         const list = standardUserList(data);
         setUserList(list);
       });
@@ -60,7 +60,7 @@ const UserPage = () => {
             { field: 'name', headerName: 'Nome', width: 200 },
           ]
         }
-        routeToChange={'/usuarios/editar/'}
+        routeToChange="/usuarios/editar/"
         remove={remove}
       />
 

@@ -23,9 +23,9 @@ const CreateBrand = () => {
 
   const findBrand = () => {
     if (id) {
-      BrandService.FindById(id).then(dataFind => {
+      BrandService.FindById(id).then((dataFind) => {
         const objectVehicle = {
-          'name': dataFind.name,
+          name: dataFind.name,
         };
         setBrandFind(objectVehicle);
         setLoading(false);
@@ -41,16 +41,18 @@ const CreateBrand = () => {
 
   return (
     loading ? <CircularProgress />
-      : <Form
-        fields={[
-          { name: 'name', label: 'Marca', required: true },
-        ]}
-        mainButton={{
-          text: 'Salvar',
-          onSubmit,
-        }}
-        value={brandFind}
-      />
+      : (
+        <Form
+          fields={[
+            { name: 'name', label: 'Marca', required: true },
+          ]}
+          mainButton={{
+            text: 'Salvar',
+            onSubmit,
+          }}
+          value={brandFind}
+        />
+      )
   );
 };
 
