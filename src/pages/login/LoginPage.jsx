@@ -1,10 +1,18 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import Container from '@material-ui/core/Container';
+import { useHistory } from 'react-router-dom';
 import Form from '../../components/form';
 import { AuthContext } from '../../contexts/AuthContext';
 
 const LoginPage = () => {
-  const { handleLogin } = useContext(AuthContext);
+  const { handleLogin, authenticated } = useContext(AuthContext);
+  const history = useHistory();
+
+  useEffect(() => {
+    if (authenticated) {
+      history.push('/dashboard');
+    }
+  });
 
   function onSubmit(value) {
     handleLogin(value.user, value.password);
