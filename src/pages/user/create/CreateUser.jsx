@@ -23,7 +23,6 @@ const CreateUser = () => {
       UserService.Save(value.username, value.confirmPassword);
       history.goBack();
     }
-    history.goBack();
   }
 
   useEffect(() => {

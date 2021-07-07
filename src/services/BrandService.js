@@ -47,6 +47,17 @@ const BrandService = {
       body: objectToChange,
     }).then((r) => r.json());
   },
+  Remove(id) {
+    return fetch(`${process.env.REACT_APP_SERVER_URL}brands/${id}`, {
+      method: 'DELETE',
+      withCredentials: true,
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    }).then((r) => r.json());
+  },
 };
 
 export default BrandService;

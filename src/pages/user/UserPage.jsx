@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Button } from '@material-ui/core';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import Table from '../../components/table/table';
 import UserService from '../../services/UserService';
 import { AlertContext } from '../../contexts/AlertContext';
@@ -8,6 +8,7 @@ import { AlertContext } from '../../contexts/AlertContext';
 const UserPage = () => {
   const { handleAlert } = useContext(AlertContext);
   const [userList, setUserList] = useState([]);
+  const history = useHistory();
 
   function standardUserList(data) {
     const list = [];
@@ -51,11 +52,9 @@ const UserPage = () => {
 
   return (
     <div style={{ height: 300, width: '100%' }}>
-      <Link className="link" to="/usuarios/novo">
-        <Button className="custom-button" variant="outlined" color="primary">
-          Novo
-        </Button>
-      </Link>
+      <Button onClick={() => { history.push('/usuarios/novo'); }} className="custom-button" variant="outlined" color="primary">
+        Novo
+      </Button>
       <Table
         fields={
           userList
