@@ -5,7 +5,7 @@ import { Button } from '@material-ui/core';
 import CustomModal from '../modal/CustomModal';
 
 function Table({
-  fields, columns, routeToChange, remove,
+  fields, columns, routeToChange, remove, columnBuffer = 3,
 }) {
   const [listFields, setListFields] = useState([]);
   const [lineSelected, setLineSelected] = useState();
@@ -22,6 +22,8 @@ function Table({
         rows={listFields}
         columns={columns}
         onRowSelected={(gridSelection) => setLineSelected(gridSelection.data)}
+        autoHeight
+        columnBuffer={columnBuffer}
       />
 
       <div className="action-itens">
