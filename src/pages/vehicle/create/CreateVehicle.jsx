@@ -25,7 +25,6 @@ const CreateVehicle = () => {
       VehicleService.Save(value);
       history.goBack();
     }
-    history.goBack();
   }
 
   useEffect(() => {

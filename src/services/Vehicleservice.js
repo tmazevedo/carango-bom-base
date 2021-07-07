@@ -44,6 +44,17 @@ const VehicleService = {
       body: JSON.stringify(objectToChange),
     }).then((r) => r.json());
   },
+  Remove(id) {
+    return fetch(`${process.env.REACT_APP_SERVER_URL}cars/${id}`, {
+      method: 'DELETE',
+      withCredentials: true,
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  },
 };
 
 export default VehicleService;

@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Button } from '@material-ui/core';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import Table from '../../components/table/table';
 import VehicleService from '../../services/Vehicleservice';
+import { AlertContext } from '../../contexts/AlertContext';
 
 const VehiclePage = () => {
+  const { handleAlert } = useContext(AlertContext);
   const [vehicleList, setVehicleList] = useState([]);
+  const history = useHistory();
 
   function standardVehicleList(data) {
     const list = [];
@@ -33,15 +36,28 @@ const VehiclePage = () => {
     loadVehicles();
   }, []);
 
-  function remove() { }
+  async function remove(id) {
+    if (Number.isInteger(parseInt(id, 10))) {
+      try {
+        await VehicleService.Remove(id);
+
+        handleAlert({ status: 'success', message: 'Removido com sucesso.' });
+
+        const newList = [...vehicleList];
+        const userIndex = vehicleList.findIndex((obj) => obj.id === id);
+        newList.splice(userIndex, 1);
+        setVehicleList(newList);
+      } catch (error) {
+        handleAlert({ status: 'error', message: error.message });
+      }
+    }
+  }
 
   return (
     <div style={{ height: '50vh' }}>
-      <Link className="link" to="/veiculos/novo">
-        <Button className="custom-button" variant="outlined" color="primary">
-          Novo
-        </Button>
-      </Link>
+      <Button onClick={() => { history.push('/veiculos/novo'); }} className="custom-button" variant="outlined" color="primary">
+        Novo
+      </Button>
 
       <Table
         fields={
