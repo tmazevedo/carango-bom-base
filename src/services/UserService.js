@@ -36,7 +36,7 @@ const UserService = {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
       },
-    }).then((r) => r.json());
+    });
   },
   FindById(id) {
     return fetch(`${process.env.REACT_APP_SERVER_URL}users/${id}`, {
