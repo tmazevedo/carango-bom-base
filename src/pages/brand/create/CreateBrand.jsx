@@ -18,7 +18,6 @@ const CreateBrand = () => {
       BrandService.Save(value);
       history.goBack();
     }
-    history.goBack();
   }
 
   useEffect(() => {

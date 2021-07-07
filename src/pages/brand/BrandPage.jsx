@@ -1,6 +1,6 @@
 import { Button } from '@material-ui/core';
 import React, { useEffect, useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import Table from '../../components/table/table';
 import BrandService from '../../services/BrandService';
 import { AlertContext } from '../../contexts/AlertContext';
@@ -8,6 +8,7 @@ import { AlertContext } from '../../contexts/AlertContext';
 const BrandPage = () => {
   const { handleAlert } = useContext(AlertContext);
   const [brandList, setBrandList] = useState([]);
+  const history = useHistory();
 
   function standardBrandList(data) {
     const list = [];
@@ -60,11 +61,9 @@ const BrandPage = () => {
 
   return (
     <div style={{ height: '50vh' }}>
-      <Link className="link" to="/marcas/novo">
-        <Button className="custom-button" variant="outlined" color="primary">
-          Novo
-        </Button>
-      </Link>
+      <Button onClick={() => { history.push('/marcas/novo'); }} className="custom-button" variant="outlined" color="primary">
+        Novo
+      </Button>
       <Table
         fields={
           brandList
