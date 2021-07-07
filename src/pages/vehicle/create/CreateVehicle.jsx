@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Form from '../../../components/form';
 import BrandService from '../../../services/BrandService';
 import VehicleService from '../../../services/Vehicleservice';
 
 const CreateVehicle = () => {
+  const history = useHistory();
   const [brandList, setbrandList] = useState([]);
   const [vehicleFind, setVehicleFind] = useState('');
   const [loading, setLoading] = useState(true);
@@ -23,6 +24,8 @@ const CreateVehicle = () => {
     } else {
       VehicleService.Save(value);
     }
+
+    history.push('/veiculos');
   }
 
   useEffect(() => {
