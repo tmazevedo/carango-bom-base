@@ -1,23 +1,33 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import { Button } from '@material-ui/core';
 import Form from '../../../components/form';
 import UserService from '../../../services/UserService';
+import { AlertContext } from '../../../contexts/AlertContext';
 
 const CreateUser = () => {
+  const { handleAlert } = useContext(AlertContext);
   const history = useHistory();
   const { id } = useParams();
   const [userFind, setUserFind] = useState('');
   const [loading, setLoading] = useState(true);
 
-  function onSubmit(value) {
+  async function onSubmit(value) {
     if (id) {
       const objectToSave = {
         username: value.username,
         password: value.confirmPassword,
       };
-      UserService.UpdateUser(JSON.stringify(objectToSave), id);
-      history.goBack();
+
+      try {
+        await UserService.UpdateUser(JSON.stringify(objectToSave), id);
+
+        handleAlert({ status: 'success', message: 'Alterado com sucesso.' });
+        history.push('/usuarios');
+      } catch (e) {
+        handleAlert({ status: 'error', message: e.message });
+      }
     } else {
       UserService.Save(value.username, value.confirmPassword);
       history.goBack();
@@ -45,25 +55,30 @@ const CreateUser = () => {
   return (
     loading ? <CircularProgress />
       : (
-        <Form
-          mainButton={{
-            text: 'Salvar',
-            onSubmit,
-          }}
-          fields={[
-            { name: 'username', label: 'Usuário', required: true },
-            {
-              name: 'password', label: 'Senha', required: true, type: 'password',
-            },
-            {
-              name: 'confirmPassword',
-              label: 'Confirmar senha',
-              required: true,
-              type: 'password',
-            },
-          ]}
-          value={userFind}
-        />
+        <>
+          <Button onClick={() => { history.push('/usuarios'); }} className="custom-button" variant="outlined" color="primary">
+            Voltar
+          </Button>
+          <Form
+            mainButton={{
+              text: 'Salvar',
+              onSubmit,
+            }}
+            fields={[
+              { name: 'username', label: 'Usuário', required: true },
+              {
+                name: 'password', label: 'Senha', required: true, type: 'password',
+              },
+              {
+                name: 'confirmPassword',
+                label: 'Confirmar senha',
+                required: true,
+                type: 'password',
+              },
+            ]}
+            value={userFind}
+          />
+        </>
       )
   );
 };
