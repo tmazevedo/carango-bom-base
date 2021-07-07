@@ -1,10 +1,12 @@
 import { Button } from '@material-ui/core';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Table from '../../components/table/table';
 import BrandService from '../../services/BrandService';
+import { AlertContext } from '../../contexts/AlertContext';
 
 const BrandPage = () => {
+  const { handleAlert } = useContext(AlertContext);
   const [brandList, setBrandList] = useState([]);
 
   function standardBrandList(data) {
@@ -30,7 +32,31 @@ const BrandPage = () => {
     loadBrands();
   }, []);
 
-  function remove() { }
+  async function remove(id) {
+    if (Number.isInteger(id)) {
+      try {
+        const response = await BrandService.Remove(id);
+
+        if (response.status === 409) {
+          handleAlert({ status: 'error', message: 'Não pode deletar marca com carros associados.' });
+          return;
+        }
+        if (response.status !== 200) {
+          handleAlert({ status: 'error', message: 'Não foi possivel deletar a marca.' });
+          return;
+        }
+
+        handleAlert({ status: 'success', message: 'Removido com sucesso.' });
+
+        const newList = [...brandList];
+        const userIndex = brandList.findIndex((obj) => obj.id === id);
+        newList.splice(userIndex, 1);
+        setBrandList(newList);
+      } catch (error) {
+        handleAlert({ status: 'error', message: error.message });
+      }
+    }
+  }
 
   return (
     <div style={{ height: '50vh' }}>
@@ -49,7 +75,7 @@ const BrandPage = () => {
           ]
         }
         routeToChange="/marcas/editar/"
-        remove={remove()}
+        remove={remove}
       />
 
     </div>

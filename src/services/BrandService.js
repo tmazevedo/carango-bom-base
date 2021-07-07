@@ -56,7 +56,7 @@ const BrandService = {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
       },
-    }).then((r) => r.json());
+    });
   },
 };
 
