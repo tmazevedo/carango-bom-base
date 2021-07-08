@@ -86,8 +86,7 @@ describe('When I create a Vehicle Component', () => {
           fireEvent.click(screen.getByText('Novo'));
         });
 
-        const ultimoHistory = history.entries[history.entries.length - 1].pathname;
-        expect(ultimoHistory).toMatch('/veiculos/novo');
+        expect(history.location.pathname).toMatch('/veiculos/novo');
       });
     });
   });
