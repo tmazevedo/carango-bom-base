@@ -17,13 +17,14 @@ describe('When I create a valid Form component', () => {
     });
   });
 
-  it('should render all the autocomplete fields received', () => {
+  it('should render all the select fields received', () => {
     render(<Form fields={correctFields} mainButton={correctMainButton} />);
 
-    const autocompleteFields = correctFields.filter((field) => field.componentType === 'autocomplete');
-    const autocompleteFieldsRendered = screen.getAllByTestId('form-autocomplete');
-
-    expect(autocompleteFieldsRendered).toHaveLength(autocompleteFields.length);
+    const selectFields = correctFields.filter((field) => field.componentType === 'select');
+    selectFields.forEach((field) => {
+      const element = screen.getByLabelText(field.label);
+      expect(element).toBeInTheDocument();
+    });
   });
 
   it('should render the main button', () => {

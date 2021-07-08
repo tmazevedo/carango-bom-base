@@ -65,6 +65,7 @@ function Form({
         <Select
           key={field.name}
           labelId={`${field.name}-label`}
+          aria-labelledby={`${field.name}-label}`}
           onChange={(event) => {
             changeFieldState(field.name, event.target.value);
           }}
