@@ -59,6 +59,7 @@ const CreateUser = () => {
           <Button onClick={() => { history.push('/usuarios'); }} className="custom-button" variant="outlined" color="primary">
             Voltar
           </Button>
+          <br />
           <Form
             mainButton={{
               text: 'Salvar',

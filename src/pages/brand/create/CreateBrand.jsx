@@ -53,6 +53,7 @@ const CreateBrand = () => {
           <Button onClick={() => { history.push('/marcas'); }} className="custom-button" variant="outlined" color="primary">
             Voltar
           </Button>
+          <br />
           <Form
             fields={[
               { name: 'name', label: 'Marca', required: true },
