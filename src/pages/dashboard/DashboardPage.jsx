@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Box from '@material-ui/core/Box';
 import { makeStyles } from '@material-ui/core/styles';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
@@ -28,6 +29,7 @@ const useStyles = makeStyles({
 const DashboardPage = () => {
   const [dashboardList, setDashboardList] = useState([]);
   const [totalCars, setTotalCars] = useState('');
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     function countCars(data) {
@@ -43,6 +45,7 @@ const DashboardPage = () => {
         .then((data) => {
           setDashboardList(data);
           setTotalCars(countCars(data));
+          setLoading(false);
         });
     }
     loadDashboard();
@@ -51,39 +54,42 @@ const DashboardPage = () => {
   const classes = useStyles();
 
   return (
-    <>
-      <Box bgcolor="info.main" color="info.contrastText" p={2}>
-        <strong>{totalCars}</strong>
-        {' '}
-        veículos encontrados
-      </Box>
+    loading ? <CircularProgress />
+      : (
+        <>
+          <Box bgcolor="info.main" color="info.contrastText" p={2}>
+            <strong>{totalCars}</strong>
+            {' '}
+            veículos encontrados
+          </Box>
 
-      <div style={{ padding: '0 12px', margin: '40px 0' }}>
+          <div style={{ padding: '0 12px', margin: '40px 0' }}>
 
-        <Grid container spacing={5}>
-          {
-        dashboardList.map((value) => (
-          <Grid container item lg={4} key={value.Brand}>
-            <Card className={classes.root} variant="outlined">
-              <CardContent>
-                <Typography variant="h5" component="h2">
-                  {value.brand}
-                </Typography>
-                <Typography className={classes.pos} color="textSecondary">
-                  {value.count}
-                </Typography>
-                <Typography variant="body2" component="p">
-                  R$
-                  {value.totalPrice}
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-        ))
-                  }
-        </Grid>
-      </div>
-    </>
+            <Grid container spacing={5}>
+              {
+                dashboardList.map((value) => (
+                  <Grid container item lg={4} key={value.Brand}>
+                    <Card className={classes.root} variant="outlined">
+                      <CardContent>
+                        <Typography variant="h5" component="h2">
+                          {value.brand}
+                        </Typography>
+                        <Typography className={classes.pos} color="textSecondary">
+                          {value.count}
+                        </Typography>
+                        <Typography variant="body2" component="p">
+                          R$
+                          {value.totalPrice}
+                        </Typography>
+                      </CardContent>
+                    </Card>
+                  </Grid>
+                ))
+              }
+            </Grid>
+          </div>
+        </>
+      )
   );
 };
 
