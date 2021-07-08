@@ -35,7 +35,7 @@ const BrandService = {
       },
     }).then((r) => r.json());
   },
-  UpdateUser(objectToChange, id) {
+  UpdateBrand(objectToChange, id) {
     return fetch(`${process.env.REACT_APP_SERVER_URL}brands/${id}`, {
       method: 'PUT',
       withCredentials: true,
