@@ -1,18 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import { CircularProgress } from '@material-ui/core';
+import { CircularProgress, Button } from '@material-ui/core';
 import Form from '../../../components/form';
 import BrandService from '../../../services/BrandService';
 import VehicleService from '../../../services/Vehicleservice';
+import { AlertContext } from '../../../contexts/AlertContext';
 
 const CreateVehicle = () => {
+  const { handleAlert } = useContext(AlertContext);
   const history = useHistory();
   const [brandsList, setBrandsList] = useState([]);
   const [loadedVehicle, setloadedVehicle] = useState(null);
   const [loading, setLoading] = useState(true);
   const { id } = useParams();
 
-  function onSubmit(value) {
+  async function onSubmit(value) {
     const objectVehicle = {
       model: value.model,
       year: parseInt(value.year, 10),
@@ -20,13 +22,19 @@ const CreateVehicle = () => {
       idBrand: parseInt(value.brand, 10),
     };
 
-    if (id) {
-      VehicleService.UpdateVehicle(objectVehicle, id);
-    } else {
-      VehicleService.Save(objectVehicle);
-    }
+    try {
+      if (id) {
+        await VehicleService.UpdateVehicle(objectVehicle, id);
+        handleAlert({ status: 'success', message: 'Alterado com sucesso.' });
+      } else {
+        await VehicleService.Save(objectVehicle);
+        handleAlert({ status: 'success', message: 'Criado com sucesso.' });
+      }
 
-    history.push('/veiculos');
+      history.push('/veiculos');
+    } catch (e) {
+      handleAlert({ status: 'error', message: e.message });
+    }
   }
 
   useEffect(() => {
@@ -62,25 +70,32 @@ const CreateVehicle = () => {
   }
 
   return (
-    <Form
-      mainButton={{
-        text: 'Salvar',
-        onSubmit,
-      }}
-      fields={[
-        {
-          name: 'brand',
-          label: 'Marca',
-          componentType: 'select',
-          options: brandsList,
-          required: true,
-        },
-        { name: 'model', label: 'Modelo', required: true },
-        { name: 'year', label: 'Ano', required: true },
-        { name: 'value', label: 'Valor', required: true },
-      ]}
-      defaultValues={loadedVehicle}
-    />
+    <>
+      <Button onClick={() => { history.push('/veiculos'); }} className="custom-button" variant="outlined" color="primary">
+        Voltar
+      </Button>
+      <br />
+      <br />
+      <Form
+        mainButton={{
+          text: 'Salvar',
+          onSubmit,
+        }}
+        fields={[
+          {
+            name: 'brand',
+            label: 'Marca',
+            componentType: 'select',
+            options: brandsList,
+            required: true,
+          },
+          { name: 'model', label: 'Modelo', required: true },
+          { name: 'year', label: 'Ano', required: true },
+          { name: 'value', label: 'Valor', required: true },
+        ]}
+        defaultValues={loadedVehicle}
+      />
+    </>
   );
 };
 
