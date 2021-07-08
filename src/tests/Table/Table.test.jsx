@@ -46,9 +46,7 @@ describe('When Create Table Component', () => {
         fireEvent.click(screen.getByText('Ka'));
         fireEvent.click(screen.getByText('Alterar'));
 
-        const ultimoHistory = history.entries[history.entries.length - 1].pathname;
-
-        expect(ultimoHistory).toMatch('/veiculos/9');
+        expect(history.location.pathname).toMatch('/veiculos/9');
       });
     });
     describe('the Delete button', () => {
