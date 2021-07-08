@@ -1,4 +1,4 @@
-import { Button } from '@material-ui/core';
+import { Button, CircularProgress } from '@material-ui/core';
 import React, { useEffect, useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import Table from '../../components/table/table';
@@ -7,55 +7,53 @@ import { AlertContext } from '../../contexts/AlertContext';
 
 const BrandPage = () => {
   const { handleAlert } = useContext(AlertContext);
-  const [brandList, setBrandList] = useState([]);
+  const [brandsList, setBrandsList] = useState([]);
+  const [loading, setLoading] = useState(false);
   const history = useHistory();
 
-  function standardBrandList(data) {
+  function standardBrandsList(data) {
     const list = [];
-    for (let index = 0; index < data.length; index++) {
-      const objectList = {
-        id: data[index].id,
-        name: data[index].name,
-      };
-      list.push(objectList);
-    }
+    data.forEach((element) => {
+      list.push({
+        id: element.id,
+        name: element.name,
+      });
+    });
     return list;
   }
 
   useEffect(() => {
     async function loadBrands() {
-      await BrandService.List()
-        .then((data) => {
-          const list = standardBrandList(data);
-          setBrandList(list);
-        });
+      const brands = await BrandService.List();
+      const standardList = standardBrandsList(brands);
+      setBrandsList(standardList);
+      setLoading(false);
     }
+    setLoading(true);
     loadBrands();
   }, []);
 
   async function remove(id) {
-    if (Number.isInteger(id)) {
-      try {
-        const response = await BrandService.Remove(id);
+    if (!Number.isInteger(id)) {
+      throw new Error('Brand ID is not an integer');
+    }
+    try {
+      const response = await BrandService.Remove(id);
 
-        if (response.status === 409) {
-          handleAlert({ status: 'error', message: 'Não pode deletar marca com carros associados.' });
-          return;
-        }
-        if (response.status !== 200) {
-          handleAlert({ status: 'error', message: 'Não foi possivel deletar a marca.' });
-          return;
-        }
-
+      if (response.status === 409) {
+        handleAlert({ status: 'error', message: 'Não pode deletar marca com carros associados.' });
+      } else if (response.status !== 200) {
+        handleAlert({ status: 'error', message: 'Não foi possivel deletar a marca.' });
+      } else {
         handleAlert({ status: 'success', message: 'Removido com sucesso.' });
-
-        const newList = [...brandList];
-        const userIndex = brandList.findIndex((obj) => obj.id === id);
-        newList.splice(userIndex, 1);
-        setBrandList(newList);
-      } catch (error) {
-        handleAlert({ status: 'error', message: error.message });
       }
+
+      const newList = [...brandsList];
+      const userIndex = brandsList.findIndex((obj) => obj.id === id);
+      newList.splice(userIndex, 1);
+      setBrandsList(newList);
+    } catch (error) {
+      handleAlert({ status: 'error', message: error.message });
     }
   }
 
@@ -64,18 +62,24 @@ const BrandPage = () => {
       <Button onClick={() => { history.push('/marcas/novo'); }} className="custom-button" variant="outlined" color="primary">
         Novo
       </Button>
-      <Table
-        fields={
-          brandList
-        }
-        columns={
-          [
-            { field: 'name', headerName: 'Marca', width: 200 },
-          ]
-        }
-        routeToChange="/marcas/editar/"
-        remove={remove}
-      />
+      {
+        loading
+          ? <CircularProgress />
+          : (
+            <Table
+              fields={
+                brandsList
+              }
+              columns={
+                [
+                  { field: 'name', headerName: 'Marca', width: 200 },
+                ]
+              }
+              routeToChange="/marcas/editar/"
+              remove={remove}
+            />
+          )
+      }
 
     </div>
   );
