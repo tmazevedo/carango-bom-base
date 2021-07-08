@@ -57,30 +57,32 @@ const DashboardPage = () => {
         {' '}
         veículos encontrados
       </Box>
-      {
+
+      <div style={{ padding: '0 12px', margin: '40px 0' }}>
+
+        <Grid container spacing={5}>
+          {
         dashboardList.map((value) => (
-          <div style={{ padding: '0 12px', margin: '40px 0' }} key={value.Brand}>
-            <Grid container spacing={5}>
-              <Grid container item lg={4}>
-                <Card className={classes.root} variant="outlined">
-                  <CardContent>
-                    <Typography variant="h5" component="h2">
-                      {value.brand}
-                    </Typography>
-                    <Typography className={classes.pos} color="textSecondary">
-                      {value.count}
-                    </Typography>
-                    <Typography variant="body2" component="p">
-                      R$
-                      {value.totalPrice}
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
-            </Grid>
-          </div>
+          <Grid container item lg={4} key={value.Brand}>
+            <Card className={classes.root} variant="outlined">
+              <CardContent>
+                <Typography variant="h5" component="h2">
+                  {value.brand}
+                </Typography>
+                <Typography className={classes.pos} color="textSecondary">
+                  {value.count}
+                </Typography>
+                <Typography variant="body2" component="p">
+                  R$
+                  {value.totalPrice}
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
         ))
-      }
+                  }
+        </Grid>
+      </div>
     </>
   );
 };
