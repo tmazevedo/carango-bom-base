@@ -16,7 +16,7 @@ const CreateBrand = () => {
   async function onSubmit(value) {
     if (id) {
       try {
-        await BrandService.UpdateUser(JSON.stringify(value), id);
+        await BrandService.UpdateBrand(JSON.stringify(value), id);
 
         handleAlert({ status: 'success', message: 'Alterado com sucesso.' });
         history.push('/marcas');
