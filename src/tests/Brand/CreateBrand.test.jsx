@@ -45,7 +45,6 @@ describe('when load the create brand page', () => {
 describe('when load the create brand page with id', () => {
   const history = createMemoryHistory({ initialEntries: ['/marcas/editar/1'] });
   beforeEach(() => {
-
     const mockAlertState = { handleAlert: jest.fn };
     BrandService.FindById.mockImplementation(() => Promise.resolve(
       { id: 1, name: 'Ford' },
@@ -62,15 +61,14 @@ describe('when load the create brand page with id', () => {
             )}
           />
         </Router>,
-      )
-    }
-    );
+      );
+    });
   });
 
   it('when render the brand edit', () => {
     expect(BrandService.FindById).toHaveBeenCalled();
   });
-  it('when update the brand edited', async() => {
+  it('when update the brand edited', async () => {
     fireEvent.click(await screen.findByText('Salvar'));
     expect(history.location.pathname).toMatch('/marcas');
     expect(BrandService.UpdateBrand).toHaveBeenCalled();
