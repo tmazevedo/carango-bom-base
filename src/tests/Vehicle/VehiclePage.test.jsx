@@ -1,41 +1,122 @@
 import React from 'react';
-import { MemoryRouter } from 'react-router-dom';
-import { render, screen } from '@testing-library/react';
+import { MemoryRouter, Router } from 'react-router-dom';
+import { render, screen, fireEvent } from '@testing-library/react';
+import { act } from 'react-dom/test-utils';
+import { createMemoryHistory } from 'history';
 import VehiclePage from '../../pages/vehicle/VehiclePage';
 import { AlertContext } from '../../contexts/AlertContext';
+import VehicleService from '../../services/Vehicleservice';
+
+jest.mock('../../services/Vehicleservice');
 
 describe('When I create a Vehicle Component', () => {
-  beforeEach(() => {
-    const mockAlerState = { handleAlert: jest.fn };
-    render(
-      <AlertContext.Provider value={mockAlerState}>
-        <VehiclePage />
-      </AlertContext.Provider>,
-      { wrapper: MemoryRouter },
-    );
+  VehicleService.List.mockImplementation(jest.fn);
+
+  describe('and the Table rendered', () => {
+    beforeEach(() => {
+      act(() => {
+        const mockAlerState = { handleAlert: jest.fn };
+        VehicleService.List.mockImplementation(() => Promise.resolve(
+          [
+            {
+              id: '9', brand: { id: 1, name: 'Ford' }, model: 'Ka', year: 2020, value: 40000,
+            },
+            {
+              id: '10', brand: { id: 1, name: 'Ford' }, model: 'Ranger', year: 2021, value: 245000,
+            },
+            {
+              id: '11', brand: { id: 1, name: 'Ford' }, model: 'Ranger', year: 2021, value: 245000,
+            },
+          ],
+        ));
+
+        render(
+          <AlertContext.Provider value={mockAlerState}>
+            <VehiclePage />
+          </AlertContext.Provider>,
+          { wrapper: MemoryRouter },
+        );
+      });
+    });
+
+    describe('and the Columns rendered', () => {
+      it('should expect Marca Column', () => {
+        expect(screen.getByText('Marca')).toBeInTheDocument();
+      });
+      it('should expect Modelo Column', () => {
+        expect(screen.getByText('Modelo')).toBeInTheDocument();
+      });
+      it('should expect Ano Column', () => {
+        expect(screen.getByText('Ano')).toBeInTheDocument();
+      });
+    });
+
+    it('should have called VehicleService.List', () => {
+      expect(VehicleService.List).toHaveBeenCalled();
+    });
   });
 
-  describe('and the button renders', () => {
-    it('should expect Novo button', () => {
+  describe('and the button Novo', () => {
+    it('should expect button to be rendered', () => {
+      const mockAlerState = { handleAlert: jest.fn };
+
+      render(
+        <AlertContext.Provider value={mockAlerState}>
+          <VehiclePage />
+        </AlertContext.Provider>,
+        { wrapper: MemoryRouter },
+      );
       expect(screen.getByText('Novo')).toBeInTheDocument();
     });
-    it('should expect Alterar button', () => {
-      expect(screen.getByText('Alterar')).toBeInTheDocument();
-    });
-    it('should expect Excluir button', () => {
-      expect(screen.getByText('Excluir')).toBeInTheDocument();
+
+    describe('and the button is clicked', () => {
+      it('should have route /veiculos/editar/{id}', () => {
+        const mockAlerState = { handleAlert: jest.fn };
+        const history = createMemoryHistory();
+
+        act(() => {
+          render(
+            <AlertContext.Provider value={mockAlerState}>
+              <Router history={history}>
+                <VehiclePage />
+              </Router>
+            </AlertContext.Provider>,
+          );
+
+          fireEvent.click(screen.getByText('Novo'));
+        });
+
+        const ultimoHistory = history.entries[history.entries.length - 1].pathname;
+        expect(ultimoHistory).toMatch('/veiculos/novo');
+      });
     });
   });
 
-  describe('and the Columns Table', () => {
-    it('should expect Marca Column', () => {
-      expect(screen.getByText('Marca')).toBeInTheDocument();
+  describe('and the button Alterar', () => {
+    it('should expect Alterar button', () => {
+      const mockAlerState = { handleAlert: jest.fn };
+
+      render(
+        <AlertContext.Provider value={mockAlerState}>
+          <VehiclePage />
+        </AlertContext.Provider>,
+        { wrapper: MemoryRouter },
+      );
+      expect(screen.getByText('Alterar')).toBeInTheDocument();
     });
-    it('should expect Modelo Column', () => {
-      expect(screen.getByText('Modelo')).toBeInTheDocument();
-    });
-    it('should expect Ano Column', () => {
-      expect(screen.getByText('Ano')).toBeInTheDocument();
+  });
+
+  describe('and the button Excluir', () => {
+    it('should expect Excluir button', () => {
+      const mockAlerState = { handleAlert: jest.fn };
+
+      render(
+        <AlertContext.Provider value={mockAlerState}>
+          <VehiclePage />
+        </AlertContext.Provider>,
+        { wrapper: MemoryRouter },
+      );
+      expect(screen.getByText('Excluir')).toBeInTheDocument();
     });
   });
 });

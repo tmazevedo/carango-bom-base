@@ -5,7 +5,7 @@ import { Button } from '@material-ui/core';
 import CustomModal from '../modal/CustomModal';
 
 function Table({
-  fields, columns, routeToChange, remove, columnBuffer = 3,
+  fields, columns, routeToChange, remove, columnBuffer = 8,
 }) {
   const [listFields, setListFields] = useState([]);
   const [lineSelected, setLineSelected] = useState();

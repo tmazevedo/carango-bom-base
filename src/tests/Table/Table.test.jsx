@@ -28,7 +28,7 @@ describe('When Create Table Component', () => {
         });
       });
     });
-    describe('Alterar button', () => {
+    describe('the Alterar button', () => {
       it('should rendered', () => {
         render(<Table fields={vehicleTable.fields} columns={vehicleTable.columns} routeToChange="" remove={() => { }} />);
         expect(screen.getByText('Alterar')).toBeInTheDocument();
@@ -51,7 +51,7 @@ describe('When Create Table Component', () => {
         expect(ultimoHistory).toMatch('/veiculos/9');
       });
     });
-    describe('Delete button', () => {
+    describe('the Delete button', () => {
       it('should be rendered', () => {
         render(<Table fields={vehicleTable.fields} columns={vehicleTable.columns} routeToChange="" remove={() => { }} />);
         expect(screen.getByText('Excluir')).toBeInTheDocument();
