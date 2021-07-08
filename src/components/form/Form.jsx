@@ -55,7 +55,7 @@ function Form({
 
   function makeSelectComponent(field) {
     return (
-      <>
+      <FormControl key={`${field.name}-form-control`} variant="outlined">
         <InputLabel
           key={`${field.name}-label}`}
           id={`${field.name}-label}`}
@@ -64,7 +64,7 @@ function Form({
         </InputLabel>
         <Select
           key={field.name}
-          labelId={`${field.name}-label}`}
+          labelId={`${field.name}-label`}
           onChange={(event) => {
             changeFieldState(field.name, event.target.value);
           }}
@@ -83,7 +83,7 @@ function Form({
             ),
           )}
         </Select>
-      </>
+      </FormControl>
     );
   }
 
@@ -94,42 +94,40 @@ function Form({
 
   if (!loadingDefaults) {
     return (
-      <FormControl variant="outlined">
-        <form
-          onSubmit={(event) => {
-            event.preventDefault();
-            mainButton.onSubmit(fieldStates);
-          }}
-        >
-          {
-            fields.map((field) => {
-              const componentType = field.componentType || 'textfield';
-              return typeToFunction[componentType](field);
-            })
-          }
-          <div data-testid="form-actions" className="action-itens">
-            {secondaryButton
-              && (
-                <Button
-                  variant="outlined"
-                  className="action-item"
-                  color="primary"
-                  onClick={secondaryButton.onSubmit}
-                >
-                  {secondaryButton.text}
-                </Button>
-              )}
-            <Button
-              type="submit"
-              variant="contained"
-              className="action-item"
-              color="primary"
-            >
-              {mainButton.text}
-            </Button>
-          </div>
-        </form>
-      </FormControl>
+      <form
+        onSubmit={(event) => {
+          event.preventDefault();
+          mainButton.onSubmit(fieldStates);
+        }}
+      >
+        {
+          fields.map((field) => {
+            const componentType = field.componentType || 'textfield';
+            return typeToFunction[componentType](field);
+          })
+        }
+        <div data-testid="form-actions" className="action-itens">
+          {secondaryButton
+            && (
+              <Button
+                variant="outlined"
+                className="action-item"
+                color="primary"
+                onClick={secondaryButton.onSubmit}
+              >
+                {secondaryButton.text}
+              </Button>
+            )}
+          <Button
+            type="submit"
+            variant="contained"
+            className="action-item"
+            color="primary"
+          >
+            {mainButton.text}
+          </Button>
+        </div>
+      </form>
     );
   }
   return (
