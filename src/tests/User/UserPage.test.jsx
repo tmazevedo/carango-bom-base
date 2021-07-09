@@ -19,7 +19,7 @@ describe('When I create a User Component', () => {
         UserService.List.mockImplementation(() => Promise.resolve(
           [
             {
-              id: '1', username: 'username 1',
+              id: '1', name: 'username 1',
             },
             {
               id: '2', name: 'username 2',
