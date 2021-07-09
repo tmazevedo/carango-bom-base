@@ -1,7 +1,6 @@
 import React from 'react';
 import { createMemoryHistory } from 'history';
 import { MemoryRouter, Route, Router } from 'react-router-dom';
-import { act } from 'react-dom/test-utils';
 import { render, screen, fireEvent } from '@testing-library/react';
 import CreateBrand from '../../pages/brand/create/CreateBrand';
 import { AlertContext } from '../../contexts/AlertContext';
@@ -9,9 +8,9 @@ import BrandService from '../../services/BrandService';
 
 jest.mock('../../services/BrandService');
 
-describe('when load the create brand page', () => {
+describe('When I create a Brand Component without id', () => {
   const history = createMemoryHistory('/marcas/novo');
-  beforeEach(() => {
+  beforeEach(async () => {
     const mockAlertState = { handleAlert: jest.fn };
     render(
       <AlertContext.Provider value={mockAlertState}>
@@ -21,8 +20,10 @@ describe('when load the create brand page', () => {
       </AlertContext.Provider>,
       { wrapper: MemoryRouter },
     );
+
+    await screen.findByTestId('form-actions');
   });
-  it('check the labels', () => {
+  it('shoudl render have rendered the labels', () => {
     expect(screen.getByText('Voltar')).toBeInTheDocument();
     expect(screen.getByText('Salvar')).toBeInTheDocument();
     expect(screen.getByText('Marca')).toBeInTheDocument();
@@ -44,25 +45,25 @@ describe('when load the create brand page', () => {
 
 describe('when load the create brand page with id', () => {
   const history = createMemoryHistory({ initialEntries: ['/marcas/editar/1'] });
-  beforeEach(() => {
+  beforeEach(async () => {
     const mockAlertState = { handleAlert: jest.fn };
     BrandService.FindById.mockImplementation(() => Promise.resolve(
       { id: 1, name: 'Ford' },
     ));
-    act(() => {
-      render(
-        <Router history={history}>
-          <Route
-            path="/marcas/editar/:id"
-            component={() => (
-              <AlertContext.Provider value={mockAlertState}>
-                <CreateBrand />
-              </AlertContext.Provider>
-            )}
-          />
-        </Router>,
-      );
-    });
+    render(
+      <Router history={history}>
+        <Route
+          path="/marcas/editar/:id"
+          component={() => (
+            <AlertContext.Provider value={mockAlertState}>
+              <CreateBrand />
+            </AlertContext.Provider>
+          )}
+        />
+      </Router>,
+    );
+
+    await screen.findByTestId('form-actions');
   });
 
   it('when render the brand edit', () => {
