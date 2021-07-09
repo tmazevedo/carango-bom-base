@@ -36,18 +36,19 @@ const UserPage = () => {
 
   async function remove(id) {
     setLoading(true);
-    if (Number.isInteger(id)) {
-      try {
-        await UserService.Remove(id);
-        handleAlert({ status: 'success', message: 'Removido com sucesso.' });
-
-        const newList = [...userList];
-        const userIndex = userList.findIndex((obj) => obj.id === id);
-        newList.splice(userIndex, 1);
-        setUserList(newList);
-      } catch (error) {
-        handleAlert({ status: 'error', message: error.message });
+    try {
+      if (!Number.isInteger(parseInt(id, 10))) {
+        throw new Error('User ID is not an integer');
       }
+      await UserService.Remove(parseInt(id, 10));
+      handleAlert({ status: 'success', message: 'Removido com sucesso.' });
+
+      const newList = [...userList];
+      const userIndex = userList.findIndex((obj) => obj.id === id);
+      newList.splice(userIndex, 1);
+      setUserList(newList);
+    } catch (error) {
+      handleAlert({ status: 'error', message: error.message });
     }
     setLoading(false);
   }

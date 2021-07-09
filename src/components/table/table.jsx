@@ -12,7 +12,7 @@ function Table({
   const history = useHistory();
 
   function wrappedRemove(args) {
-    remove(...args);
+    remove(args);
     setLineSelected(null);
   }
 
