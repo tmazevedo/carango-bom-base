@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 function Form({
   fields, mainButton, secondaryButton, defaultValues,
 }) {
-  const [fieldStates, setFieldStates] = useState({});
+  const [fieldStates, setFieldStates] = useState(null);
   const [loadingDefaults, setLoadingDefaults] = useState(true);
 
   function changeFieldState(id, newValue) {
@@ -17,20 +17,20 @@ function Form({
   }
 
   useEffect(() => {
-    const keys = Object.keys(defaultValues || {});
-    if (!keys.length) setLoadingDefaults(false);
-  }, [defaultValues]);
-
-  useEffect(() => {
     let entries = {};
     fields.forEach((field) => {
       entries[field.name] = '';
     });
     entries = { ...entries, ...defaultValues };
     setFieldStates({ ...entries });
-    setLoadingDefaults(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    if (fieldStates) {
+      setLoadingDefaults(false);
+    }
+  }, [fieldStates]);
 
   function makeTextFieldComponent(field) {
     return (
@@ -69,7 +69,7 @@ function Form({
           onChange={(event) => {
             changeFieldState(field.name, event.target.value);
           }}
-          defaultValue={fieldStates[field.name] || field.options[0]?.id || ''}
+          defaultValue={fieldStates[field.name] ? fieldStates[field.name] : ''}
           fullWidth
         >
           {field.options.map(

@@ -28,28 +28,24 @@ const useStyles = makeStyles({
 
 const DashboardPage = () => {
   const [dashboardList, setDashboardList] = useState([]);
-  const [totalCars, setTotalCars] = useState('');
+  const [totalCars, setTotalCars] = useState(0);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    function countCars(data) {
-      let element = 0;
-      for (let index = 0; index < data.length; index++) {
-        element = data[index].count + element;
-      }
-      return element;
+    async function fetchData() {
+      setLoading(true);
+      const dashboard = await DashboardService.List();
+      setDashboardList(dashboard);
+
+      let carsQuantity = 0;
+      dashboard.forEach((element) => { carsQuantity += element.count; });
+      setTotalCars(carsQuantity);
+
+      setLoading(false);
     }
 
-    async function loadDashboard() {
-      await DashboardService.List()
-        .then((data) => {
-          setDashboardList(data);
-          setTotalCars(countCars(data));
-          setLoading(false);
-        });
-    }
-    loadDashboard();
-  }, [totalCars]);
+    fetchData();
+  }, []);
 
   const classes = useStyles();
 
@@ -68,7 +64,7 @@ const DashboardPage = () => {
             <Grid container spacing={5}>
               {
                 dashboardList.map((value) => (
-                  <Grid container item lg={4} key={value.Brand}>
+                  <Grid container item lg={4} key={`${value.brand}-grid`}>
                     <Card className={classes.root} variant="outlined">
                       <CardContent>
                         <Typography variant="h5" component="h2">
