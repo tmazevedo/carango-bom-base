@@ -5,7 +5,9 @@
     "plugin:jest/recommended",
     "plugin:jest/style"
   ],
-  "plugins": ["jest"],
+  "plugins": [
+    "jest"
+  ],
   "env": {
     "jest": true,
     "browser": true
@@ -15,6 +17,7 @@
   },
   "rules": {
     "react/prop-types": "off",
-    "no-plusplus": "off"
+    "no-plusplus": "off",
+    "jest/no-conditional-expect": "off",
   }
 }
