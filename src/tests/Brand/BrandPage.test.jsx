@@ -10,9 +10,9 @@ jest.mock('../../services/BrandService');
 
 describe('When I create a Brand Component', () => {
   beforeEach(() => {
-    const mockAlerState = { handleAlert: jest.fn };
+    const mockAlertState = { handleAlert: jest.fn };
     render(
-      <AlertContext.Provider value={mockAlerState}>
+      <AlertContext.Provider value={mockAlertState}>
         <BrandPage />
       </AlertContext.Provider>,
       { wrapper: MemoryRouter },
@@ -48,9 +48,9 @@ describe('when load the page', () => {
       ],
     ));
 
-    const mockAlerState = { handleAlert: jest.fn };
+    const mockAlertState = { handleAlert: jest.fn };
     render(
-      <AlertContext.Provider value={mockAlerState}>
+      <AlertContext.Provider value={mockAlertState}>
         <BrandPage />
       </AlertContext.Provider>,
       { wrapper: MemoryRouter },
@@ -64,11 +64,11 @@ describe('when load the page', () => {
 
 describe('Click on Novo button', () => {
   it('should have route /brands/novo/', () => {
-    const mockAlerState = { handleAlert: jest.fn };
+    const mockAlertState = { handleAlert: jest.fn };
     const history = createMemoryHistory();
 
     render(
-      <AlertContext.Provider value={mockAlerState}>
+      <AlertContext.Provider value={mockAlertState}>
         <Router history={history}>
           <BrandPage />
         </Router>
