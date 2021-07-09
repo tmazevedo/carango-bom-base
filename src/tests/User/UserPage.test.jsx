@@ -10,7 +10,7 @@ jest.mock('../../services/UserService');
 
 const history = createMemoryHistory();
 describe('When I create a User Component', () => {
-  UserService.List.mockImplementation(jest.fn);
+  UserService.List.mockImplementation(jest.fn());
 
   describe('and the Table rendered', () => {
     beforeEach(async () => {
@@ -28,7 +28,7 @@ describe('When I create a User Component', () => {
         ],
       ));
 
-      const mockAlertState = { handleAlert: jest.fn };
+      const mockAlertState = { handleAlert: jest.fn() };
       render(
         <AlertContext.Provider value={mockAlertState}>
           <Router history={history}>

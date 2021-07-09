@@ -25,7 +25,7 @@ beforeEach(async () => {
     ],
   ));
 
-  const mockAlertState = { handleAlert: jest.fn };
+  const mockAlertState = { handleAlert: jest.fn() };
   render(
     <AlertContext.Provider value={mockAlertState}>
       <Router history={history}>
