@@ -51,11 +51,8 @@ describe('When I try to log in', () => {
   });
 
   describe('and the credentials are wrong', () => {
-    it('should show an error messagee', async () => {
-      LoginService.auth.mockResolvedValue({
-        token: 'random-token-test',
-        type: 'Bearer',
-      });
+    it('should show an error message', async () => {
+      LoginService.auth.mockRejectedValue(new Error('Usuário ou senha inválida!'));
       const mockAlertState = { handleAlert: jest.fn() };
       const history = createMemoryHistory();
       history.push('/login');
@@ -72,7 +69,10 @@ describe('When I try to log in', () => {
       makeLogin('admin', 'ad');
       await flushPromises();
       expect(LoginService.auth).toHaveBeenCalled();
-      expect(screen.findByText('Usuário ou senha inválida!'));
+      expect(mockAlertState.handleAlert).toHaveBeenCalledWith({
+        status: 'error',
+        message: 'Usuário ou senha inválida!',
+      });
     });
   });
 });

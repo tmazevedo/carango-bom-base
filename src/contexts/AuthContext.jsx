@@ -23,14 +23,15 @@ const AuthProvider = ({ children }) => {
 
   async function handleLogin(user, password) {
     if (user && password) {
-      await LoginService.auth(user, password).then((data) => {
+      try {
+        const data = await LoginService.auth(user, password);
         setAuthenticated(true);
         localStorage.setItem('token', String(data.token));
         history.push('/dashboard');
-      }).catch((e) => {
-        handleAlert({ status: 'error', message: e.message });
+      } catch (error) {
+        handleAlert({ status: 'error', message: error.message });
         history.push('/login');
-      });
+      }
     }
   }
 

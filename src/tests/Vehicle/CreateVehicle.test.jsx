@@ -19,12 +19,10 @@ describe('When I create a Vehicle Component without id', () => {
       </AlertContext.Provider>,
       { wrapper: MemoryRouter },
     );
-
-    // await screen.findByTestId('form-actions');
   });
-  it('shoudl render have rendered the labels', () => {
-    expect(screen.findByText('Voltar'));
-    expect(screen.findByText('Salvar'));
-    expect(screen.findByText('Marca'));
+  it('should render have rendered the labels', () => {
+    expect(screen.findByText('Voltar')).toBeInTheDocument();
+    expect(screen.findByText('Salvar')).toBeInTheDocument();
+    expect(screen.findByText('Marca')).toBeInTheDocument();
   });
 });

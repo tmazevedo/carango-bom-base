@@ -10,7 +10,7 @@ const CreateUser = () => {
   const { handleAlert } = useContext(AlertContext);
   const history = useHistory();
   const { id } = useParams();
-  const [userFind, setUserFind] = useState('');
+  const [userFind, setUserFind] = useState({});
   const [loading, setLoading] = useState(true);
 
   async function onSubmit(value) {
@@ -82,7 +82,6 @@ const CreateUser = () => {
                 type: 'password',
               },
             ]}
-            value={userFind}
             defaultValues={userFind}
           />
         </>

@@ -17,8 +17,6 @@
   },
   "rules": {
     "react/prop-types": "off",
-    "no-plusplus": "off",
-    "jest/no-conditional-expect": "off",
-    "jest/valid-expect": "off",
+    "no-plusplus": "off"
   }
 }
