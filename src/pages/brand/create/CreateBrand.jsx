@@ -19,7 +19,8 @@ const CreateBrand = () => {
         await BrandService.UpdateBrand(JSON.stringify(value), id);
         handleAlert({ status: 'success', message: 'Alterado com sucesso.' });
       } else {
-        BrandService.Save(value);
+        await BrandService.Save(value);
+        handleAlert({ status: 'success', message: 'Salvo com sucesso.' });
       }
       history.push('/marcas');
     } catch (e) {
@@ -30,25 +31,27 @@ const CreateBrand = () => {
   useEffect(() => {
     async function findBrand() {
       if (id) {
-        BrandService.FindById(id).then((dataFind) => {
-          const objectVehicle = {
-            name: dataFind.name,
-          };
-          setBrandFind(objectVehicle);
-          setLoading(false);
+        const brand = await BrandService.FindById(id);
+        setBrandFind({
+          name: brand.name,
         });
-      } else {
-        setLoading(false);
       }
+      setLoading(false);
     }
     findBrand();
   }, [id]);
 
   return (
-    loading ? <CircularProgress />
+    loading
+      ? <CircularProgress />
       : (
         <>
-          <Button onClick={() => { history.push('/marcas'); }} className="custom-button" variant="outlined" color="primary">
+          <Button
+            onClick={() => { history.push('/marcas'); }}
+            className="custom-button"
+            variant="outlined"
+            color="primary"
+          >
             Voltar
           </Button>
           <br />
@@ -61,6 +64,7 @@ const CreateBrand = () => {
               onSubmit,
             }}
             value={brandFind}
+            defaultValues={{ name: brandFind.name }}
           />
         </>
       )

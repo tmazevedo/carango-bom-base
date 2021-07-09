@@ -12,7 +12,7 @@ describe('When I load the sidebar', () => {
   describe('when user is authenticated', () => {
     it('should have the labels', () => {
       const history = createMemoryHistory();
-      const mockAlertState = { authenticated: true, handleLogout: jest.fn };
+      const mockAlertState = { authenticated: true, handleLogout: jest.fn() };
 
       render(
         <AuthContext.Provider value={mockAlertState}>
@@ -35,7 +35,7 @@ describe('When I load the sidebar', () => {
   describe('when user is not authenticated', () => {
     it('should have the labels', () => {
       const history = createMemoryHistory();
-      const mockAlertState = { authenticated: false, handleLogout: jest.fn };
+      const mockAlertState = { authenticated: false, handleLogout: jest.fn() };
 
       render(
         <AuthContext.Provider value={mockAlertState}>

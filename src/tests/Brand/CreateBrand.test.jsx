@@ -11,7 +11,7 @@ jest.mock('../../services/BrandService');
 describe('When I create a Brand Component without id', () => {
   const history = createMemoryHistory('/marcas/novo');
   beforeEach(async () => {
-    const mockAlertState = { handleAlert: jest.fn };
+    const mockAlertState = { handleAlert: jest.fn() };
     render(
       <AlertContext.Provider value={mockAlertState}>
         <Router history={history}>
@@ -46,7 +46,7 @@ describe('When I create a Brand Component without id', () => {
 describe('when load the create brand page with id', () => {
   const history = createMemoryHistory({ initialEntries: ['/marcas/editar/1'] });
   beforeEach(async () => {
-    const mockAlertState = { handleAlert: jest.fn };
+    const mockAlertState = { handleAlert: jest.fn() };
     BrandService.FindById.mockImplementation(() => Promise.resolve(
       { id: 1, name: 'Ford' },
     ));
