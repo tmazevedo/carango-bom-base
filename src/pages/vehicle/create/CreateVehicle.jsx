@@ -55,8 +55,10 @@ const CreateVehicle = () => {
       });
     }
 
+    setLoading(true);
     if (id) findCar();
     getBrands();
+    setLoading(false);
   }, [id]);
 
   useEffect(() => {
@@ -65,37 +67,36 @@ const CreateVehicle = () => {
     }
   }, [brandsList, id, loadedVehicle]);
 
-  if (loading) {
-    return <CircularProgress />;
-  }
-
   return (
-    <>
-      <Button onClick={() => { history.push('/veiculos'); }} className="custom-button" variant="outlined" color="primary">
-        Voltar
-      </Button>
-      <br />
-      <br />
-      <Form
-        mainButton={{
-          text: 'Salvar',
-          onSubmit,
-        }}
-        fields={[
-          {
-            name: 'brand',
-            label: 'Marca',
-            componentType: 'select',
-            options: brandsList,
-            required: true,
-          },
-          { name: 'model', label: 'Modelo', required: true },
-          { name: 'year', label: 'Ano', required: true },
-          { name: 'value', label: 'Valor', required: true },
-        ]}
-        defaultValues={loadedVehicle}
-      />
-    </>
+    loading ? <CircularProgress />
+      : (
+        <>
+          <Button onClick={() => { history.push('/veiculos'); }} className="custom-button" variant="outlined" color="primary">
+            Voltar
+          </Button>
+          <br />
+          <br />
+          <Form
+            mainButton={{
+              text: 'Salvar',
+              onSubmit,
+            }}
+            fields={[
+              {
+                name: 'brand',
+                label: 'Marca',
+                componentType: 'select',
+                options: brandsList,
+                required: true,
+              },
+              { name: 'model', label: 'Modelo', required: true },
+              { name: 'year', label: 'Ano', required: true },
+              { name: 'value', label: 'Valor', required: true },
+            ]}
+            defaultValues={loadedVehicle}
+          />
+        </>
+      )
   );
 };
 
