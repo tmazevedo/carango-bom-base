@@ -22,8 +22,11 @@ describe('should get all cars by brand from backend', () => {
     // eslint-disable-next-line jest/no-conditional-expect
     if (arr.length > 0) {
       expect(arr).toBe(expect.arrayContaining(
-        expect.toMatchObject({ count: expect.any(Number), brand: expect.any(String), 
-            totalPrice: expect.any(Number) }),
+        expect.toMatchObject({
+          count: expect.any(Number),
+          brand: expect.any(String),
+          totalPrice: expect.any(Number),
+        }),
       ));
     }
   });
