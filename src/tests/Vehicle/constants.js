@@ -8,6 +8,9 @@ const vehiclesList = [
   {
     id: '11', brand: { id: 1, name: 'Ford' }, model: 'Ranger', year: 2021, value: 245000,
   },
+  {
+    id: 'badID', brand: { id: 1, name: 'Ford' }, model: 'Mustang', year: 2021, value: 245000,
+  },
 ];
 
 export default vehiclesList;

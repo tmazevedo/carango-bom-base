@@ -14,11 +14,11 @@ const AlertProvider = ({ children }) => {
     setCustomModal({ hidden: true, status: 'error', message: '' });
   }
 
-  function handleAlert(props) {
+  function handleAlert({ status, message }) {
     setCustomModal({
       hidden: false,
-      status: props.status,
-      message: props.message,
+      status,
+      message,
     });
   }
 

@@ -12,11 +12,11 @@ import vehiclesList from './constants';
 jest.mock('../../services/Vehicleservice');
 
 const history = createMemoryHistory();
+const mockAlertState = { handleAlert: jest.fn() };
 
 beforeEach(async () => {
   VehicleService.List.mockResolvedValue(vehiclesList);
 
-  const mockAlertState = { handleAlert: jest.fn };
   render(
     <AlertContext.Provider value={mockAlertState}>
       <Router history={history}>
@@ -81,6 +81,27 @@ describe('When I create a Vehicle Component', () => {
   describe('and the button Excluir', () => {
     it('should expect Excluir button', () => {
       expect(screen.getByText('Excluir')).toBeInTheDocument();
+    });
+
+    describe('and is clicked with an invalid vehicle', () => {
+      beforeEach(async () => {
+        const { model } = vehiclesList.find((vehicle) => vehicle.id === 'badID');
+        fireEvent.click(screen.getByText(model));
+        fireEvent.click(screen.getByText('Excluir'));
+        await screen.findByText('Confirmar');
+        await screen.findByText('Cancelar');
+      });
+
+      describe('id', () => {
+        it('should throw an error', async () => {
+          const confirmButton = await screen.findByText('Confirmar');
+          fireEvent.click(confirmButton);
+          expect(mockAlertState.handleAlert).toHaveBeenCalledWith({
+            status: 'error',
+            message: 'Vehicle ID is not an integer',
+          });
+        });
+      });
     });
 
     describe('and is clicked', () => {
