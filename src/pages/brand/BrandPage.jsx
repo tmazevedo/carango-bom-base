@@ -34,10 +34,11 @@ const BrandPage = () => {
   }, []);
 
   async function remove(id) {
-    if (!Number.isInteger(id)) {
-      throw new Error('Brand ID is not an integer');
-    }
     try {
+      if (!Number.isInteger(id)) {
+        throw new Error('Brand ID is not an integer');
+      }
+
       const response = await BrandService.Remove(id);
 
       if (response.status === 409) {
