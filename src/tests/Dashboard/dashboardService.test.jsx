@@ -19,7 +19,6 @@ describe('should get all cars by brand from backend', () => {
   ));
 
   it('List from backend is not empty', () => {
-    // eslint-disable-next-line jest/no-conditional-expect
     if (arr.length > 0) {
       expect(arr).toBe(expect.arrayContaining(
         expect.toMatchObject({
