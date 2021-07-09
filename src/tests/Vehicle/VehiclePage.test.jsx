@@ -5,23 +5,14 @@ import { createMemoryHistory } from 'history';
 import VehiclePage from '../../pages/vehicle/VehiclePage';
 import { AlertContext } from '../../contexts/AlertContext';
 import VehicleService from '../../services/Vehicleservice';
+import vehiclesList from './constants';
 
 jest.mock('../../services/Vehicleservice');
 
 const history = createMemoryHistory();
 
 beforeEach(async () => {
-  VehicleService.List.mockResolvedValue([
-    {
-      id: '9', brand: { id: 1, name: 'Ford' }, model: 'Ka', year: 2020, value: 40000,
-    },
-    {
-      id: '10', brand: { id: 1, name: 'Ford' }, model: 'Ranger', year: 2021, value: 245000,
-    },
-    {
-      id: '11', brand: { id: 1, name: 'Ford' }, model: 'Ranger', year: 2021, value: 245000,
-    },
-  ]);
+  VehicleService.List.mockResolvedValue(vehiclesList);
 
   const mockAlertState = { handleAlert: jest.fn };
   render(
@@ -58,12 +49,12 @@ describe('When I create a Vehicle Component', () => {
   });
 
   describe('and the button Novo', () => {
-    it('should expect button to be rendered', () => {
+    it('should expect to be in the document', () => {
       expect(screen.getByText('Novo')).toBeInTheDocument();
     });
 
-    describe('and the button is clicked', () => {
-      it('should have route /veiculos/editar/{id}', () => {
+    describe('and is clicked', () => {
+      it('should have route /veiculos/novo', () => {
         fireEvent.click(screen.getByText('Novo'));
         expect(history.location.pathname).toMatch('/veiculos/novo');
       });
@@ -71,8 +62,17 @@ describe('When I create a Vehicle Component', () => {
   });
 
   describe('and the button Alterar', () => {
-    it('should expect Alterar button', () => {
+    it('should expect to be in the document', () => {
       expect(screen.getByText('Alterar')).toBeInTheDocument();
+    });
+
+    describe('and is clicked', () => {
+      it('should have route /veiculos/editar/{id}', () => {
+        const { id, model } = vehiclesList[0];
+        fireEvent.click(screen.getByText(model));
+        fireEvent.click(screen.getByText('Alterar'));
+        expect(history.location.pathname).toMatch(`/veiculos/editar/${id}`);
+      });
     });
   });
 
