@@ -8,75 +8,64 @@ import BrandService from '../../services/BrandService';
 
 jest.mock('../../services/BrandService');
 
-describe('When I create a Brand Component', () => {
-  beforeEach(() => {
-    const mockAlerState = { handleAlert: jest.fn };
-    render(
-      <AlertContext.Provider value={mockAlerState}>
-        <BrandPage />
-      </AlertContext.Provider>,
-      { wrapper: MemoryRouter },
-    );
-  });
+const history = createMemoryHistory();
 
-  describe('and the button renders', () => {
-    it('should expect Novo button', () => {
-      expect(screen.getByText('Novo')).toBeInTheDocument();
-    });
-    it('should expect Alterar button', () => {
-      expect(screen.getByText('Alterar')).toBeInTheDocument();
-    });
-    it('should expect Excluir button', () => {
-      expect(screen.getByText('Excluir')).toBeInTheDocument();
-    });
-  });
+beforeEach(async () => {
+  BrandService.List.mockImplementation(() => Promise.resolve(
+    [
+      {
+        id: '1', name: 'Ford',
+      },
+      {
+        id: '2', name: 'Audi',
+      },
+      {
+        id: '2', name: 'BMW',
+      },
+    ],
+  ));
+
+  const mockAlertState = { handleAlert: jest.fn };
+  render(
+    <AlertContext.Provider value={mockAlertState}>
+      <Router history={history}>
+        <BrandPage />
+      </Router>
+    </AlertContext.Provider>,
+    { wrapper: MemoryRouter },
+  );
+
+  await screen.findByRole('grid');
 });
 
-describe('when load the page', () => {
-  beforeEach(() => {
-    BrandService.List.mockImplementation(() => Promise.resolve(
-      [
-        {
-          id: '1', name: 'Ford',
-        },
-        {
-          id: '2', name: 'Audi',
-        },
-        {
-          id: '2', name: 'BMW',
-        },
-      ],
-    ));
+describe('When I create a Brand Component', () => {
+  describe('and the button renders', () => {
+    it('should expect Novo button', async () => {
+      const novoButton = screen.getByText('Novo');
+      expect(novoButton).toBeInTheDocument();
+    });
 
-    const mockAlerState = { handleAlert: jest.fn };
-    render(
-      <AlertContext.Provider value={mockAlerState}>
-        <BrandPage />
-      </AlertContext.Provider>,
-      { wrapper: MemoryRouter },
-    );
+    describe('and the loading finishes', () => {
+      it('should expect Alterar button', () => {
+        const alterarButton = screen.getByText('Alterar');
+        expect(alterarButton).toBeInTheDocument();
+      });
+
+      it('should expect Excluir button', () => {
+        const excluirButton = screen.getByText('Excluir');
+        expect(excluirButton).toBeInTheDocument();
+      });
+    });
+
+    describe('and I click on Novo button', () => {
+      it('should have route /brands/novo/', () => {
+        fireEvent.click(screen.getByText('Novo'));
+        expect(history.location.pathname).toMatch('/marcas/novo');
+      });
+    });
   });
 
   it('should call the brands list call', () => {
     expect(BrandService.List).toHaveBeenCalled();
-  });
-});
-
-describe('Click on Novo button', () => {
-  it('should have route /brands/novo/', () => {
-    const mockAlerState = { handleAlert: jest.fn };
-    const history = createMemoryHistory();
-
-    render(
-      <AlertContext.Provider value={mockAlerState}>
-        <Router history={history}>
-          <BrandPage />
-        </Router>
-      </AlertContext.Provider>,
-    );
-
-    fireEvent.click(screen.getByText('Novo'));
-
-    expect(history.location.pathname).toMatch('/marcas/novo');
   });
 });
