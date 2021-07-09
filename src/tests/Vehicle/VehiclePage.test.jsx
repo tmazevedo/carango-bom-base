@@ -15,7 +15,7 @@ describe('When I create a Vehicle Component', () => {
   describe('and the Table rendered', () => {
     beforeEach(() => {
       act(() => {
-        const mockAlerState = { handleAlert: jest.fn };
+        const mockAlertState = { handleAlert: jest.fn };
         VehicleService.List.mockImplementation(() => Promise.resolve(
           [
             {
@@ -31,7 +31,7 @@ describe('When I create a Vehicle Component', () => {
         ));
 
         render(
-          <AlertContext.Provider value={mockAlerState}>
+          <AlertContext.Provider value={mockAlertState}>
             <VehiclePage />
           </AlertContext.Provider>,
           { wrapper: MemoryRouter },
@@ -58,10 +58,10 @@ describe('When I create a Vehicle Component', () => {
 
   describe('and the button Novo', () => {
     it('should expect button to be rendered', () => {
-      const mockAlerState = { handleAlert: jest.fn };
+      const mockAlertState = { handleAlert: jest.fn };
 
       render(
-        <AlertContext.Provider value={mockAlerState}>
+        <AlertContext.Provider value={mockAlertState}>
           <VehiclePage />
         </AlertContext.Provider>,
         { wrapper: MemoryRouter },
@@ -71,12 +71,12 @@ describe('When I create a Vehicle Component', () => {
 
     describe('and the button is clicked', () => {
       it('should have route /veiculos/editar/{id}', () => {
-        const mockAlerState = { handleAlert: jest.fn };
+        const mockAlertState = { handleAlert: jest.fn };
         const history = createMemoryHistory();
 
         act(() => {
           render(
-            <AlertContext.Provider value={mockAlerState}>
+            <AlertContext.Provider value={mockAlertState}>
               <Router history={history}>
                 <VehiclePage />
               </Router>
@@ -93,10 +93,10 @@ describe('When I create a Vehicle Component', () => {
 
   describe('and the button Alterar', () => {
     it('should expect Alterar button', () => {
-      const mockAlerState = { handleAlert: jest.fn };
+      const mockAlertState = { handleAlert: jest.fn };
 
       render(
-        <AlertContext.Provider value={mockAlerState}>
+        <AlertContext.Provider value={mockAlertState}>
           <VehiclePage />
         </AlertContext.Provider>,
         { wrapper: MemoryRouter },
@@ -107,10 +107,10 @@ describe('When I create a Vehicle Component', () => {
 
   describe('and the button Excluir', () => {
     it('should expect Excluir button', () => {
-      const mockAlerState = { handleAlert: jest.fn };
+      const mockAlertState = { handleAlert: jest.fn };
 
       render(
-        <AlertContext.Provider value={mockAlerState}>
+        <AlertContext.Provider value={mockAlertState}>
           <VehiclePage />
         </AlertContext.Provider>,
         { wrapper: MemoryRouter },
