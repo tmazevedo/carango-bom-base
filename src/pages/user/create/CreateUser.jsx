@@ -14,36 +14,41 @@ const CreateUser = () => {
   const [loading, setLoading] = useState(true);
 
   async function onSubmit(value) {
-    if (id) {
-      const objectToSave = {
-        username: value.username,
-        password: value.confirmPassword,
-      };
-
-      try {
-        await UserService.UpdateUser(JSON.stringify(objectToSave), id);
-
-        handleAlert({ status: 'success', message: 'Alterado com sucesso.' });
-        history.push('/usuarios');
-      } catch (e) {
-        handleAlert({ status: 'error', message: e.message });
+    setLoading(true);
+    try {
+      if (value.password !== value.confirmPassword) {
+        throw new Error('Invalid password');
       }
-    } else {
-      UserService.Save(value.username, value.confirmPassword);
-      history.goBack();
+      if (id) {
+        const objectToSave = {
+          username: value.username,
+          password: value.confirmPassword,
+        };
+        await UserService.UpdateUser(JSON.stringify(objectToSave), id);
+        handleAlert({ status: 'success', message: 'Alterado com sucesso.' });
+      } else {
+        await UserService.Save(value.username, value.confirmPassword);
+        handleAlert({ status: 'success', message: 'Incluído com sucesso.' });
+      }
+      history.push('/usuarios');
+    } catch (error) {
+      handleAlert({ status: 'error', message: error.message });
+    } finally {
+      setLoading(false);
     }
   }
 
   useEffect(() => {
     async function findUser() {
       if (id) {
-        UserService.FindById(id).then((dataFind) => {
-          const objectVehicle = {
-            username: dataFind.username,
-          };
-          setUserFind(objectVehicle);
-          setLoading(false);
-        });
+        const user = await UserService.FindById(id);
+
+        const objectUser = {
+          ...user,
+          username: user.username,
+        };
+        setUserFind(objectUser);
+        setLoading(false);
       } else {
         setLoading(false);
       }
@@ -78,6 +83,7 @@ const CreateUser = () => {
               },
             ]}
             value={userFind}
+            defaultValues={userFind}
           />
         </>
       )
