@@ -11,6 +11,11 @@ function Table({
   const [lineSelected, setLineSelected] = useState();
   const history = useHistory();
 
+  function wrappedRemove(args) {
+    remove(...args);
+    setLineSelected(null);
+  }
+
   useEffect(() => {
     setListFields(fields);
   }, [fields]);
@@ -27,7 +32,7 @@ function Table({
       />
 
       <div className="action-itens">
-        <CustomModal disabled={!lineSelected} item={lineSelected?.id} remove={remove} />
+        <CustomModal disabled={!lineSelected} item={lineSelected?.id} remove={wrappedRemove} />
         <BrowserRouter>
           <Link
             className={lineSelected ? 'link' : 'link link-disabled'}
