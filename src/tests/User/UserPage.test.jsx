@@ -1,7 +1,6 @@
 import React from 'react';
 import { MemoryRouter, Router } from 'react-router-dom';
 import { render, screen, fireEvent } from '@testing-library/react';
-import { act } from 'react-dom/test-utils';
 import { createMemoryHistory } from 'history';
 import UserPage from '../../pages/user/UserPage';
 import { AlertContext } from '../../contexts/AlertContext';
@@ -9,99 +8,69 @@ import UserService from '../../services/UserService';
 
 jest.mock('../../services/UserService');
 
+const history = createMemoryHistory();
 describe('When I create a User Component', () => {
   UserService.List.mockImplementation(jest.fn);
 
   describe('and the Table rendered', () => {
     beforeEach(() => {
-      act(() => {
-        const mockAlerState = { handleAlert: jest.fn };
-        UserService.List.mockImplementation(() => Promise.resolve(
-          [
-            {
-              id: '1', name: 'username 1',
-            },
-            {
-              id: '2', name: 'username 2',
-            },
-            {
-              id: '3', name: 'username 3',
-            },
-          ],
-        ));
+      UserService.List.mockImplementation(() => Promise.resolve(
+        [
+          {
+            id: '1', name: 'username 1',
+          },
+          {
+            id: '2', name: 'username 2',
+          },
+          {
+            id: '3', name: 'username 3',
+          },
+        ],
+      ));
 
-        render(
-          <AlertContext.Provider value={mockAlerState}>
+      const mockAlertState = { handleAlert: jest.fn };
+      render(
+        <AlertContext.Provider value={mockAlertState}>
+          <Router history={history}>
             <UserPage />
-          </AlertContext.Provider>,
-          { wrapper: MemoryRouter },
-        );
-      });
+          </Router>
+        </AlertContext.Provider>,
+        { wrapper: MemoryRouter },
+      );
     });
 
     describe('and the Columns rendered', () => {
       it('should expect Username Column', () => {
-        expect(screen.getByText('Nome')).toBeInTheDocument();
+        const columnNome = screen.getByText('Nome');
+        expect(columnNome).toBeInTheDocument();
       });
     });
 
     describe('and the Button Labels rendered', () => {
       it('should expect Novo button', () => {
-        expect(screen.getByText('Novo')).toBeInTheDocument();
+        const novoButton = screen.getByText('Novo');
+        expect(novoButton).toBeInTheDocument();
       });
       it('should expect Excluir button', () => {
-        expect(screen.getByText('Excluir')).toBeInTheDocument();
+        const removeButton = screen.getByText('Excluir');
+        expect(removeButton).toBeInTheDocument();
       });
       it('should expect Alterar button', () => {
-        expect(screen.getByText('Alterar')).toBeInTheDocument();
+        const alterarButton = screen.getByText('Alterar');
+        expect(alterarButton).toBeInTheDocument();
+      });
+    });
+
+    describe('when click in the Novo Button', () => {
+      it('should have route /usuarios/novo', () => {
+        const novoButton = screen.getByText('Novo');
+        fireEvent.click(novoButton);
+        expect(history.location.pathname).toMatch('/usuarios/novo');
+      });
+    });
+    describe('when click in the Remover Button', () => {
+      it('should delete the selected user', async () => {
       });
     });
   });
-
-  describe('when click in the Novo Button', () => {
-    it('should have route /usuarios/novo', () => {
-      const mockAlerState = { handleAlert: jest.fn };
-      const history = createMemoryHistory();
-
-      act(() => {
-        render(
-          <AlertContext.Provider value={mockAlerState}>
-            <Router history={history}>
-              <UserPage />
-            </Router>
-          </AlertContext.Provider>,
-        );
-
-        fireEvent.click(screen.getByText('Novo'));
-      });
-
-      expect(history.location.pathname).toMatch('/usuarios/novo');
-    });
-  });
-
-  // describe('when click in the Remover Button', () => {
-  //   it('should delete the selected user', async () => {
-  //     const mockAlerState = { handleAlert: jest.fn };
-
-  //     act(async () => {
-  //       render(
-  //         <AlertContext.Provider value={mockAlerState}>
-  //           <Router>
-  //             <UserPage />
-  //           </Router>
-  //         </AlertContext.Provider>,
-  //       );
-
-  //       const userRow = await screen.getByText('usuario 1');
-  //       fireEvent.click(userRow);
-  //       const removeButton = await screen.getByText('Excluir');
-  //       fireEvent.click(removeButton);
-  //     });
-
-  //     const wrapper = shallow(<UserPage />);
-  //     expect(wrapper.text().includes('usuario 2')).toBe(true);
-
-  //     // expect(await screen.getByRole('div', { name: 'usuario 2' })).toBeInTheDocument();
-  //   });
-  // });
 });
