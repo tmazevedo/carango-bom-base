@@ -1,6 +1,8 @@
 import React from 'react';
 import { MemoryRouter, Router } from 'react-router-dom';
-import { render, screen, fireEvent } from '@testing-library/react';
+import {
+  render, screen, fireEvent,
+} from '@testing-library/react';
 import { createMemoryHistory } from 'history';
 import VehiclePage from '../../pages/vehicle/VehiclePage';
 import { AlertContext } from '../../contexts/AlertContext';
@@ -79,6 +81,36 @@ describe('When I create a Vehicle Component', () => {
   describe('and the button Excluir', () => {
     it('should expect Excluir button', () => {
       expect(screen.getByText('Excluir')).toBeInTheDocument();
+    });
+
+    describe('and is clicked', () => {
+      beforeEach(async () => {
+        const { model } = vehiclesList[0];
+        fireEvent.click(screen.getByText(model));
+        fireEvent.click(screen.getByText('Excluir'));
+        await screen.findByText('Confirmar');
+        await screen.findByText('Cancelar');
+      });
+
+      describe('and I click on Confirmar button', () => {
+        it('should have removed the line from the grid', async () => {
+          const { model } = vehiclesList[0];
+          const modelLine = screen.getByText(model);
+          fireEvent.click(screen.getByText('Confirmar'));
+          await screen.findByRole('grid');
+          expect(modelLine).not.toBeInTheDocument();
+        });
+      });
+
+      describe('and I click on Cancelar button', () => {
+        it('should not remove the line from the grid', async () => {
+          const { model } = vehiclesList[0];
+          const modelLine = screen.getByText(model);
+          fireEvent.click(screen.getByText('Cancelar'));
+          await screen.findByRole('grid');
+          expect(modelLine).toBeInTheDocument();
+        });
+      });
     });
   });
 });

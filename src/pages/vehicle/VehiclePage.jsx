@@ -36,22 +36,31 @@ const VehiclePage = () => {
     loadVehicles();
   }, []);
 
+  // mock => VehiclePage.remove = {  }
+
   async function remove(id) {
+    setLoading(true);
     try {
       if (!Number.isInteger(parseInt(id, 10))) {
         throw new Error('Vehicle ID is not an integer');
       }
 
+      const vehicleIndex = vehicleList.findIndex((obj) => obj.id === id);
+      if (vehicleIndex === -1) {
+        throw new Error('Could not find Vehicle with given ID');
+      }
+
       await VehicleService.Remove(id);
-      handleAlert({ status: 'success', message: 'Removido com sucesso.' });
 
       const newList = [...vehicleList];
-      const vehicleIndex = vehicleList.findIndex((obj) => obj.id === id);
       newList.splice(vehicleIndex, 1);
       setVehicleList(newList);
+
+      handleAlert({ status: 'success', message: 'Removido com sucesso.' });
     } catch (error) {
       handleAlert({ status: 'error', message: error.message });
     }
+    setLoading(false);
   }
 
   return (
@@ -66,16 +75,16 @@ const VehiclePage = () => {
           : (
             <Table
               fields={
-              vehicleList
-            }
+                vehicleList
+              }
               columns={
-              [
-                { field: 'brand', headerName: 'Marca', width: 200 },
-                { field: 'model', headerName: 'Modelo', width: 200 },
-                { field: 'year', headerName: 'Ano', width: 200 },
-                { field: 'value', headerName: 'Valor', width: 200 },
-              ]
-            }
+                [
+                  { field: 'brand', headerName: 'Marca', width: 200 },
+                  { field: 'model', headerName: 'Modelo', width: 200 },
+                  { field: 'year', headerName: 'Ano', width: 200 },
+                  { field: 'value', headerName: 'Valor', width: 200 },
+                ]
+              }
               routeToChange="/veiculos/editar/"
               remove={remove}
             />
