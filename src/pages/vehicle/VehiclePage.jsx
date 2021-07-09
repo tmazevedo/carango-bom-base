@@ -65,19 +65,20 @@ const VehiclePage = () => {
 
   return (
     <div style={{ height: '50vh' }}>
-      <Button onClick={() => { history.push('/veiculos/novo'); }} className="custom-button" variant="outlined" color="primary">
-        Novo
-      </Button>
-
       {
         loading
           ? <CircularProgress />
           : (
-            <Table
-              fields={
+            <>
+              <Button onClick={() => { history.push('/veiculos/novo'); }} className="custom-button" variant="outlined" color="primary">
+                Novo
+              </Button>
+
+              <Table
+                fields={
                 vehicleList
               }
-              columns={
+                columns={
                 [
                   { field: 'brand', headerName: 'Marca', width: 200 },
                   { field: 'model', headerName: 'Modelo', width: 200 },
@@ -85,9 +86,10 @@ const VehiclePage = () => {
                   { field: 'value', headerName: 'Valor', width: 200 },
                 ]
               }
-              routeToChange="/veiculos/editar/"
-              remove={remove}
-            />
+                routeToChange="/veiculos/editar/"
+                remove={remove}
+              />
+            </>
           )
       }
     </div>

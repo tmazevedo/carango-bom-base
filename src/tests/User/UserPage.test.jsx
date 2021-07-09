@@ -13,7 +13,7 @@ describe('When I create a User Component', () => {
   UserService.List.mockImplementation(jest.fn);
 
   describe('and the Table rendered', () => {
-    beforeEach(() => {
+    beforeEach(async () => {
       UserService.List.mockImplementation(() => Promise.resolve(
         [
           {
@@ -37,6 +37,8 @@ describe('When I create a User Component', () => {
         </AlertContext.Provider>,
         { wrapper: MemoryRouter },
       );
+
+      await screen.findByRole('grid');
     });
 
     describe('and the Columns rendered', () => {

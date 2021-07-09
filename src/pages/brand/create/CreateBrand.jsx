@@ -14,18 +14,16 @@ const CreateBrand = () => {
   const [loading, setLoading] = useState(true);
 
   async function onSubmit(value) {
-    if (id) {
-      try {
+    try {
+      if (id) {
         await BrandService.UpdateBrand(JSON.stringify(value), id);
-
         handleAlert({ status: 'success', message: 'Alterado com sucesso.' });
-        history.push('/marcas');
-      } catch (e) {
-        handleAlert({ status: 'error', message: e.message });
+      } else {
+        BrandService.Save(value);
       }
-    } else {
-      BrandService.Save(value);
-      history.goBack();
+      history.push('/marcas');
+    } catch (e) {
+      handleAlert({ status: 'error', message: e.message });
     }
   }
 
