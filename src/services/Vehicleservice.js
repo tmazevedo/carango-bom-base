@@ -1,4 +1,4 @@
-const token = localStorage.getItem('token');
+import getToken from './TokenUtils';
 
 const VehicleService = {
   List() {
@@ -16,7 +16,7 @@ const VehicleService = {
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${getToken()}`,
       },
       body: JSON.stringify(objectToSave),
     }).then((r) => r.json());
@@ -28,7 +28,7 @@ const VehicleService = {
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${getToken()}`,
       },
     }).then((r) => r.json());
   },
@@ -39,7 +39,7 @@ const VehicleService = {
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${getToken()}`,
       },
       body: JSON.stringify(objectToChange),
     }).then((r) => r.json());
@@ -51,7 +51,7 @@ const VehicleService = {
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${getToken()}`,
       },
     });
   },

@@ -12,7 +12,7 @@ const LoginPage = () => {
     if (authenticated) {
       history.push('/dashboard');
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [authenticated]);
 
   function onSubmit(value) {

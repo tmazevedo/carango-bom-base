@@ -1,4 +1,4 @@
-const token = localStorage.getItem('token');
+import getToken from './TokenUtils';
 
 const DashboardService = {
   List() {
@@ -8,7 +8,7 @@ const DashboardService = {
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${getToken()}`,
       },
     }).then((r) => r.json());
   },

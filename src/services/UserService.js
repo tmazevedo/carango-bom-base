@@ -1,4 +1,4 @@
-const token = localStorage.getItem('token');
+import getToken from './TokenUtils';
 
 const UserService = {
   List() {
@@ -8,7 +8,7 @@ const UserService = {
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${getToken()}`,
       },
     }).then((r) => r.json());
   },
@@ -19,7 +19,7 @@ const UserService = {
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${getToken()}`,
       },
       body: JSON.stringify({
         username,
@@ -34,7 +34,7 @@ const UserService = {
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${getToken()}`,
       },
     });
   },
@@ -45,7 +45,7 @@ const UserService = {
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${getToken()}`,
       },
     }).then((r) => r.json());
   },
@@ -56,7 +56,7 @@ const UserService = {
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${getToken()}`,
       },
       body: objectToChange,
     }).then((r) => r.json());
