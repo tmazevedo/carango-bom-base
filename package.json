@@ -25,6 +25,11 @@
     "universal-cookie": "^4.0.4",
     "web-vitals": "^1.1.1"
   },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/{!(*Service.js|TokenUtils.js|reportWebVitals.js|index.js),}.(js|jsx)"
+    ]
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
