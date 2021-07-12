@@ -23,18 +23,22 @@ const CreateVehicle = () => {
     };
 
     try {
+      setLoading(true);
       if (id) {
+        console.log('entrou no update');
+        console.log(id);
         await VehicleService.UpdateVehicle(objectVehicle, id);
         handleAlert({ status: 'success', message: 'Alterado com sucesso.' });
       } else {
+        console.log('entrou no new car');
         await VehicleService.Save(objectVehicle);
         handleAlert({ status: 'success', message: 'Criado com sucesso.' });
       }
-
       history.push('/veiculos');
     } catch (e) {
       handleAlert({ status: 'error', message: e.message });
     }
+    setLoading(false);
   }
 
   useEffect(() => {
