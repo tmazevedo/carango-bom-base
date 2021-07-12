@@ -67,7 +67,7 @@ const BrandPage = () => {
           <Button onClick={() => { history.push('/marcas/novo'); }} className="custom-button" variant="outlined" color="primary">
             Novo
           </Button>
-          (
+
           <Table
             fields={
                 brandsList
