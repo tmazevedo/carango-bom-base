@@ -25,8 +25,8 @@ const AuthProvider = ({ children }) => {
     if (user && password) {
       try {
         const data = await LoginService.auth(user, password);
-        setAuthenticated(true);
         localStorage.setItem('token', String(data.token));
+        setAuthenticated(true);
         history.push('/dashboard');
       } catch (error) {
         handleAlert({ status: 'error', message: error.message });

@@ -1,4 +1,4 @@
-const token = localStorage.getItem('token');
+import getToken from './TokenUtils';
 
 const BrandService = {
   List() {
@@ -8,7 +8,7 @@ const BrandService = {
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${getToken()}`,
       },
     }).then((r) => r.json());
   },
@@ -19,7 +19,7 @@ const BrandService = {
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${getToken()}`,
       },
       body: JSON.stringify(objectToSave),
     }).then((r) => r.json());
@@ -31,7 +31,7 @@ const BrandService = {
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${getToken()}`,
       },
     }).then((r) => r.json());
   },
@@ -42,7 +42,7 @@ const BrandService = {
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${getToken()}`,
       },
       body: objectToChange,
     }).then((r) => r.json());
@@ -54,7 +54,7 @@ const BrandService = {
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${getToken()}`,
       },
     });
   },
