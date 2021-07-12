@@ -34,8 +34,9 @@ const BrandPage = () => {
   }, []);
 
   async function remove(id) {
+    setLoading(true);
     try {
-      if (!Number.isInteger(id)) {
+      if (!Number.isInteger(parseInt(id, 10))) {
         throw new Error('Brand ID is not an integer');
       }
 
@@ -47,42 +48,40 @@ const BrandPage = () => {
         handleAlert({ status: 'error', message: 'Não foi possivel deletar a marca.' });
       } else {
         handleAlert({ status: 'success', message: 'Removido com sucesso.' });
+        const newList = [...brandsList];
+        const userIndex = brandsList.findIndex((obj) => obj.id === id);
+        newList.splice(userIndex, 1);
+        setBrandsList(newList);
       }
-
-      const newList = [...brandsList];
-      const userIndex = brandsList.findIndex((obj) => obj.id === id);
-      newList.splice(userIndex, 1);
-      setBrandsList(newList);
     } catch (error) {
       handleAlert({ status: 'error', message: error.message });
     }
+    setLoading(false);
   }
 
   return (
-    <div style={{ height: '50vh' }}>
-      <Button onClick={() => { history.push('/marcas/novo'); }} className="custom-button" variant="outlined" color="primary">
-        Novo
-      </Button>
-      {
-        loading
-          ? <CircularProgress />
-          : (
-            <Table
-              fields={
+    loading
+      ? <CircularProgress />
+      : (
+        <div style={{ height: '50vh' }}>
+          <Button onClick={() => { history.push('/marcas/novo'); }} className="custom-button" variant="outlined" color="primary">
+            Novo
+          </Button>
+          (
+          <Table
+            fields={
                 brandsList
               }
-              columns={
+            columns={
                 [
                   { field: 'name', headerName: 'Marca', width: 200 },
                 ]
               }
-              routeToChange="/marcas/editar/"
-              remove={remove}
-            />
-          )
-      }
-
-    </div>
+            routeToChange="/marcas/editar/"
+            remove={remove}
+          />
+        </div>
+      )
   );
 };
 
