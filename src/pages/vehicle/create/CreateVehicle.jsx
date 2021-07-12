@@ -23,6 +23,7 @@ const CreateVehicle = () => {
     };
 
     try {
+      setLoading(true);
       if (id) {
         await VehicleService.UpdateVehicle(objectVehicle, id);
         handleAlert({ status: 'success', message: 'Alterado com sucesso.' });
@@ -30,11 +31,11 @@ const CreateVehicle = () => {
         await VehicleService.Save(objectVehicle);
         handleAlert({ status: 'success', message: 'Criado com sucesso.' });
       }
-
       history.push('/veiculos');
     } catch (e) {
       handleAlert({ status: 'error', message: e.message });
     }
+    setLoading(false);
   }
 
   useEffect(() => {
