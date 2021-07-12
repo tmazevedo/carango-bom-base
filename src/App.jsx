@@ -188,7 +188,7 @@ function App({ window }) {
                     <WithTitle title="Editar Marca" component={CreateBrand} />
                   )}
                 />
-                <CustomRoute
+                <Route
                   exact
                   path="/veiculos"
                   component={() => (
